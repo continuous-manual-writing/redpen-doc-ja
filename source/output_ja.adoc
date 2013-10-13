@@ -1,0 +1,46 @@
+== RedPen 出力フォーマット
+
+RedPen はいくつかの出力フォーマットをサポートしています。
+
+[[plain-text]]
+=== 平文
+
+平文を指定すると RedPen がかえすエラーは、以下のフォーマットで出力されます。
+
+----
+FILE_NAME:LINE_NUM: ValidationError[ERROR_TYPE], ERROR_MESSAGE at line: SENTENCE
+----
+
+plain2 を指定した場合には、各文ごとのエラーがまとまって出力されます。
+
+[[xml]]
+=== XML
+
+XML 出力フォーマットの最上位ブロックは *validation-result* です。
+*validation-result* は複数の *error* ブロックを持ちます。*error* ブロックは
+以下の子要素を含んでいます。
+
+[option="header"]
+|====
+|ブロック          |   必須      |    解説
+|`validator`       |   false     |    機能（Validator）名
+|`message`         |   false     |    エラーメッセージ
+|`lineNum`         |   false     |    エラーが検知された行
+|`sentence`        |   false     |    エラーが検知された文
+|`file`            |   true      |    ファイル名
+|====
+
+[[json]]
+=== JSON
+
+[option="header"]
+|====
+|ブロック          |   必須       |   解説
+|`validator`       |   false      |   機能（Validator）名
+|`message`         |   false      |   エラーメッセージ
+|`lineNum`         |   false      |   行番号
+|`sentence`        |   false      |   エラーが検知された行
+|`file`            |   true       |   ファイル名
+|====
+
+*json2* フォーマットは各文ごとのエラーがまとまって出力されます。
