@@ -1,0 +1,45 @@
+== RedPen クィックスタート
+
+本節では RedPen をダウンロードしてから利用するところまでを解説します。
+
+[[requirements]]
+=== 準備
+
+RedPen を利用するには、以下のソフトウェアをインストールする必要があります。
+
+* Java 1.8.40 以上
+* Maven 3.0.0 以上
+
+[[example-run]]
+=== 実行例
+
+はじめに RedPen パッケージを以下のリリースページからダウンロードします。
+
+https://github.com/redpen-cc/redpen/releases/[release page]
+
+次に以下のコマンドで RedPen パッケージを解凍してください。
+
+[source,bash]
+----
+$ tar xvf redpen-*.tar.gz
+$ cd redpen-*
+----
+
+これで RedPen を利用する準備が整いました。以下のコマンドを実行すると RedPen が動作します。
+
+[source,bash]
+----
+$ bin/redpen -c conf/redpen-conf-en.xml sample-doc/en/sampledoc-en.txt
+14:32:37.639 [main] INFO  org.unigram.docvalidator.Main - loading character table file: sample/conf/symbol-conf-en.xml
+14:32:37.652 [main] INFO  o.u.docvalidator.util.CharacterTable - Succeeded to load character table
+14:32:37.654 [main] INFO  o.unigram.docvalidator.parser.Parser - comma is set to ","
+14:32:37.655 [main] INFO  o.unigram.docvalidator.parser.Parser - full stop is set to "."
+14:32:37.663 [main] INFO  o.u.d.v.s.ParagraphStartWithValidator - Using the default value of paragraph_start_with.
+CheckError[sample/doc/txt/en/sampledoc-en.txt: 0] = The length of the line exceeds the maximum 265 in line: ln bibliometrics and link analysis studies many attempts have been made to analyze the \
+relationship amongscientific papers, authors andjoumals and recently, these research results have been found to be effective for analyzing the link structure ofweb pages as we11.
+CheckError[sample/doc/txt/en/sampledoc-en.txt: 0] = The length of the line exceeds the maximum 161 in line:  In addition,  Most of these methods are concernedwith the two link analysis measures: \
+relatedness between documenatsndglobal importance of individual documents.
+...
+----
+
+上記のコマンドにおいて、 -c で指定されているのはRedPenの設定ファイルとなります。

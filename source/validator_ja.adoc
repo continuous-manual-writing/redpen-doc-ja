@@ -1,0 +1,543 @@
+== RedPen が提供する機能
+
+RedPen は以下の機能を提供します。
+
+* SentenceLength
+* InvalidExpression
+* InvalidWord
+* SpaceBeginningOfSentence
+* CommaNumber
+* WordNumber
+* SuggestExpression
+* InvalidSymbol
+* SymbolWithSpace
+* KatakanaEndHyphen
+* KatakanaSpellCheck
+* SectionLength
+* SpaceBetweenAlphabeticalWord
+* ParagraphNumber
+* ParagraphStartWith
+* Contraction
+* Spelling
+* DoubledWord
+* SuccessiveWord
+* DuplicatedSection
+* JapaneseStyle
+* DoubleNegative
+* FrequentSentenceStart
+* UnexpandedAcronym
+* WordFrequency
+* Hyphenation
+* NumberFormat
+* ParenthesizedSentence
+* WeakExpression
+
+[[sentencelength]]
+=== SentenceLength
+
+SentenceLength は入力文書内に存在する文（センテンス）の長さに関する規約が守られているかを検査します。
+具体的には、文書内に存在する文が指定された最大文長より長い場合にエラーを出力します。
+
+[[properties]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト値   |解説
+|``max_len``     |100            |最大文長
+|====
+
+[[supported-languages]]
+==== 対応言語
+
+どの言語にも対応しています。
+
+[[invalidexpression]]
+=== InvalidExpression
+
+InvalidExpression は入力文が不正な表現（単語や句）を含むときにエラーを出力します。
+
+[[properties-1]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``dict``        |None           |ユーザ辞書ファイル
+|``list``        |None           |不正表現のリスト（コンマ区切り）。
+|====
+
+InvalidExpression で指定される辞書は改行区切りです。以下辞書の例となります。
+
+----
+オワタ
+馬鹿
+...
+----
+
+[[supported-languages-1]]
+==== 対応言語
+
+どの言語にも対応しています。
+
+[[invalidword]]
+=== InvalidWord
+
+InvalidWord は入力文に不正な単語が存在するかを検査します。
+
+[[properties-2]]
+==== Properties
+
+[options="header"]
+|====
+|Property        |デフォルト     |解説
+|``dict``        |None           |ユーザ辞書ファイル
+|``list``        |None           |不正単語のリスト（コンマ区切り）。
+|====
+
+InvalidWord で指定される辞書は改行区切りです。以下辞書の例となります。
+
+----
+like
+hey
+wow
+...
+----
+
+[[supported-languages]]
+==== 対応言語
+
+どの言語にも対応しています。
+ただし日本語や中国語のように単語の境界が曖昧な言語では InvalidExpression の利用をおすすすめします。
+
+[[spacebeginningofsentencevalidator]]
+=== SpaceBeginningOfSentenceValidator
+
+SpaceBeginningOfSentenceValidator は文（センテンス）間に半角スペースが存在するかを検査します。
+
+
+[[supported-languages-2]]
+==== 対応言語
+
+SpaceBeginningOfSentenceValidator はどの言語にも対応しています。
+
+[[commanumber]]
+=== CommaNumber
+
+CommaNumber は文内のコンマの数が指定された最大数よりも多いときにエラーを出力します。
+
+[[properties-3]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``max_num``     |4              |一文に存在する最大のコンマ数
+|====
+
+[[supported-languages-1]]
+==== 対応言語
+
+どの言語にも対応しています。
+
+[[wordnumber]]
+=== WordNumber
+
+WordNumber は一文内の単語数を検査します。文内の単語数が指定した数よりも大きいとき、WordNumber はエラー出力します。
+
+[[properties-4]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``max_num``     |50             |一文内で使用できる単語数の上限
+|====
+
+[[supported-languages-3]]
+==== 対応言語
+
+WordNumber はどの言語にも対応しています。
+ただし、日本語やタイ語など、単語が半角スペースで分かれていない言語ではうまく動作しません。
+
+[[suggestexpression]]
+=== SuggestExpression
+
+SuggestExpression はInvalidExpression と同様に動作します。
+入力文で不正な表現が使用されているとエラーを出力します。出力されるエラーには利用すべき正しい表現が含まれます。
+
+[[properties-5]]
+==== Properties
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |記述
+|``dict``        |None           |ユーザ辞書
+|====
+
+辞書は二カラムのタブ区切り（TSV）フォーマットです。一列目には不正な表現、二列目に正しい表現を記述します。
+以下辞書のサンプルとなります。
+
+----
+like    such as
+asap    as soon as possible
+...
+----
+
+[[supported-languages-4]]
+==== 対応言語
+
+どの言語にも対応しています。
+
+[[invalidsymbol]]
+=== InvalidSymbol
+
+シンボルによっては代替のシンボルが存在します。たとえばクエスチョンマーク "? (0x003F)"
+は代替のシンボル"？(0xFF1F)"がユニコードに登録されています。InvalidSymbol は入力文に不正なシンボル
+が利用されているときにエラーを出力します。
+
+文書内で使用するシンボルについての設定は設定ファイルの**symbols**ブロックで指定します。
+詳しくは節 <<setting-symbols,シンボル設定>> を参照して下さい。
+
+[[supported-languages-2]]
+==== 対応言語
+
+InvalidSymbol はどの言語でも動作します。
+
+[[symbolwithspace]]
+=== SymbolWithSpace
+
+シンボルによっては前もしくは後にスペースが必要です。たとえば、半角の左括弧 "(" の前に半角スペースを
+入れる規約を矯正したい場合にはシンボルの左にスペースが必要という設定を追加します。
+スペース前後の設定は設定ファイルの**symbols**ブロックで指定します。
+
+[[supported-languages-3]]
+==== 対応言語
+
+どの言語でも動作します。
+
+[[katakanaendhyphen]]
+=== KatakanaEndHyphen
+
+KatakanaEndHyphen はカタカナ単語の語尾が規約（JIS Z8301、G.6.2.2 b、G.3.）にしたがっているかを検査します。
+具体的には以下のルールが適用されます。
+
+* a: 単語が三文字以上からなるばあいにはハイフンで単語は終わらない。
+* b: 単語が二文字もしくはそれ以下の場合には、単語はハイフンで終わってもよい。
+* c: 単語が複合語の場合には各部分単語の条件が適用される。
+* d: *a* から *c* のルールにおいて、拗音をのぞきハイフンは一文字としてカウントされます。
+
+[[supported-languages-4]]
+==== 対応言語
+
+日本語にのみ適用できます。
+
+[[katakanaspellcheck]]
+=== KatakanaSpellCheck
+
+KatakanaSpellCheck はカタカナ単語のスペリングを検査します。
+文中に対象となるカタカナ単語とスペリングが著しく類似する単語が存在するとエラーを出力します。
+
+たとえば、入力ファイルに "インデックス" という単語が存在し、同時に "インデクス" が利用されている時に
+KatakanaSpellCheck はエラーを出力します。
+
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |記述
+|``dict``        |None           |辞書ファイル
+|``min_ratio``   |0.2            |類似度の閾値。KatakanaSpellCheck は文書内で使用されたふたつのカタカナ単語のペアの類似度が閾値以下の時にエラーを出力します。なお類似度として編集距離を使用しています。
+|``min_freq``    |5              |最小頻度。KatakanaSpellCheck は最小閾値以下の単語のみを検査対象とします。
+|====
+
+[[supported-languages-5]]
+==== 対象言語
+
+KatakanaSpellCheck は日本語のみに対応しています。
+
+[[sectionlength]]
+=== SectionLength
+
+SectionLength は節で利用できる単語の数を指定します。
+
+[[properties-6]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``max_num``     |1000           |一つ節で利用する単語の最大数
+|====
+
+[[supported-languages]]
+==== 対応言語
+
+SectionLength はどの言語でも動作します。
+
+[[paragraphnumber]]
+=== ParagraphNumber
+
+ParagraphNumber は一つの節内に存在してよいパラグラフの最大数を指定します。
+
+[[properties]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト  |解説
+|``max_num``     |5           |一つの節に存在するパラグラフの最大数
+|====
+
+[[supported-languages-1]]
+==== 対応言語
+
+どの言語でも動作します。
+
+[[paragraphstartwith]]
+=== ParagraphStartWith
+
+ParagraphStartWith はパラグラフの開始部分が指定された規約にしたがっているかを検査します。
+
+[[properties-7]]
+==== Properties
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``start_with``  |" "            |パラグラフ開始部分の文字列
+|====
+
+[[supported-languages-6]]
+==== Supported languages
+
+どの言語でも動作します。
+
+[[spacebetweenalphabeticalword]]
+=== SpaceBetweenAlphabeticalWord
+
+アルファベット単語の前後に空白が存在するかを検査します。
+中国語や日本語など単語が空白で区切らない言語で文書執筆する際に、アルファベット単語の前後には空白を入れる規約を矯正するために使用します。
+SpaceBetweenAlphabeticalWord はアルファベット単語の前後に空白が存在しないとエラーを出力します。
+
+[[supported-languages-7]]
+==== 対応言語
+
+日本語や中国語など単語がスペースで区切られていない言語に適用できます。
+
+[[contraction]]
+=== Contraction
+
+Contraction は入力文書で省略表現が利用されたときにエラーを出力します。
+
+
+[[supported-languages-8]]
+==== 対応言語
+
+英語のみです。
+
+[[spelling]]
+=== Spelling
+
+Spelling は文書内でスペルミスが起こった時にエラーを出力します。
+
+[[supported-languages-9]]
+==== 対応言語
+
+英語のみです。
+
+[[doubledword]]
+=== DoubledWord
+
+DoubledWord は一文内で二回以上同一単語が使用されたときにエラーを出力します。
+たとえば、以下の文では **良い** が二回使われているので、DoubledWord はエラーを出力します。
+
+----
+この良い本は良いね。
+----
+
+[[properties-8]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``dict``        |None           |スキップリスト用の辞書
+|``list``        |None           |スキップリスト（コンマ区切り）
+|====
+
+[[supported-languages-10]]
+==== 対応言語
+
+DoubledWord はトークナイザが対応していない言語で、かつ単語が分かれていない言語（中国語、タイ語など）に対応していません。
+日本語は動作します。
+
+[[successiveword]]
+=== SuccessiveWord
+
+SuccessiveWord は同一の単語が連続して使用されたときにエラーを出力します。
+たとえば入力文書が以下の文を含んでいる場合にエラーを出力します。
+以下の文は、**言語**という単語をあやまって連続で使用しています。
+
+----
+日本語はいい言語言語だ。
+----
+
+[[supported-languages-11]]
+==== 対応言語
+
+日本語以外の単語がスペースで区切されない言語には対応していません。
+
+[[duplicatedsection]]
+=== DuplicatedSection
+
+DuplicatedSection は節の内容が他の節と類似しているときにエラーを出力します。
+
+[[supported-languages-12]]
+==== 対応言語
+
+どの言語でも動作します。
+
+[[japanesestyle]]
+=== JapaneseStyle
+
+JapaneseStyle は**ですます調**と**である調**が混在して使われるとエラーを出力します。
+
+[[supported-languages-13]]
+==== 対応言語
+
+日本語のみに対応しています。
+
+[[doublenegative]]
+=== DoubleNegative
+
+DoubleNegative は入力文書に二重否定が使用されているとエラーを出力します。
+
+[[supported-languages-14]]
+==== 対応言語
+
+日本語のみに対応しています。
+
+[[frequentsentencestart]]
+=== FrequentSentenceStart
+
+FrequentSentenceStart は多くの文が同一の表現から開始されているときにエラーを出力します。
+
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ                  |デフォルト     |解説
+|``leading_word_limit``      |3              |考慮する銭湯からの単語数
+|``percentage_threshold``    |25             |同一の文頭表現が利用された最大パーセント
+|``min_sentence_count``      |5              |エラーが起こる最小の文数。文書内の文が指定値よりも少ないとエラーは出力されません。
+|====
+
+[[supported-languages-15]]
+==== 対応言語
+
+中国語、タイ語などトークナイザが対応していない言語以外は動作します。
+
+[[unexpandedacronym]]
+=== UnexpandedAcronym
+
+UnexpandedAcronymは省略形で書かれている単語の正式表記が文中に存在するかを検査します。
+
+
+たとえば、もし ABC という省略形で書かれた単語が文中に存在した場合に、Axxx Bxx Cxxx という単語列が存在するかを検査します。
+
+[[properties-9]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ                |デフォルト    |解説
+|``min_acronym_length``    |3             |省略形の最小文字数
+|====
+
+[[supported-languages-16]]
+==== 対応言語
+
+UnexpandedAcronym は英語のみ動作します。
+
+[[wordfrequency]]
+=== WordFrequency
+
+WordFrequency は文中で使用されている単語が一般的な単語の頻度とくらべ異なる際にエラーを出力します。
+
+[[properties-10]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ             |デフォルト    |解説
+|``deviation_factor``   |      3       | Permitted factor of deviation from the norm. So if a word is normally used 3% of the time, your document can use it up to 9% of the time.
+|``min_word_count``     |      200     | Minimum number of words in a document before this validator starts to validate
+|====
+
+[[supported-languages-17]]
+==== Supported languages
+
+英語のみに対応しています。
+
+[[hyphenation]]
+=== Hyphenation
+
+Hyphenation ハイフンで連結された単語列が一般的な利用方法にマッチしているかを検査します。
+
+[[supported-languages-18]]
+==== Supported languages
+
+英語のみに対応しています。
+
+[[numberformat]]
+=== NumberFormat
+
+NumberFormatは英語の数値表現が一般的なフォーマットにしたがって記述されているかを検査します。
+
+[[properties-11]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ                      |デフォルト       |解説
+|``decimal_delimiter_is_comma``  |  false          |数値のデリミタを . から , に変更する（ヨーロッパ方式）
+|``ignore_years``                |  false          |四桁の数値を虫する（2015, 1998など）
+|====
+
+[[supported-languages-19]]
+==== 対応言語
+
+ヨーロッパ系の言語に対応しています。
+
+[[parenthesizedsentence]]
+=== ParenthesizedSentence
+
+ParenthesizedSentence は括弧に関する規約を検査します。
+一文内での括弧の使用頻度が多い場合や、ネストされた括弧が存在するとエラーを出力します。
+
+[[properties-12]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ             |デフォルト  |解説
+|``max_nesting_level``  |2  |一文に存在してよい括弧のネスト数。
+|``max_count``          |1  |一文内に存在してよい括弧の上限数。
+|``max_length``         |4  |括弧内に存在してもよい単語数の上限
+|====
+
+[[supported-languages-20]]
+==== 対象言語
+
+ヨーロッパ系の言語のみに対応しています。
+
+[[weakexpression]]
+=== WeakExpression
+
+WeakExpression は文書内に"weak expression" と呼ばれる表現が現れるとエラーを出力します。
+
+[[supported-languages-21]]
+==== Supported languages
+
+英語のみ対応しています。
