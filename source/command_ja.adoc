@@ -1,0 +1,111 @@
+== RedPen コマンド
+
+RedPen は二つのコマンドを提供します。RedPen はコマンドラインツールとサーバコマンドを提供します。
+
+[[command-line-tool]]
+=== コマンドラインツール
+
+RedPen が提供するコマンドラインツールは **redpen** という名前です。
+
+[[usage-redpen]]
+==== 使い方：redpen
+
+redpen コマンドは以下のように利用します。
+
+[source,bash]
+------------------------------------------------
+$ redpen [オプション] 入力ファイル（複数可）
+------------------------------------------------
+
+複数の入力ファイルを指定した際には、ファイルは半角スペースで区切ります。
+
+[[options]]
+==== オプション
+
+redpen コマンドは以下のオプションをサポートしています。
+
+===== RedPen の設定ファイルを指定
+
+----
+-c <CONFIG_FILE>, --configuration <CONFIG_FILE>
+----
+
+===== 入力フォーマット [**デフォルト**: plain]
+
+----
+-f <INPUT_FORMAT>, --input_format <INPUT_FORMAT>
+----
+
+入力ファイルの引数として指定できるフォーマットとして、 redpen は以下のフォーマットをサポートします。
+
+[options="header",]
+|====
+|値       |解説
+|plain    |平文
+|wiki     |Wiki (Textile) フォーマット
+|markdown |Markdown フォーマット
+|asciidoc |AsciiDoc フォーマット
+|latex    |LaTeX フォーマット
+|====
+
+[NOTE]
+RedPen does not currently support every element of the wiki format, such as tables. The remaining elements will be supported in the near future.
+
+===== 出力フォーマット [**デフォルト**: plain]
+
+----
+option:: -r <RESULT_FORMAT>, --result_format <RESULT_FORMAT>
+----
+
+redpen は以下の出力フォーマットをサポートします。
+
+[options="header"]
+|====
+|値     |解説
+|plain  |平文
+|plain2 |平文（文ごとのエラーを出力）
+|xml    |xml フォーマット
+|json   |json フォーマット
+|json2  |json フォーマット（文ごとのエラーを出力）
+|====
+
+===== ヘルプの出力
+
+----
+-h, --help
+----
+
+==== バージョンの出力
+----
+--version
+----
+
+[[sample-server]]
+=== RedPen サーバ
+
+RedPne はサーバ機能も提供します。
+
+[[usage-redpen-server]]
+==== 使い方：redpen-server
+
+RedPen サーバは redpen-server コマンドで起動（終了）できます。
+
+[source,bash]
+----------------------------
+$ redpen-server [start|stop]
+----------------------------
+
+[[configuration]]
+=== 設定
+
+redpen-server はredpen-serverコマンドファイル自身を編集することで設定できます。 
+以下が設定できる項目となります。
+
+[options="header",]
+|=======================================================================
+|設定          |デフォルト値  |解説
+|REDPEN_PORT   |8080          |RedPen サーバが利用するポート番号
+|STOP_KEY      |redpen.stop   |RedPen サーバはストップキーを登録すると http 経由で終了できます。http 経由で終了させたくない場合にはコメントアウトしてください。
+|=======================================================================
+
+RedPen サーバが提供する機能については <<redpen-server>> 節を参照してください。

@@ -1,31 +1,22 @@
-== RedPen Configuration
-
-RedPen's configuration file consists of two separate blocks. One block
-configures the RedPen validators and the other lets you override
-characters and symbols for the input documents.
+== RedPen の設定
+RedPen はコマンラインツールでもサーバでも設定ファイルを指定して実行します。
+RedPen の設定ファイルは二つのブロックからなります。一つ目のブロックは利用する
+機能を列挙します。もう一つのブロックは文字の設定を上書きします。以下詳しくみてゆきます。
 
 [[configuration-file]]
-=== Configuration file
+=== 設定ファイル
 
-RedPen has a single configuration file, which contains all the settings
-RedPen require to work with different types of input documents. The main
-configuration file is an xml file with a root element of "redpen-conf".
-Within this element there are two sub elements named "validators" and
-"symbols".
+RedPen 単一の設定ファイルを持ちます。ファイルは入力ファイルのフォーマットに依存しない設定項目すべてが含まれます。
+設定ファイルは XML フォーマットで記述されます。XML のルートのブロックは "redpen-conf" です。
+"root-conf" ブロックは二つの子ブロック（"validators" と "symbols"）を持ちます。
 
-In order to match the default validators and character settings to a
-target language, such as Japanese or English, we can specify *lang* and
-*type* attributes in the *redpen-conf* element to override the default
-character settings.
+*validators* には RedPen で利用する機能（validator）を列挙します。*validator* には property を指定できるものがあります。
+property を利用すると機能がもつデフォルトの挙動を変更できます。
 
-The *validators* section specifies which validators are to be loaded by
-RedPen. Each *validator* within this section can have their property
-values overriden.
+*symbols* ブロックは言語ごとに存在するデフォルトのシンボル設定を上書きます。
+言語ごとに存在するデフォルトの文字設定を指定するには、redpen-conf ブロックのプロパティとして **lang** と **type** を指定します。
 
-*symbols* section overrides the default symbol settings for the target
-language.
-
-The following is an example of a RedPen configuration file.
+以下は設定ファイルの例です。
 
 [source,xml]
 ----
@@ -48,18 +39,17 @@ The following is an example of a RedPen configuration file.
 </redpen-conf>
 ----
 
-In the next section we will cover the configuration of validators in
-greater detail. The settings for the symbols section are described in the
-<<setting-symbols,Setting Symbols>> section.
+次節では機能の設定について詳しく解説をおこないます。
+シンボルの設定については説 <<setting-symbols,Setting Symbols>> で解説をおこないます。
 
 [[validator-configuration]]
-=== Validator configuration
+=== 機能（Validator）設定 
 
-The RedPen configuration file contains a "validators" section for
-registering Validators. RedPen will apply each validator specified in
-this section to the to the input document.
+RedPen の設定ファイルは *validator* ブロックを持ちます。
+validator ブロックには RedPen に検査させたい検査機能を列挙します。
+RedPen はブロックに追加された Validator を入力文書に適用します。
 
-The following is a sample "validators" section.
+以下は "validators" ブロックのサンプルです。
 
 [source,xml]
 ----
@@ -76,64 +66,48 @@ The following is a sample "validators" section.
  </validators>
 ----
 
-Each validator is configured within its own "validator" element. The
-"name" attribute of this element specifies the name of the validator,
-which is essentially the validator's class name without the trailing
-"Validator". Each validator is responsible for checking a particular
-aspect of the input document. For example, if the "SectionLength"
-validator is included in the configuration, then RedPen's
-DocumentValidator will check the length of each 'section' of each input
-document.
+各機能は validator 要素で表現されます。
+validator 要素の "name" で機能を指定します。
+各機能は入力文書がもつ特定の面を検査します。たとえば SentenceLength は
+文書内にふくまれる文の長さが指定した上限よりも短いを検査します。
 
-Some validator components can be configured using "property" elements.
-For example, you can override the maxmimum character count used by the
-"SectionLength" validator by specifying a "max_num" property. Some
-validators also have "sub-validators" which can also be configured
-within the validator section.
-
-We will cover all supported validators in the <<validator.adoc#,validator>> page.
+提供される機能の中には **property** 要素で設定できるものがあります。
+たとえば、SentenceLength で検査する文長の最大値は **max_num** で指定できます。
+各機能の解説については <<validator.adoc#,validator>> を参照してください.
 
 [[setting-symbols]]
-=== Setting symbols
+=== シンボル（文字）設定
 
-The *lang* attribute of the *redpen-conf* element determines how various
-symbols are handled by RedPen. RedPen supports default symbols for "en"
-and "ja", which are described in <<en-default-symbol-setting,English symbols>> and
-<<ja-default-symbol-setting,Japanese Symbols>>.
+*redpen-conf* の *lang* 属性で入力文書の言語を指示すると、シンボルの基本設定が決定されます。
+RedPen は英語 "en" と日本語 "ja" をサポートしています。
+各言語のシンボル設定については <<en-default-symbol-setting,英語シンボル設定>>
+と <<ja-default-symbol-setting,日本語シンボル設定>>を参照してください。
 
-The default symbol settings for a target language can be overridden by
-configuring the symbols section of the RedPen configuration file.
+言語ごとに設定されるシンボルの設定は、**symbols** ブロックを設定ファイルに追加することで上書きできます。
+symbols ブロックには **symbol** ブロックを追加します。symbol ブロックには文書を検査する際に利用するシンボルの設定を記述します。
 
-The default settings are described in the following sections. Within the
-symbols configuration section we can use *symbol* elements to specify
-which symbols to use when validating documents. Each "symbol" element
-overrides a character found in the documents.
-
-The following table describes the properties of the symbol element.
+以下の表は、symbol で指定する属性について解説しています。
 
 [options="header"]
 |====
-|Property             |Mandatory     |Default Value |Description
-|`name`               |true          |none          |Name of the symbol
-|`value`              |true          |none          |Value of the symbol
-|`before-space`       |false         |false         |Need space before the symbol
-|`after-space`        |false         |false         |Need space after the symbol
-|`invalid-chars`      |false         |""            |List of invalid symbols
+|プロパティ（属性）   |必須          |デフォルト    |解説
+|`name`               |true          |none          |シンボル名
+|`value`              |true          |none          |シンボルの値（文字）
+|`before-space`       |false         |false         |シンボルの前に半角スペースが必要か
+|`after-space`        |false         |false         |シンボルの後ろに半角スペースが必要か
+|`invalid-chars`      |false         |""            |使いたくない同意文字のリスト
 |====
 
 [[sample-setting-symbols]]
-==== Sample: Setting symbols
+==== サンプル：シンボル設定
 
-In the following example, we can see a symbols section that defines 3
-symbols. The first element defines exlamation mark as '!'. Then,
-FULL_STOP defines a period as the character "." and specifies that the
-symbol must be followed by a space. The third element defines comma as
-',' and also defines '、' and '，' as invalid comma characters. This is
-because some characters have equivalent symbolic meanings.
-
-For example, in Japanese both '.' and '。' can represent a FULL_STOP.
-The invalid-chars setting allows us to restrict which character
-alternatives are permitted in our documents.
+以下の例では三つのシンボルを設定しています。
+一つはエクスクラメーションマーク '!' です。
+二つ目は FULL_STOP です。FULL_STOP は文末文字（ピリオド、句点）を指定します。以下の設定では
+文末文字として半角ピリオド "." を使用し、シンボルの後ろには半角スペースが必要という指定をしています。
+最後の要素はコンマ ',' を使用し、'、' and '，' が利用不可な文字として登録しています。
+invalid-char に登録された文字は InvalidSymbol 機能で利用されます。
+登録された文字が文中に存在すると、InvalidSymbol はエラーを出力します。
 
 [source,xml]
 ----
@@ -145,18 +119,17 @@ alternatives are permitted in our documents.
 ----
 
 [[default-settings-for-english]]
-==== Default Settings for English
+==== デフォルトのシンボル設定（英語）
 
-The following table shows the default symbol settings for English and
-other latin based documents. In the table, the first column contains the
-name of each symbol and the second column (Value) shows the symbol's
-character value. The columns 'NeedBeforeSpace', 'NeedAfterSpace'
-'InvalidChars' indicate if the symbol should be followed by or preceded
-by a space and the symbol's invalid characters, respectively.
+以下の表はデフォルトのシンボル（文字）設定を示しています。
+表内の一列目はシンボル名、二列目はシンボルの値（文字）、
+三列目（前スペース）は文字の前に半角スペースが必要かを表しています。
+四列目（後ろスペース）は文字の後ろにスペースが必要かを示しています。
+五列目（不正文字リスト）は各シンボルの同意シンボルで使用してはいけないものを列挙しています。
 
 [options="header"]
 |====
-|Symbol                        |Value         |NeedBeforeSpace    |NeedAfterSpace     |InvalidChars     |  Description
+|シンボル                      |値            |前スペース         |後ろスペース       |不正文字リスト   |  解説
 |`FULL_STOP`                   |'.'           |false              |true               |'．', '。'       |  Sentence period
 |`SPACE`                       |' '           |false              |false              |'　'             |  White space between words
 |`EXCLAMATION_MARK`            |'!'           |false              |true               |'！'             |  Exclamation mark
@@ -193,24 +166,19 @@ by a space and the symbol's invalid characters, respectively.
 |`RIGHT_DOUBLE_QUOTATION_MARK` |'"'           |false              |false              |                 |  Right double quotation mark
 |====
 
-These settings are used by several Validators such as InvalidSymbol and
-SpaceValidator. If you want to change the symbol definitions used by
-these Validators, you can override the settings by adding symbol
-elements to the symbols section of the redpen configuration file.
+これらのシンボルは文の切り出しや、いくつかの機能で利用されます。たとえば、InvalidSymbol は不正文字リストに登録されてたシンボルが文中に存在するとエラーを出力します。
+SymbolWithSpace は前スペース、後ろスペースの設定と異なる使用文中にあった場合にエラーを出力します。
+なお、設定を変更したい場合には設定ファイルに **symbols** ブロックを追加して変更したい文字を追加してゆきます。
+くわしくは<<setting-symbols>>節を参照してください。
 
 [[default-settings-for-japanese]]
-==== Default Settings for Japanese
+====  デフォルトのシンボル設定（日本語）
 
-The following table shows the default symbol settings for Japanese
-documents. In the table, the first column contains the name of each
-symbol and the second column (Value) shows the symbol's character value.
-The columns 'NeedBeforeSpace', 'NeedAfterSpace' 'InvalidChars' indicate
-if the symbol should be followed by or preceded by a space and the
-symbol's invalid characters, respectively.
+以下の表は日本語のデフォルトシンボル設定を示しています。テーブルの各列は英語のシンボル表と同一です。
 
 [options="header"]
 |====
-|Symbol                        |Value        | NeedBeforeSpace  |  NeedAfterSpace    |  InvalidChars     |  Description
+|シンボル                      |値            |前スペース         |後ろスペース       |不正文字リスト   |  解説
 |`FULL_STOP`                   |'。'         | false            |  false             |  '．','.'         |  Sentence period
 |`SPACE`                       |'　'         | false            |  false             |                   |  White space between words
 |`EXCLAMATION_MARK`            |'！'         | false            |  false             |  '!'              |  Exclamation mark
@@ -247,21 +215,14 @@ symbol's invalid characters, respectively.
 |`RIGHT_DOUBLE_QUOTATION_MARK` |'”'          | false            |  false             |                   |  Right double quotation mark
 |====
 
-These settings are used by several Validators such as InvalidSymbol and
-SpaceValidator. If you want to change the symbol definitions used by
-these Validators, you can override the settings by adding symbol
-elements to the symbols section of the redpen configuration file.
-
 [[japanese-symbol-validations]]
-==== Japanese Symbol Validations
+==== 日本語文字設定のバリエーション
 
-Symbols in Japanese has vary by the author and the writing group. RedPen
-provide the two defalut symbol settings for Japanese. The validations are
-specified with *type* attribute. Currently there are two variation for
-Japanese symbol settings ("zenkaku2" and "hankaku").
+日本語で書かれた文書で使用される文字は著者や執筆グループによって大きくことなります。
+そこで RedPen は日本語用に二種類のバリエーション（"zenkaku2" と "hankaku"）を提供しています。
+文字設定のバリエーションは *type* 属性で指定します。
 
-For example the following is the sample of configuration file for
-Japanese text with the "zenkaku2" setting.
+以下の例はバリエーションの一つ "zenkaku2" を指定した設定例となります。
 
 [source,xml]
 ----
@@ -275,13 +236,13 @@ Japanese text with the "zenkaku2" setting.
 </redpen-conf>
 ----
 
-The symbols of "hankaku" type is the same as the symbol settings as
-"en." The symbols of "zenkaku2" is almost the same as normal type of
-"ja" with the following exceptions.
+**hankaku** は英語の設定と同一です。*zenkaku2* はほとんど日本語のデフォルト文字設定と同一なのですが、
+以下のシンボルについてのみ設定がことなります。
+
 
 [options="header"]
 |====
-|Symbol    |Value |NeedBeforeSpace |NeedAfterSpace |InvalidChars |Description
+|シンボル  |値    |前スペース      |後ろスペース   |不正文字リスト   |  解説
 |FULL_STOP |'．'  |false           |false          |' .', '。'   |Sentence period
 |COMMA     |'，'  |false           |false          |',','、'     |Comma
 |====

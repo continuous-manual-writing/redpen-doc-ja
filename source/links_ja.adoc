@@ -1,4 +1,4 @@
-== Links
+== リンク集
 
 * https://github.com/redpen-cc/redpen[Source]
 * https://github.com/redpen-cc/redpen/issues?state=open[Issues]

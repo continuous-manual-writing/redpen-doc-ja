@@ -1,31 +1,31 @@
-== RedPen Quickstart
+== RedPen クィックスタート
 
-This quickstart guide is to help you get started with RedPen. Let's go
-through some of the basics.
+本節では RedPen をダウンロードしてから利用するところまでを解説します。
 
 [[requirements]]
-=== Requirements
+=== 準備
 
-RedPen requires the following software.
+RedPen を利用するには、以下のソフトウェアをインストールする必要があります。
 
-* Java 1.8.0 or greater
-* Maven 3.0.0 or greater
+* Java 1.8.0 以上
+* Maven 3.0.0 以上
 
 [[example-run]]
-=== Example run
+=== 実行例
 
-First, download the RedPen package from
-https://github.com/redpen-cc/redpen/releases/[release page], and then
-decompress the package with the following commands.
+はじめに RedPen パッケージを以下のリリースページからダウンロードします。
+
+https://github.com/redpen-cc/redpen/releases/[release page]
+
+次に以下のコマンドで RedPen パッケージを解凍してください。
 
 [source,bash]
 ----
-$ tar xvf redpen-*-assembled.tar.gz
+$ tar xvf redpen-*.tar.gz
 $ cd redpen-*
 ----
 
-Then, run the redpen command with the supplied sample document and
-configuration file.
+これで RedPen を利用する準備が整いました。以下のコマンドを実行すると RedPen が動作します。
 
 [source,bash]
 ----
@@ -41,3 +41,5 @@ CheckError[sample/doc/txt/en/sampledoc-en.txt: 0] = The length of the line excee
 relatedness between documenatsndglobal importance of individual documents.
 ...
 ----
+
+上記のコマンドにおいて、 -c で指定されているのはRedPenの設定ファイルとなります。
