@@ -9,10 +9,7 @@ RedPen は数種類のマークアップテキストフォーマットに対応�
 パラグラフは連続する二つの改行によって区切られます。たとえば以下は二つのパラグラフを含んでいます。
 
 ----
-This is a first paragraph. This paragraph is the introduction of this article.
-It introduces the central issue discussed throughout the rest of the article.
-
-Second paragraph describes the details of the issue and attempts to present a solution.
+include::sample-en-paragraph.txt[]
 ----
 
 [[asciidoc]]
@@ -28,14 +25,14 @@ NOTE: 自作マクロには対応していません
 [[wiki-format]]
 === Wiki
 
-RedPen Wiki 記法の一部に対応しています。以下対応した記法の解説となります。
+RedPen は Wiki 記法の一部に対応しています。以下対応した記法の解説となります。
 
 NOTE: エラー箇所のポジション情報を出力できません。
 
 [[headings]]
 ==== 見出し
 
-見出しを "h[1234]. " で表現します。 *h* の次の数値で見出しのレベルを表現します。
+見出しを "h[1234]. " で表現します。*h*につづく数で見出しのレベルを表現します。
 
 [[inline-formatting]]
 ==== インライン表記
@@ -88,18 +85,14 @@ __this is an underlined sentence.__
 ===== Numbered リスト
 
 ----
-# List
-# List
-## Sub List
+include::wiki-numbered-list-sample.txt[]
 ----
 
 [[comments]]
 ==== コメント
 
 ----
-[!--
-  This is a comment.
---]
+include::wiki-comment.txt[]
 ----
 
 [[paragraphs]]
