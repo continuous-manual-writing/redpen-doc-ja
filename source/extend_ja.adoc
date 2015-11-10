@@ -1,27 +1,21 @@
-== Extending RedPen
+== RedPen を拡張する
 
-RedPen users can extend RedPen by creating new Validators. This page
-describes how to construct your Validators and covers the basics of the
-internal document model used by Validators.
+ユーザは自身で RedPen を拡張（機能追加）できます。本節では機能追加の方法とRedPen が内部に保持する文書モデルについて解説します。
 
-RedPen users can create new validators for themselves or their
-organization. Adding validator is simple - just write a class that
-extends the abstract class **Validator**.
+機能拡張は抽象クラス（Validato）を実装することで作成できます。
 
 [[extending-validators]]
-=== Extending Validators
+=== Validator クラスの拡張
 
-There are several methods which users can implment for their methods
-(validate, prevalidate and init).
+Validator クラスには実装できるメソッドがいくつか（validate、prevalidate、init）提供されています。
+以下各メソッドについて解説します。
 
 [[validate-methods]]
-==== validate methods
+==== validate メソッド
 
-Minimally, we just need to implement the "validate" template method.
-
-Users need to implement the one of validate methods provided by the
-Validator class. Currently there are three validate methods with three
-different parameters.
+機能を実装するには最低限 *validate* メソッドを実装しなくてはなりません。
+validate メソッドには引数によっていくつかのバリエーションがあります。
+現状では三種類の validate メソッドが提供されています。
 
 [source,java]
 ----
@@ -50,16 +44,13 @@ different parameters.
   public void validate(Section section)
 ----
 
-Note that the implemented class needs to be in one of the following
-packages: 'cc.redpen.validator', 'cc.redpen.validator.sentence' or
-'cc.redpen.validator.section.'
+Note: 実装されたクラスは三つのパッケージ（*cc.redpen.validator*、*cc.redpen.validator.sentence*、*cc.redpen.validator.section*）のどれかに属す必要があります。別のパッケージに属したクラスはメソッドが実装されていても利用できません。
 
 [[prevalidate-method]]
-==== prevalidate method
+==== prevalidate メソッド
 
-the preValidate method called before validate method is run. This method
-is useful to create the prerequisite to run validate method. There are
-two prevalidte methods variations which have different parameters.
+preValidate メソッドは validate メソッドが呼び出される前に実行されます。validate が呼び出される前に実行されるので、preValidate メソッドを前処理に利用すると便利です。
+現在引数がことなる二種類の prevalidte メソッドが提供されています。
 
 [source,java]
 ----
@@ -81,9 +72,9 @@ two prevalidte methods variations which have different parameters.
 ----
 
 [[init-method]]
-==== init method
+==== init メソッド
 
-The init method is used to load the confiuration for the Validators.
+init メソッドは機能（Validator）用の設定項目（プロパティ）を読み込むのに使用します。
 
 [source,java]
 ----
@@ -95,9 +86,8 @@ The init method is used to load the confiuration for the Validators.
  protected void init() throws RedPenException
 ----
 
-For example, *SentencelengthValidator* has a configuration **max_len**,
-which to specifies the maximum length of sentences in input documents.
-Following configuration specifies the maximum length to 200.
+たとえば *SentencelengthValidator* は *max_len* というプロパティ（設定項目）を提供します。
+max_len は入力文書でゆるされる一文の最大長を指定します。以下は文の最大長を二百に指定した際の設定ファイルです。
 
 [source,xml]
 ----
@@ -112,8 +102,8 @@ Following configuration specifies the maximum length to 200.
 </redpen-conf>
 ----
 
-SentenceLengthValidator load the max_len value with init methods as
-follows.
+SentenceLengthValidator は max_len の値を init メソッドで読み込みます。
+実際の処理は以下のように行われます。
 
 [source,java]
 ----
@@ -122,45 +112,37 @@ protected void init() throws RedPenException {
  }
 ----
 
-In the above code, getConfigAttributeAsInt loads the value of the
-max_len property as integer.
+上記のコードで、getConfigAttributeAsInt は max_len プロパティで指定した値を int としてロードしています。
 
 [[adding-validators]]
-=== Adding Validators
+=== 作成した Validator の追加
 
-There are two ways to add your Validator to RedPen.
+RedPen に作成した Validator を追加する方法は二通りあります。
 
-One way is to add the Validator source file to the RedPen source tree
-and then build RedPen normally. This method is simple, but involves
-bundling the source code for the Validators with the source code for
-RedPen.
+一つは、Validator のソースファイルを RedPen のソースツリーに追加して、RedPen をビルドする方法です。
+この方法はシンプルですが、ソースファイルの管理をRedPenのソースと一緒に行わなくてはなりません。
 
-The second way is to create a Validator plugin. Creating a plugin has
-the advantage that you can then independently manage the source code for
-your Validator.
+もう一つの方法は Validator のプラグインを作る方法です。プラグインを作る場合には、Validator のソースコードを
+RedPen から独立して扱えるという利点があります。
 
-Note that in both cases, your Validator's class name must have the
-suffix **Validator**.
+Note: どちらの方法でもクラス名の最後は **Validator** でなくてはなりません。クラス名が Validator というサフィックスを持たない場合、RedPen は実装された機能ロードできません。
 
-In the next section, we will explain how to add a new Validator to
-Redpen's source tree, and how to construct a Validator plugin.
+以下、どのように Validator をソースツリーに追加するかについてと、プラグインの作り方についてそれぞれ解説します。
 
 [[add-a-validator-in-redpen-source]]
-==== Add a Validator to Redpen's source
+==== Validator を RedPen のソースに追加
 
-Let's define a plain Validator (SentenceLengthValidator) - which check
-if the input sentence is over 100 characters long - and then apply it to
-RedPen's source tree.
+ではさっそく、シンプルな Validator（PlainSentenceLengthValidator）を実装してみましょう。
+PlainSentenceLengthValidator は文書内に存在する各文が百文字以内かどうかチェックします。
+実装したのち、PlainSentenceLengthValidator を RedPen のソースツリーに追加します。
 
 [[sentencelengthvalidator]]
-===== SentenceLengthValidator
+===== PlainSentenceLengthValidator
 
-We create a PlainSentenceLengthValidator class and specify the package
-'cc.redpen.validator.sentence'. Therefore the class is stored in the
-'redpen/redpen-core/src/main/java/cc/redpen/validator/sentence/'
-directory.
+PlainSentenceLengthValidator クラスをつくってパッケージを 'cc.redpen.validator.sentence' とします。
+このときクラスは 'redpen/redpen-core/src/main/java/cc/redpen/validator/sentence/' ディレクトリに保存します。
 
-The following is an implementation of this class.
+以下は PlainSentenceLengthValidator クラスの実装となります。
 
 [source,java]
 ----
@@ -190,18 +172,14 @@ package cc.redpen.validator.sentence;
  }
 ----
 
-The class has a validate method that takes a Sentence object as its
-parameter. When this class is registered in the configuration file,
-RedPen automatically applies the validate method to each sentence in
-each input document.
+このクラスは Sentence オブジェクトを引数にとる validate メソッドを実装しています。
+このクラスが設定ファイルに登録されると、RedPen は入力文書内に存在するすべての文に validate メソッドを適用します。
 
 [[include-a-new-validator]]
-===== Include a new Validator
+===== 実装した Validator を適用する
 
-To include the Validator in your RedPen configuration, add the
-Validator's name, without the "Validator" suffix, to a RedPen
-configuration file. For example, to activate our newly created Validator
-PlainSentenceLengthValidator, include the validator element as follows:
+実装した Validator を利用するには、設定ファイルにクラス名からサフィックス Validator をのぞいて追加します。
+たとえば PlainSentenceLengthValidator を設定に追加するには、 以下の validator 要素を追加します。
 
 [source,xml]
 ----
@@ -214,22 +192,11 @@ PlainSentenceLengthValidator, include the validator element as follows:
 </redpen-conf>
 ----
 
-We would then run RedPen normally, using this configuration file.
-
 [[create-a-validator-plugin]]
-==== Create a Validator plugin
+==== プラグインの作成
 
-When creating a Validator plugin, it is often easier to start by using
-another plugin's project as a template.
-
-As an example, I (takahi-i) have written a simple Validator plugin
-https://github.com/takahi-i/hankaku-kana-validator[hankaku_kana_validator].
-
-The most significant file for the plugin is pom.xml which exists at the
-top of the project. This file is the Maven configuration file, which is
-a popular software project management tool for Java.
-
-The following is the content of pom.xml:
+プラグイン作成でもっとも重要なファイルは pom.xml です。
+pom.xml は Java 言語で書かれたプロジェクト用のビルドツール、Maven の設定ファイルです。以下は pom.xml の例です。
 
 [source,java]
 ----
@@ -245,27 +212,23 @@ The following is the content of pom.xml:
          <dependency>
              <groupId>redpen.cc</groupId>
              <artifactId>redpen-core</artifactId>
-             <version>1.2</version>
+             <version>1.4</version>
              <scope>system</scope>
-             <systemPath>${project.basedir}/lib/redpen-core-0.6.jar</systemPath>
+             <systemPath>${project.basedir}/lib/redpen-core-1.4.jar</systemPath>
          </dependency>
     </dependencies>
 </project>
 ----
 
-Usually you do not need to change the pom.xml file, except for the
-contents of the *artifact-id* and *name* elements. You should alter the
-name to fit the function of your Validator.
+プラグインを作るときには上の pom.xml fファイルをほぼそのまま利用できます。
+変更する点は *artifactId*、*name* 要素です。あなたの機能名になるように名前を変更しましょう。
 
-After changing pom.xml, you should delete the the existing validator
-file (HankakuKanaValidator.java) from
-"main/java/cc/redpen/validator/sentence". Then, put your Validator's
-source file in "main/java/cc/redpen/validator/sentence" or
-"main/java/cc/redpen/validator/section". As mentioned above, your
-Validator must extend the RedPen Validator class.
+pom.xml を編集後、作成したファイルを "main/java/cc/redpen/validator/sentence" か
+"main/java/cc/redpen/validator/section" にコピーします。上記で解説しましたように、
+機能を実装するクラスは Validator クラスを継承する必要があります。
 
-Once you have included your Validator implementation, you can build the
-plugin.
+Validator の実装ファイルをコピーすると、ビルドができます。
+以下のコマンドでプラグインを作成しましょう。
 
 [source,bash]
 ----
@@ -273,36 +236,27 @@ $ mvn install
 ----
 
 [[including-a-user-defined-validator-plugin]]
-===== Including a user-defined Validator plugin
+===== 作成したプラグインを利用する
 
-When you have successfully built your Validator plugin, you can use it
-by copying the plugin's jar file from the *target* directory to a
-directory in RedPen's classpath, such as the RedPen library directory
-($REDPEN_HOME/lib). Once copied, you can add your Validator to the
-configuration file as described above. Remember to remove the
-*Validator* suffix from the name you enter in redpen-config.xml.
+Validator のプラグインがビルドに成功すると、*target* ディレクトリに生成される、プラグインの jar ファイルを RedPen のクラスパス
+に含まれるディレクトリ（$REDPEN_HOME/lib など）にコピーします。
+
+RedPen に利用するには、クラス名からサフィックス *Validator* を取り除いて設定ファイルに追加するだけです。
 
 [[model-structure]]
-=== Model Structure
+=== 文書モデル
 
-This section describes the internal document model structure generated
-by parser objects.
+本節では RedPen が内部に保持する文書モデルについて解説します。
+RedPen は多様なテキストフォーマットをサポートしますが、入力文書は文書モデルというブロック群に変換されます。
 
-Generated RedPen documents consist of several blocks, which represent
-the elements of a document.
+生成された内部文書モデルは以下のブロック（クラス）からなります。
 
-* *DocumentCollection* represents a set of one or more files that
-contain a Document.
-* *Document* represents a single file which contains one or more
-Sections.
-* *Section* contains several blocks (Header, Paragraph, ListBlock).
-Except for Header, each Section can contain multiple blocks. A Section
-may also specify the section level and its subsections.
-* *Header* represents header sentences that contain a list of Sentence
-objects.
-* *Paragraph* contains one or more sentences.
-* *ListBlock* contains a set of ListElement objects.
+* *Document* 一つ以上の節を持つファイル
+* *Section* 文書内の節に相当する。複数のブロック（見出し, パラグラフ, リスト）を保持する。
+* *Header* 見出し文
+* *Paragraph* パラグラフに相当（複数の文を保持する）
+* *ListBlock* リスト要素（ListElement）を保持する
 
-The following image shows the document model used by RedPen.
+以下のイメージは RedPen の文書モデルを表しています。
 
 image:model.jpg[image]

@@ -1,29 +1,26 @@
-== RedPen Server
+== RedPen サーバ
 
-The RedPen server delivers the majority of RedPen's functionality via a
-simple HTTP REST API.
+RedPen サーバは RedPen が提供する機能のほとんどを HTTP REST API としてサポートしてます。
 
 [[starting-the-redpen-server]]
-=== Starting the RedPen server
+=== RedPen サーバの起動・終了方法
 
-Please refer to the <<command.adoc#,command>> page for details on how to start the RedPen server.
+<<command.adoc#,RedPen コマンド>> 節を参照してください。
 
 [[redpen-server-api]]
-=== RedPen Server API
+=== RedPen サーバ API
 
 [[configuration]]
-==== Configuration
+==== 設定を表示
 
-*/rest/config/redpens*
+*/rest/config/redpens* はあらかじめ定義された redpens メソッドで利用できる設定を返します。
 
-Return the configuration for available, preconfigured redpens.
+===== GET パラメタ
 
-===== GET Parameters
+* _lang=xx_ を設定すると、指定された言語の設定（JSONフォーマット）だけが返されます。
+langを指定しない場合には、すべての言語の設定が返されます。
 
-* _lang=xx_ restricts the returned configurations to those that match
-the specified language. By default, all configurations are returned.
-
-The JSON response is as follows:
+以下は返されたJSONの例となります。
 
 [source,json]
 ----
@@ -75,44 +72,39 @@ The JSON response is as follows:
 }
 ----
 
-* The _version_ property indicates the version of RedPen.
-* The _documentParsers_ array contains all supported document parsers
-* The _redpens_ object shows the available pre-configured redpens and
-how they are configured. Within each object:
-** _lang_ specifies the language the redpen is designed for
-** _tokenizer_ specifies the tokenizer class used by the redpen
-** _validators_ shows which validators are configured within the redpen.
-This object is in a format suitable for the _document/validate/json_
-request below. For each validator:
-*** The _languages_ array indicates which languages for which the
-validator is suitable. An empty array indicates all languages.
-*** The _properties_ object specifies the currently configured
-properties for this validator, as described in validator
+* _version_ はRedPenのバージョンをあらわします。
+* _documentParsers_ 配列はサポートされる文書パーサ（文書フォーマット）をあらわします。
+* _redpens_ はあらかじめ言語ごとに定義されたRedPenがどのように設定されているかをあらわします。
+** _lang_ は対象となる言語をしめします。
+** _tokenizer_ はredpenによって利用されるTokenizerをあらわします。
+** _validators_ は文書に適用される機能集合です。各オブジェクトは以下の要素をもちます。
+*** _languages_ は機能がサポートする言語からなる配列です。配列が空の場合には、任意の言語対応していることをあらわします。
+*** _properties_ は機能で指定された設定値をしめします。
 
 [[document-validation]]
-==== Document Validation
+==== 文書検査（XML）
 
-*/document/validate*
+*/document/validate* は POST リクエストで文書を検査してエラーを返します。
 
-This POST request validates a document and returns the errors.
+===== POST パラメタ
 
-===== POST Parameters
-
-* _document_ contains the text of the document RedPen is to validate
-* _documentParser_ specifies which parser should be used to parse the
-document. Valid options are:::
+* _document_ にはRedPenに検査させたい文書（テキスト）を追加します。
+* _documentParser_ にはパーサを指定します。現在対応しているパーサは以下のものがあります。
   ** PLAIN
   ** MARKDOWN
   ** WIKI
-* _lang_ specifies the language used to tokenize the document.
-Currently, values of *ja* (Japanese) and *en* (English/Whitespace) are
-supported.
-* The optional _format_ field determines the format for the results. It
-can be one of json (the default), json2, plain, plain2 or xml.
-* The optional _config_ field contains the contents of a RedPen XML
-configuration file
+  ** ASCIIDOC
+  ** LATEX
+* _lang_ には入力文書の言語を指定します。現在、*ja*（日本語）と*en* (英語) がサポートされています。
+* （オプション）_format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります
+  ** json（デフォルト）
+  ** json2
+  ** plain
+  ** plain2
+  ** xml
+* _config_ にはRedPenの設定内容（XML）を追加します。
 
-====== Examples using curl and document/validate
+====== curl コマンドを利用して document/validate をつかってみる
 
 [source,bash]
 ----
@@ -157,12 +149,12 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 }
 ----
 
-*/document/validate/json*
+==== 文書検査（JSON）
 
-This POST request processes a redpen validation request, specified in
-JSON, and returns redpen errors in a supported RedPen format.
+*/document/validate/json* は POST リクエストを受け取り、検査をして結果をかえします。
+設定は JSON フォーマットでおこないます。
 
-===== Request format
+===== Request フォーマット
 
 [source,json]
 ----
@@ -217,24 +209,29 @@ JSON, and returns redpen errors in a supported RedPen format.
 }
 ----
 
-* The _document_ property specifies the text of the document to validate
-* The _documentParser_ property should contain the name of a valid
-RedPen documentparser (ie: PLAIN, MARKDOWN or WIKI)
-* The _format_ property determines the format for the results. It can be
-one of json, json2, plain, plain2 or xml.
-* The _config_ object specifies the validator configuration for the request. This consists of:
-** A _config_ object, consisting of a series of objects that are named
-  after a RedPen validator. If the object is present, the validator will
-  be configured. Within this named object, a _properties_ object can be
-  used to set the name and values of any property used by the validator,
-  as described in validator
-** The _lang_ property indicates the language of the document. It determines how the document will be tokenized by RedPen.
-** A _symbols_ object containing overridden symbols, as described in configuration. Each entry must be a validate symbol name, and can contain the following elements:
-*** _value_ specifies the Symbol's value
-*** _invalid_chars_ is a string of invalid alternatives for this Symbol
-*** _before_space_ and _after_space_ specify if a space is required before or after the Symbol.
+* _document_ には入力文書の内容を追加します。
+* _document_ にはRedPenに検査させたい文書（テキスト）を追加します。
+* _documentParser_ にはパーサを指定します。現在対応しているパーサは以下のものがあります。
+  ** PLAIN
+  ** MARKDOWN
+  ** WIKI
+  ** ASCIIDOC
+  ** LATEX
+* _format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります
+  ** json（デフォルト）
+  ** json2
+  ** plain
+  ** plain2
+  ** xml
+* _config_ にはRedPenの設定をJSONフォーマットで指定します。 _config_ にはいくつかの要素が含まれます。
+  ** _validators_ には**validator**要素を追加し機能名リストを追加します。機能名ブロックには *properties* を追加し設定をおこなえます。
+  ** _lang_ は入力文書の言語を指定します。
+  ** _symbols_ ではシンボル設定の変更を行います。書く要素はシンボル名からなるブロックです。シンボル名ブロックには以下の要素が追加されます
+  *** _value_ specifies the Symbol's value
+  *** _invalid_chars_ is a string of invalid alternatives for this Symbol
+  *** _before_space_ and _after_space_ specify if a space is required before or after the Symbol.
 
-Response (json2 format):
+以下、/document/validate/json で検査した結果の例（json2 format）となります。
 
 [source,json]
 ----
@@ -331,7 +328,7 @@ Response (json2 format):
 }
 ----
 
-====== Some examples using curl and document/validate/json
+====== curl コマンドを利用してdocument/validate/jsonをつかってみる
 
 [source,bash]
 ----

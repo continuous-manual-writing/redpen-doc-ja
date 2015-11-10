@@ -83,7 +83,7 @@ redpen は以下の出力フォーマットをサポートします。
 [[sample-server]]
 === RedPen サーバ
 
-RedPne はサーバ機能も提供します。
+RedPen はサーバ機能も提供します。
 
 [[usage-redpen-server]]
 ==== 使い方：redpen-server
