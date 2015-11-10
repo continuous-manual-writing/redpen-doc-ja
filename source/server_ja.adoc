@@ -5,7 +5,7 @@ RedPen サーバは RedPen が提供する機能のほとんどを HTTP REST API
 [[starting-the-redpen-server]]
 === RedPen サーバの起動・終了方法
 
-<<command.adoc#,RedPen コマンド>> 節を参照してください。
+RedPenコマンド節を参照してください。
 
 [[redpen-server-api]]
 === RedPen サーバ API
@@ -13,7 +13,7 @@ RedPen サーバは RedPen が提供する機能のほとんどを HTTP REST API
 [[configuration]]
 ==== 設定を表示
 
-*/rest/config/redpens* はあらかじめ定義された redpens メソッドで利用できる設定を返します。
+*/rest/config/redpens* はあらかじめ定義されたredpensメソッドで利用できる設定を返します。
 
 ===== GET パラメタ
 

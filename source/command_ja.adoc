@@ -5,7 +5,7 @@ RedPen は二つのコマンドを提供します。RedPen はコマンドライ
 [[command-line-tool]]
 === コマンドラインツール
 
-RedPen が提供するコマンドラインツールは **redpen** という名前です。
+RedPenが提供するコマンドラインツールは **redpen** という名前です。
 
 [[usage-redpen]]
 ==== 使い方：redpen
@@ -17,7 +17,7 @@ redpen コマンドは以下のように利用します。
 $ redpen [オプション] 入力ファイル（複数可）
 ------------------------------------------------
 
-複数の入力ファイルを指定した際には、ファイルは半角スペースで区切ります。
+複数の入力ファイルを指定した際、ファイル間は半角スペースで区切られます。
 
 [[options]]
 ==== オプション
@@ -36,7 +36,7 @@ redpen コマンドは以下のオプションをサポートしています。
 -f <INPUT_FORMAT>, --input_format <INPUT_FORMAT>
 ----
 
-入力ファイルの引数として指定できるフォーマットとして、 redpen は以下のフォーマットをサポートします。
+redpen は以下のフォーマットをサポートします。
 
 [options="header",]
 |====
@@ -49,7 +49,7 @@ redpen コマンドは以下のオプションをサポートしています。
 |====
 
 [NOTE]
-RedPen does not currently support every element of the wiki format, such as tables. The remaining elements will be supported in the near future.
+RedPenはWikiフォーマットの一部要素に対応していません。またRedPenはWikiフォーマット文書のオフセット情報を出力できません。
 
 ===== 出力フォーマット [**デフォルト**: plain]
 
