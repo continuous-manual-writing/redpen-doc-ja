@@ -1,9 +1,9 @@
 == RedPen FAQ
 
-* Does RedPen check LaTeX documents for common style errors?
+* RedPenはLaTeXに対応していますか。
 +
 --
-RedPen supports LaTex format from version 1.4. The following is a sample usage of the redpen command.
+はい、バージョン１．４から対応を開始しました。
 
 [source,bash]
 ----
