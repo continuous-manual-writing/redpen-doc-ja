@@ -1,0 +1,7 @@
+/**
+ * Validation initialization, called after the configuration and symbol tables have been assigned
+ *
+ * @throws RedPenException
+ */
+ protected void init() throws RedPenException
+

@@ -1,42 +1,26 @@
 == RedPen の設定
-RedPen はコマンラインツールでもサーバでも設定ファイルを指定して実行します。
-RedPen の設定ファイルは二つのブロックからなります。一つ目のブロックは利用する
-機能を列挙します。もう一つのブロックは文字の設定を上書きします。以下詳しくみてゆきます。
+RedPen は実行方法（コマンラインツール、サーバ）関係なく、設定ファイルを指定して使用します。
+RedPenが提供する設定ファイルは二つのブロックからなります。一つ目のブロックは利用する
+機能を列挙します。もう一つのブロックは文書内で利用するシンボル設定に関するものです。以下詳しくみてゆきます。
 
 [[configuration-file]]
 === 設定ファイル
 
 RedPen 単一の設定ファイルを持ちます。ファイルは入力ファイルのフォーマットに依存しない設定項目すべてが含まれます。
-設定ファイルは XML フォーマットで記述されます。XML のルートのブロックは "redpen-conf" です。
+設定ファイルは XML フォーマットで記述されます。XML のルート（root）ブロックは "redpen-conf" です。
 "root-conf" ブロックは二つの子ブロック（"validators" と "symbols"）を持ちます。
 
-*validators* には RedPen で利用する機能（validator）を列挙します。*validator* には property を指定できるものがあります。
-property を利用すると機能がもつデフォルトの挙動を変更できます。
+*validators*には RedPen で利用する機能（validator）を列挙します。*validator*にはpropertyを指定できるものがあります。
+propertyを利用すると、機能の挙動がデフォルトから変更できます。
 
-*symbols* ブロックは言語ごとに存在するデフォルトのシンボル設定を上書きます。
-言語ごとに存在するデフォルトの文字設定を指定するには、redpen-conf ブロックのプロパティとして **lang** と **type** を指定します。
+*symbols*ブロックは**言語ごとに存在するデフォルトのシンボル設定**を上書きます。
+デフォルトのシンボル設定には、redpen-confブロックがサポートするプロパティ、**lang**と**type**を利用します。
 
 以下は設定ファイルの例です。
 
 [source,xml]
 ----
-<redpen-conf lang="en">
-    <validators>
-        <validator name="SentenceLength">
-            <property name="max_len" value="200"/>
-        </validator>
-        <validator name="InvalidSymbol" />
-        <validator name="SpaceWithSymbol" />
-        <validator name="SectionLength">
-            <property name="max_num" value="2000"/>
-        </validator>
-        <validator name="ParagraphNumber" />
-    </validators>
-    <symbols>
-         <symbol name="EXCLAMATION_MARK" value="!" invalid-chars="！" after-space="true" />
-         <symbol name="LEFT_QUOTATION_MARK" value="\'"  invalid-chars="“" before-space="true" />
-    </symbols>
-</redpen-conf>
+include::redpen-example-conf.xml[]
 ----
 
 次節では機能の設定について詳しく解説をおこないます。
@@ -45,25 +29,14 @@ property を利用すると機能がもつデフォルトの挙動を変更で�
 [[validator-configuration]]
 === 機能（Validator）設定 
 
-RedPen の設定ファイルは *validator* ブロックを持ちます。
-validator ブロックには RedPen に検査させたい検査機能を列挙します。
-RedPen はブロックに追加された Validator を入力文書に適用します。
+RedPenの設定ファイルは*validator*ブロックを持ちます。
+validatorブロックには、RedPenで検査したい機能を列挙します。
 
-以下は "validators" ブロックのサンプルです。
+以下は**validators**ブロックのサンプルです。
 
 [source,xml]
 ----
-<validators>
-    <validator name="SentenceLength">
-        <property name="max_len" value="200"/>
-    </validator>
-    <validator name="InvalidSymbol" />
-    <validator name="SpaceWithSymbol" />
-    <validator name="SectionLength">
-        <property name="max_num" value="2000"/>
-    </validator>
-    <validator name="ParagraphNumber" />
- </validators>
+include::validator-conf-sample.xml[]
 ----
 
 各機能は validator 要素で表現されます。
@@ -78,13 +51,15 @@ validator 要素の "name" で機能を指定します。
 [[setting-symbols]]
 === シンボル（文字）設定
 
-*redpen-conf* の *lang* 属性で入力文書の言語を指示すると、シンボルの基本設定が決定されます。
-RedPen は英語 "en" と日本語 "ja" をサポートしています。
+*redpen-conf*が提供する*lang*属性で、入力文書の記述言語を指示します。
+lang属性で記述言語を指定すると、シンボルの基本（デフォルト）設定がロードされます。
+RedPenは二言語（英語"en"と日本語"ja"）の基本設定をサポートしています。
 各言語のシンボル設定については <<en-default-symbol-setting,英語シンボル設定>>
 と <<ja-default-symbol-setting,日本語シンボル設定>>を参照してください。
 
-言語ごとに設定されるシンボルの設定は、**symbols** ブロックを設定ファイルに追加することで上書きできます。
-symbols ブロックには **symbol** ブロックを追加します。symbol ブロックには文書を検査する際に利用するシンボルの設定を記述します。
+デフォルトシンボル設定は、**symbols**ブロックを設定ファイルに追加することで上書きできます。
+symbolsブロックには**symbol**ブロックを追加します。
+symbolブロックにはシンボル属性をいくつか記述します。シンボル属性は文書を検査する際に利用されます。
 
 以下の表は、symbol で指定する属性について解説しています。
 
@@ -101,31 +76,23 @@ symbols ブロックには **symbol** ブロックを追加します。symbol �
 [[sample-setting-symbols]]
 ==== サンプル：シンボル設定
 
-以下の例では三つのシンボルを設定しています。
-一つはエクスクラメーションマーク '!' です。
-二つ目は FULL_STOP です。FULL_STOP は文末文字（ピリオド、句点）を指定します。以下の設定では
-文末文字として半角ピリオド "." を使用し、シンボルの後ろには半角スペースが必要という指定をしています。
-最後の要素はコンマ ',' を使用し、'、' and '，' が利用不可な文字として登録しています。
-invalid-char に登録された文字は InvalidSymbol 機能で利用されます。
-登録された文字が文中に存在すると、InvalidSymbol はエラーを出力します。
+以下はシンボルの設定例です。設定例では三種類のシンボルを定義しています。
+一つはエクスクラメーションマークです。
+二つ目は FULL_STOP です。FULL_STOP は文末文字（ピリオド、句点）を指定します。
+文末文字として半角ピリオドを使用する設定がなされてます。さらにピリオドの後ろには半角スペースを必要とするという指定がなされています。
+最後の要素では、コンマに関するものです。二つのシンボルを利用不可な文字として登録しています。
+invalid-charに登録された文字はInvalidSymbol機能で利用されます。
+invalid-charsに登録された文字が文中であらわれると、InvalidSymbolはエラーを出力します。
 
 [source,xml]
 ----
-<symbols>
-    <symbol name="EXCLAMATION_MARK" value="!" />
-    <symbol name="FULL_STOP" value="." after-space="true" />
-    <symbol name="COMMA" value="," invalid-chars="、，" after-space="true" />
-</symbols>
+include::symbols-setting.xml[]
 ----
 
 [[default-settings-for-english]]
-==== デフォルトのシンボル設定（英語）
+==== 英語：デフォルト（基本）のシンボル設定
 
-以下の表はデフォルトのシンボル（文字）設定を示しています。
-表内の一列目はシンボル名、二列目はシンボルの値（文字）、
-三列目（前スペース）は文字の前に半角スペースが必要かを表しています。
-四列目（後ろスペース）は文字の後ろにスペースが必要かを示しています。
-五列目（不正文字リスト）は各シンボルの同意シンボルで使用してはいけないものを列挙しています。
+以下は英語の基本シンボル（文字）設定を示しています。
 
 [options="header"]
 |====
@@ -166,8 +133,17 @@ invalid-char に登録された文字は InvalidSymbol 機能で利用されま�
 |`RIGHT_DOUBLE_QUOTATION_MARK` |'"'           |false              |false              |                 |  Right double quotation mark
 |====
 
-これらのシンボルは文の切り出しや、いくつかの機能で利用されます。たとえば、InvalidSymbol は不正文字リストに登録されてたシンボルが文中に存在するとエラーを出力します。
-SymbolWithSpace は前スペース、後ろスペースの設定と異なる使用文中にあった場合にエラーを出力します。
+以下、各列の意味をしめしています。
+
+* 一列目 シンボル名
+* 二列目 シンボルの値（文字）
+* 三列目 文字の前に半角スペースが必要かを表しています。
+* 四列目 文字の後ろにスペースが必要かを示しています。
+* 五列目 各シンボルの同意シンボルで使用してはいけないものを列挙しています。
+
+これらのシンボルは文の切り出しや、いくつかの機能で利用されます。
+たとえば、InvalidSymbol は不正文字リストに登録されてたシンボルが文中に存在するとエラーを出力します。
+SymbolWithSpaceは前スペース、後ろスペースの設定と異なる使用文中にあった場合にエラーを出力します。
 なお、設定を変更したい場合には設定ファイルに **symbols** ブロックを追加して変更したい文字を追加してゆきます。
 くわしくは<<setting-symbols>>節を参照してください。
 
@@ -220,25 +196,15 @@ SymbolWithSpace は前スペース、後ろスペースの設定と異なる使�
 
 日本語で書かれた文書で使用される文字は著者や執筆グループによって大きくことなります。
 そこで RedPen は日本語用に二種類のバリエーション（"zenkaku2" と "hankaku"）を提供しています。
-文字設定のバリエーションは *type* 属性で指定します。
-
-以下の例はバリエーションの一つ "zenkaku2" を指定した設定例となります。
+文字設定のバリエーションは *type* 属性で指定します。以下の例はバリエーションの一つ "zenkaku2" を指定した設定例となります。
 
 [source,xml]
 ----
-<redpen-conf lang="ja" type="zenkaku2">
-    <validators>
-        <validator name="InvalidSymbol" />
-        <validator name="SpaceWithSymbol" />
-        <validator name="SectionLength" />
-        <validator name="ParagraphNumber" />
-    </validators>
-</redpen-conf>
+include::symbols-variation.xml[]
 ----
 
-**hankaku** は英語の設定と同一です。*zenkaku2* はほとんど日本語のデフォルト文字設定と同一なのですが、
-以下のシンボルについてのみ設定がことなります。
-
+**hankaku** は英語の設定と同一です。*zenkaku2* は、ほぼ日本語のデフォルト文字設定と同一です。
+以下のシンボルについてのみデフォルトと設定が異なります。
 
 [options="header"]
 |====
