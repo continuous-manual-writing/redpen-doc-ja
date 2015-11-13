@@ -1,74 +1,39 @@
 == RedPen を拡張する
 
-ユーザは自身で RedPen を拡張（機能追加）できます。本節では機能追加の方法とRedPen が内部に保持する文書モデルについて解説します。
+ユーザは自身でRedPenを拡張（機能追加）できます。
+本節では機能追加の方法とRedPen が内部に保持する文書モデルについて解説します。
 
-機能拡張は抽象クラス（Validato）を実装することで作成できます。
+機能拡張の作成には抽象クラス（Validato）を実装が必要です。
 
 [[extending-validators]]
 === Validator クラスの拡張
 
-Validator クラスには実装できるメソッドがいくつか（validate、prevalidate、init）提供されています。
+Validatorクラスには実装できるメソッドがいくつか（validate、prevalidate、init）提供されています。
 以下各メソッドについて解説します。
 
 [[validate-methods]]
 ==== validate メソッド
 
-機能を実装するには最低限 *validate* メソッドを実装しなくてはなりません。
+機能を作成するには、かならず*validate*メソッドの実装が必要です。
 validate メソッドには引数によっていくつかのバリエーションがあります。
 現状では三種類の validate メソッドが提供されています。
 
 [source,java]
 ----
-/**
- * validate the input document and returns the invalid points.
- * {@link cc.redpen.validator.Validator} provides empty implementation. Validator implementation validates documents can override this method.
- *
- * @param document input
- */
- public void validate(Document document)
-
- /**
-  * validate the input document and returns the invalid points.
-  * {@link cc.redpen.validator.Validator} provides empty implementation. Validator implementation validates sentences can override this method.
-  *
-  * @param sentence input
-  */
-  public void validate(Sentence sentence)
-
- /**
-  * validate the input document and returns the invalid points.
-  * {@link cc.redpen.validator.Validator} provides empty implementation. Validator implementation validates sections can override this method.
-  *
-  * @param section input
-  */
-  public void validate(Section section)
+include::validate-java-interfaces.txt[]
 ----
 
-Note: 実装されたクラスは三つのパッケージ（*cc.redpen.validator*、*cc.redpen.validator.sentence*、*cc.redpen.validator.section*）のどれかに属す必要があります。別のパッケージに属したクラスはメソッドが実装されていても利用できません。
+Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは*cc.redpen.validator*、*cc.redpen.validator.sentence*、*cc.redpen.validator.section*です。
 
 [[prevalidate-method]]
 ==== prevalidate メソッド
 
-preValidate メソッドは validate メソッドが呼び出される前に実行されます。validate が呼び出される前に実行されるので、preValidate メソッドを前処理に利用すると便利です。
-現在引数がことなる二種類の prevalidte メソッドが提供されています。
+preValidateはvalidateが呼び出される前に実行されます。preValidateメソッドをvalidateメソッドの前処理として利用すると便利です。
+現在、二種類のprevalidteメソッドが提供されています。
 
 [source,java]
 ----
-/**
- * Process input blocks before run validation. This method is used to store
- * the information needed to run Validator before the validation process.
- *
- * @param sentence input sentence
- */
- public void preValidate(Sentence sentence)
-
- /**
-  * Process input blocks before run validation. This method is used to store
-  * the information needed to run Validator before the validation process.
-  *
-  * @param section input section
-  */
-  public void preValidate(Section section)
+include::prevalidate-java-interfaces.txt[]
 ----
 
 [[init-method]]
@@ -78,157 +43,94 @@ init メソッドは機能（Validator）用の設定項目（プロパティ）
 
 [source,java]
 ----
-/**
- * Validation initialization, called after the configuration and symbol tables have been assigned
- *
- * @throws RedPenException
- */
- protected void init() throws RedPenException
+include::init-java-interfaces.txt[]
 ----
 
 たとえば *SentencelengthValidator* は *max_len* というプロパティ（設定項目）を提供します。
-max_len は入力文書でゆるされる一文の最大長を指定します。以下は文の最大長を二百に指定した際の設定ファイルです。
+max_len は入力文書でゆるされる一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
 
 [source,xml]
 ----
-<redpen-conf>
-    <validators>
-        ...
-        <validator name="SentenceLength">
-            <property name="max_len" value="200"/>
-    </validator>
-        ...
-    </validators>
-</redpen-conf>
+include::load-property-config.xml[]
 ----
 
-SentenceLengthValidator は max_len の値を init メソッドで読み込みます。
-実際の処理は以下のように行われます。
+SentenceLengthValidatorはmax_lenの値をinitメソッドで読み込みます。
+実際のinit処理は、以下で定義されます。
 
 [source,java]
 ----
-protected void init() throws RedPenException {
-        this.maxLength = getConfigAttributeAsInt("max_len", DEFAULT_MAX_LENGTH);
- }
+include::init-java-implementation.txt[]
 ----
 
-上記のコードで、getConfigAttributeAsInt は max_len プロパティで指定した値を int としてロードしています。
+上記のコードで、getConfigAttributeAsIntはmax_lenに指定した値をint型としてロードしています。
 
 [[adding-validators]]
 === 作成した Validator の追加
 
 RedPen に作成した Validator を追加する方法は二通りあります。
 
-一つは、Validator のソースファイルを RedPen のソースツリーに追加して、RedPen をビルドする方法です。
-この方法はシンプルですが、ソースファイルの管理をRedPenのソースと一緒に行わなくてはなりません。
+一つは、機能拡張（Validator）用ファイルを、RedPenのソースに追加してビルドする方法です。
+この方法は簡単です。しかし機能拡張用ソースファイルをRedPenのソースファイル群と同梱して扱う必要があります。
 
-もう一つの方法は Validator のプラグインを作る方法です。プラグインを作る場合には、Validator のソースコードを
-RedPen から独立して扱えるという利点があります。
+もう一つの方法はプラグインを作る方法です。
+プラグインの場合には、機能拡張用ファイルをRedPen から独立して扱えます。
 
-Note: どちらの方法でもクラス名の最後は **Validator** でなくてはなりません。クラス名が Validator というサフィックスを持たない場合、RedPen は実装された機能ロードできません。
-
-以下、どのように Validator をソースツリーに追加するかについてと、プラグインの作り方についてそれぞれ解説します。
+Note: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator**で終わる必要があります。クラス名がValidatorというサフィックスを持たない場合、RedPen は実装された機能ロードできません。
+以下、Validatorを追加する方法とプラグインの作り方について解説します。
 
 [[add-a-validator-in-redpen-source]]
 ==== Validator を RedPen のソースに追加
 
-ではさっそく、シンプルな Validator（PlainSentenceLengthValidator）を実装してみましょう。
-PlainSentenceLengthValidator は文書内に存在する各文が百文字以内かどうかチェックします。
-実装したのち、PlainSentenceLengthValidator を RedPen のソースツリーに追加します。
+ではさっそく、簡単なValidator（PlainSentenceLengthValidator）を実装してみましょう。
+PlainSentenceLengthValidatorは文書内に存在する文が百文字以上の場合、エラーを出力します。
+実装したのち、PlainSentenceLengthValidator を RedPen のソースに追加します。
 
 [[sentencelengthvalidator]]
 ===== PlainSentenceLengthValidator
 
-PlainSentenceLengthValidator クラスをつくってパッケージを 'cc.redpen.validator.sentence' とします。
+PlainSentenceLengthValidatorクラスをパッケージ'cc.redpen.validator.sentence'に作成します。
 このときクラスは 'redpen/redpen-core/src/main/java/cc/redpen/validator/sentence/' ディレクトリに保存します。
 
-以下は PlainSentenceLengthValidator クラスの実装となります。
+以下はPlainSentenceLengthValidatorクラスの実装となります。
 
 [source,java]
 ----
-package cc.redpen.validator.sentence;
-
-/**
- * Validate input sentences contain more characters more than specified.
- */
- final public class PlainSentenceLengthValidator extends Validator {
-     /**
-      * Default maximum length of sentences.
-  */
-  public static final int DEFAULT_MAX_LENGTH = 30;
-      private int maxLength = DEFAULT_MAX_LENGTH;
-
-      @Override
-  public void validate(Sentence sentence) {
-       if (sentence.getContent().length() > maxLength) {
-           addValidationError(sentence, sentence.getContent().length(), maxLength);
-        }
-  }
-
-      @Override
-      protected void init() throws RedPenException {
-            this.maxLength = getConfigAttributeAsInt("max_len", DEFAULT_MAX_LENGTH);
-      }
- }
+include::plainsentencelengthvalidator.java[]
 ----
 
-このクラスは Sentence オブジェクトを引数にとる validate メソッドを実装しています。
-このクラスが設定ファイルに登録されると、RedPen は入力文書内に存在するすべての文に validate メソッドを適用します。
+PlainSentenceLengthValidatorはvalidate（引数＝Sentenceオブジェクト）メソッドを実装しています。
+PlainSentenceLengthValidatorが設定ファイルに追加されると、RedPenは実装したvaildateメソッドを実行します。
+Sentenceが引数なので、RedPenは入力文書の文すべてを引数としてくりかえし実行します。
 
 [[include-a-new-validator]]
 ===== 実装した Validator を適用する
 
-実装した Validator を利用するには、設定ファイルにクラス名からサフィックス Validator をのぞいて追加します。
-たとえば PlainSentenceLengthValidator を設定に追加するには、 以下の validator 要素を追加します。
+では設定ファイルに作成した機能を追加しましょう。設定ファイルにはクラス名からサフィックスValidatorをのぞいて追加します。
+以下、PlainSentenceLengthValidatorを設定に追加しています。
 
 [source,xml]
 ----
-<redpen-conf>
-    <validator>
-        ...
-        <validator name="PlainSentenceLength" />
-        ...
-    </validator>
-</redpen-conf>
+include::extension-config.xml[]
 ----
 
 [[create-a-validator-plugin]]
 ==== プラグインの作成
 
-プラグイン作成でもっとも重要なファイルは pom.xml です。
-pom.xml は Java 言語で書かれたプロジェクト用のビルドツール、Maven の設定ファイルです。以下は pom.xml の例です。
+プラグイン作成でもっとも重要なファイルはpom.xmlです。
+pom.xmlはビルドツール、Maven の設定ファイルです。以下は pom.xml の例です。
 
 [source,java]
 ----
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>redpen.cc</groupId>
-    <artifactId>hankaku-kana-validator</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>hankaku-kana-validator</name>
-    <url>http://maven.apache.org</url>
-    <dependencies>
-         <dependency>
-             <groupId>redpen.cc</groupId>
-             <artifactId>redpen-core</artifactId>
-             <version>1.4</version>
-             <scope>system</scope>
-             <systemPath>${project.basedir}/lib/redpen-core-1.4.jar</systemPath>
-         </dependency>
-    </dependencies>
-</project>
+include::redpen-plugin-pom.xml[]
 ----
 
-プラグインを作るときには上の pom.xml fファイルをほぼそのまま利用できます。
-変更する点は *artifactId*、*name* 要素です。あなたの機能名になるように名前を変更しましょう。
+プラグインを作るときには上の pom.xml ファイルが**ほぼ**そのまま利用できます。
+変更する点は*artifactId*、*name*要素です。あなたの機能名になるよう名前を変更しましょう。
 
-pom.xml を編集後、作成したファイルを "main/java/cc/redpen/validator/sentence" か
-"main/java/cc/redpen/validator/section" にコピーします。上記で解説しましたように、
-機能を実装するクラスは Validator クラスを継承する必要があります。
+これでpom.xmlが編集できました。編集した機能用のファイルを"main/java/cc/redpen/validator/sentence（sentence）"にコピーします。
+上記で解説しましたように、機能用のクラスはValidatorクラスを継承する必要があります。
 
-Validator の実装ファイルをコピーすると、ビルドができます。
-以下のコマンドでプラグインを作成しましょう。
+Validator の実装ファイルをコピーすると、ビルドができます。以下のコマンドでプラグインを作成しましょう。
 
 [source,bash]
 ----
@@ -238,18 +140,18 @@ $ mvn install
 [[including-a-user-defined-validator-plugin]]
 ===== 作成したプラグインを利用する
 
-Validator のプラグインがビルドに成功すると、*target* ディレクトリに生成される、プラグインの jar ファイルを RedPen のクラスパス
-に含まれるディレクトリ（$REDPEN_HOME/lib など）にコピーします。
-
-RedPen に利用するには、クラス名からサフィックス *Validator* を取り除いて設定ファイルに追加するだけです。
+無事mvnコマンドによるビルドが成功しました。これで*target*ディレクトリにプラグイン用jarファイルが生成されます。
+プラグイン用jarファイルをRedPenのクラスパスが含まれるディレクトリ（$REDPEN_HOME/libなど）にコピーします。
+作成したプラグインが設定ファイルに追加されると、RedPenは実装したvaildateメソッドを実行します。
 
 [[model-structure]]
 === 文書モデル
 
 本節では RedPen が内部に保持する文書モデルについて解説します。
-RedPen は多様なテキストフォーマットをサポートしますが、入力文書は文書モデルというブロック群に変換されます。
+RedPen は多様なテキストフォーマットをサポートします。
+各種の入力文書はRedPen内部で**文書モデル**というブロック（クラス）群に変換されます。
 
-生成された内部文書モデルは以下のブロック（クラス）からなります。
+生成された内部文書モデルは以下のブロックからなります。
 
 * *Document* 一つ以上の節を持つファイル
 * *Section* 文書内の節に相当する。複数のブロック（見出し, パラグラフ, リスト）を保持する。
