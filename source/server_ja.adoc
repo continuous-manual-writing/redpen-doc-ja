@@ -1,3 +1,4 @@
+[[redpen-server]]
 == RedPen サーバ
 
 RedPen サーバはRedPenが提供する機能のほとんどをHTTP REST APIとしてサポートしてます。

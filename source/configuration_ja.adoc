@@ -24,7 +24,7 @@ include::redpen-example-conf.xml[]
 ----
 
 次節では機能の設定について詳しく解説をおこないます。
-シンボルの設定については説 <<setting-symbols,Setting Symbols>> で解説をおこないます。
+シンボルの設定については説 <<setting-symbols,シンボル（文字）設定>> で解説をおこないます。
 
 [[validator-configuration]]
 === 機能（Validator）設定 
@@ -46,7 +46,7 @@ validator 要素の "name" で機能を指定します。
 
 提供される機能の中には **property** 要素で設定できるものがあります。
 たとえば、SentenceLength で検査する文長の最大値は **max_num** で指定できます。
-各機能の解説については <<validator.adoc#,validator>> を参照してください.
+各機能の解説については <<validator,Validator>> を参照してください.
 
 [[setting-symbols]]
 === シンボル（文字）設定
@@ -54,8 +54,8 @@ validator 要素の "name" で機能を指定します。
 *redpen-conf*が提供する*lang*属性で、入力文書の記述言語を指示します。
 lang属性で記述言語を指定すると、シンボルの基本（デフォルト）設定がロードされます。
 RedPenは二言語（英語"en"と日本語"ja"）の基本設定をサポートしています。
-各言語のシンボル設定については <<en-default-symbol-setting,英語シンボル設定>>
-と <<ja-default-symbol-setting,日本語シンボル設定>>を参照してください。
+各言語のシンボル設定については <<default-settings-for-english,英語シンボル設定>>
+と <<default-settings-for-japanese,日本語シンボル設定>>を参照してください。
 
 デフォルトシンボル設定は、**symbols**ブロックを設定ファイルに追加することで上書きできます。
 symbolsブロックには**symbol**ブロックを追加します。
