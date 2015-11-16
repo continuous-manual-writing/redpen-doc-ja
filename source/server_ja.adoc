@@ -1,6 +1,6 @@
 == RedPen サーバ
 
-RedPen サーバは RedPen が提供する機能のほとんどを HTTP REST API としてサポートしてます。
+RedPen サーバはRedPenが提供する機能のほとんどをHTTP REST APIとしてサポートしてます。
 
 [[starting-the-redpen-server]]
 === RedPen サーバの起動・終了方法
@@ -84,7 +84,7 @@ langを指定しない場合には、すべての言語の設定が返されま�
 [[document-validation]]
 ==== 文書検査（XML）
 
-*/document/validate* は POST リクエストで文書を検査してエラーを返します。
+*/document/validate* はPOSTリクエストで文書を検査します。検査が終了した後、発見されたエラーを返します。
 
 ===== POST パラメタ
 
@@ -95,7 +95,7 @@ langを指定しない場合には、すべての言語の設定が返されま�
   ** WIKI
   ** ASCIIDOC
   ** LATEX
-* _lang_ には入力文書の言語を指定します。現在、*ja*（日本語）と*en* (英語) がサポートされています。
+* _lang_ には入力文書の言語を指定します。現在、*ja*（日本語）と*en*（英語）がサポートされています。
 * （オプション）_format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります
   ** json（デフォルト）
   ** json2
@@ -151,8 +151,7 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 
 ==== 文書検査（JSON）
 
-*/document/validate/json* は POST リクエストを受け取り、検査をして結果をかえします。
-設定は JSON フォーマットでおこないます。
+*/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果をかえします。設定はJSONフォーマットでおこないます。
 
 ===== Request フォーマット
 

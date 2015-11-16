@@ -20,6 +20,7 @@
     </validators>
     <symbols>
       <symbol name="FULL_STOP" value="。" invalid-chars="．" />
+      <symbol name="QUESTION_MARK" value="？" />
       <symbol name="COMMA" value="、" invalid-chars="，"/>
       <symbol name="COLON" value="：" />
       <symbol name="DOLLAR_SIGN" value="＄" />
