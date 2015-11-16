@@ -159,6 +159,6 @@ RedPen は多様なテキストフォーマットをサポートします。
 * *Paragraph* パラグラフに相当（複数の文を保持する）
 * *ListBlock* リスト要素（ListElement）を保持する
 
-以下のイメージは RedPen の文書モデルを表しています。
+以下のイメージは RedPen が内部で使用する文書モデルです。
 
 image:model.jpg[image]
