@@ -5,8 +5,6 @@
 == 概要
 RedPen はオープンソースの校正ツールです。RedPen は技術文書が文書規約に従って書かれているかを自動検査します。
 
-NOTE: 現在の RedPen 日本語ドキュメントは十分検査されておりません。校正にはもう少々時間がかかる予定です。誤りなど見つかりましたら、https://github.com/redpen-cc/redpen-doc-ja に Issue 登録しておしらせ頂けると幸いです。
-
 include::quickstart_ja.adoc[]
 
 include::command_ja.adoc[]
