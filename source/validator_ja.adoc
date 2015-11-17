@@ -1,3 +1,4 @@
+[[validator]]
 == RedPen が提供する機能
 
 RedPen は以下の機能を提供します。
