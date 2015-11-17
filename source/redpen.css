@@ -692,6 +692,12 @@ h4 { color: #6c818f; }
 table.tableblock.grid-all { border-collapse: collapse; -webkit-border-radius: 0; border-radius: 0; }
 table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock { border-bottom: 1px solid #aaa; }
 
+#toc.toc2 { background: #0d1e31; }
+
+#toctitle { background: url("redpen/logo-002.png") no-repeat; background-size: Auto 3em; -webkit-background-size: Auto 3em; -moz-background-size: Auto 3em; padding-top: 3em; }
+
+#toc a { color: white; }
+
 #footer { background-color: #585146; padding: 2em; }
 
 #footer-text { color: #eee; font-size: 0.8em; text-align: center; }
