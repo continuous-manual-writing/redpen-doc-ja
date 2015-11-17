@@ -1,9 +1,9 @@
 redpen-doc
 ==========
 
-This repository is for the user manual of RedPen.
+本リポジトリは、RedPen の日本語ドキュメントを保持します。
 
-Requirements
+必要なツール
 -------------
 - AsciiDoctor
 - rubygem-coderay
@@ -11,23 +11,23 @@ Requirements
 Download and Build
 ----------------------
 
-We download and build the manual with the following steps.
+ドキュメントは以下のステップでビルドできます。
 
-1. go to your home directory (/home/username if your account name is 'username')
+1. ホームディレクトリに移動 ('username' というアカウント名なら /home/username)
 
 ```bash
     $ cd username
 ```
 
-2. clone the source code with git command
+2. ソースファイルの取得
 
 ```bash
-    $ git clone git@github.com:recruit-tech/redpen-doc
+    $ git clone git@github.com:continuous-manual-writing/redpen-doc-ja.git
 ```
 
-3. compile the user manual
+3. ドキュメントのコンパイル
 
 ```bash
-    $ cd redpen-doc
+    $ cd redpen-doc-ja
     $ make html
 ```
