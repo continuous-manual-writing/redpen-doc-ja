@@ -1,5 +1,6 @@
 = RedPen ドキュメント
 :stylesheet: redpen.css
+:pdf-style: redpen.yml
 :toc: right
 
 == 概要
