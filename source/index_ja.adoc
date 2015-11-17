@@ -1,4 +1,5 @@
 = RedPen ドキュメント
+:stylesheet: redpen.css
 :toc: right
 
 == 概要
