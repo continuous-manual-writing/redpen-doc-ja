@@ -161,4 +161,4 @@ RedPen は多様なテキストフォーマットをサポートします。
 
 以下のイメージは RedPen が内部で使用する文書モデルです。
 
-image:model.jpg[image]
+image::model.jpg[width="500", height="300"]
