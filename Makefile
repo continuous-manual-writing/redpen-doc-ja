@@ -5,7 +5,8 @@
 BUILDDIR              = build
 
 ASCIIDOCTOR           = asciidoctor
-.PHONY: help clean html 
+ASCIIDOCTOR_PDF       = asciidoctor-pdf
+.PHONY: help clean html pdf
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -20,6 +21,12 @@ html:
 	cp -a source/redpen $(BUILDDIR)/html/
 	$(ASCIIDOCTOR) -a source-highlighter=coderay -d book -b html5 source/index_ja.adoc -D$(BUILDDIR)/html
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html"
+
+pdf:
+	mkdir -p $(BUILDDIR)/pdf
+	cp source/*.jpg source/*.png $(BUILDDIR)/pdf/
+	$(ASCIIDOCTOR_PDF) -a source-highlighter=coderay -d book source/index_ja.adoc -D$(BUILDDIR)/pdf
+	@echo "Build finished. The PDF file is in $(BUILDDIR)/pdf"
 
 check:
 	redpen -f asciidoc source/*.adoc
