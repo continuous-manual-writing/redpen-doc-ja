@@ -48,7 +48,7 @@ link:
   font_color: #002FA7
 
 literal:
-  font_color: b12146
+  font_style: bold
 
 heading:
   font_color: $base_font_color
