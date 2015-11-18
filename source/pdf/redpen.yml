@@ -198,10 +198,6 @@ toc:
 header:
   height: 0.75in
   line_height: 1
-  recto_content:
-    center: 'v{revnumber}, {docdate}'
-  verso_content:
-    center: $header_recto_content
 
 footer:
   font_size: $base_font_size_small
