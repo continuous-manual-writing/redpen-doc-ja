@@ -14,7 +14,7 @@ Validatorクラスには実装できるメソッドがいくつか（validate、
 [[validate-methods]]
 ==== validate メソッド
 
-機能を作成するには、かならず*validate*メソッドの実装が必要です。
+機能を作成するには、かならず**validate**メソッドの実装が必要です。
 validate メソッドには引数によっていくつかのバリエーションがあります。
 現状では三種類の validate メソッドが提供されています。
 
@@ -23,7 +23,7 @@ validate メソッドには引数によっていくつかのバリエーショ�
 include::validate-java-interfaces.txt[]
 ----
 
-Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは*cc.redpen.validator*、*cc.redpen.validator.sentence*、*cc.redpen.validator.section*です。
+Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは**cc.redpen.validator**、**cc.redpen.validator.sentence**、**cc.redpen.validator.section**です。
 
 [[prevalidate-method]]
 ==== prevalidate メソッド
@@ -46,7 +46,7 @@ init メソッドは機能（Validator）用の設定項目（プロパティ）
 include::init-java-interfaces.txt[]
 ----
 
-たとえば *SentencelengthValidator* は *max_len* というプロパティ（設定項目）を提供します。
+たとえば **SentencelengthValidator** は **max_len** というプロパティ（設定項目）を提供します。
 max_len は入力文書でゆるされる一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
 
 [source,xml]
@@ -125,7 +125,7 @@ include::redpen-plugin-pom.xml[]
 ----
 
 プラグインを作るときには上の pom.xml ファイルが**ほぼ**そのまま利用できます。
-変更する点は*artifactId*、*name*要素です。あなたの機能名になるよう名前を変更しましょう。
+変更する点は**artifactId**、**name**要素です。あなたの機能名になるよう名前を変更しましょう。
 
 これでpom.xmlが編集できました。編集した機能用のファイルを"main/java/cc/redpen/validator/sentence（sentence）"にコピーします。
 上記で解説しましたように、機能用のクラスはValidatorクラスを継承する必要があります。
@@ -140,7 +140,7 @@ $ mvn install
 [[including-a-user-defined-validator-plugin]]
 ===== 作成したプラグインを利用する
 
-無事mvnコマンドによるビルドが成功しました。これで*target*ディレクトリにプラグイン用jarファイルが生成されます。
+無事mvnコマンドによるビルドが成功しました。これで**target**ディレクトリにプラグイン用jarファイルが生成されます。
 プラグイン用jarファイルをRedPenのクラスパスが含まれるディレクトリ（$REDPEN_HOME/libなど）にコピーします。
 作成したプラグインが設定ファイルに追加されると、RedPenは実装したvaildateメソッドを実行します。
 
