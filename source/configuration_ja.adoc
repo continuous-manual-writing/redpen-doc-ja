@@ -10,10 +10,10 @@ RedPen 単一の設定ファイルを持ちます。ファイルは入力ファ�
 設定ファイルは XML フォーマットで記述されます。XML のルート（root）ブロックは "redpen-conf" です。
 "root-conf" ブロックは二つの子ブロック（"validators" と "symbols"）を持ちます。
 
-*validators*には RedPen で利用する機能（validator）を列挙します。*validator*にはpropertyを指定できるものがあります。
+**validators** には RedPen で利用する機能（validator）を列挙します。**validator**にはpropertyを指定できるものがあります。
 propertyを利用すると、機能の挙動がデフォルトから変更できます。
 
-*symbols*ブロックは**言語ごとに存在するデフォルトのシンボル設定**を上書きます。
+**symbols**ブロックは**言語ごとに存在するデフォルトのシンボル設定**を上書きます。
 デフォルトのシンボル設定には、redpen-confブロックがサポートするプロパティ、**lang**と**type**を利用します。
 
 以下は設定ファイルの例です。
@@ -29,7 +29,7 @@ include::redpen-example-conf.xml[]
 [[validator-configuration]]
 === 機能（Validator）設定 
 
-RedPenの設定ファイルは*validator*ブロックを持ちます。
+RedPenの設定ファイルは**validator**ブロックを持ちます。
 validatorブロックには、RedPenで検査したい機能を列挙します。
 
 以下は**validators**ブロックのサンプルです。
@@ -51,7 +51,7 @@ validator 要素の "name" で機能を指定します。
 [[setting-symbols]]
 === シンボル（文字）設定
 
-*redpen-conf*が提供する*lang*属性で、入力文書の記述言語を指示します。
+**redpen-conf**が提供する**lang**属性で、入力文書の記述言語を指示します。
 lang属性で記述言語を指定すると、シンボルの基本（デフォルト）設定がロードされます。
 RedPenは二言語（英語"en"と日本語"ja"）の基本設定をサポートしています。
 各言語のシンボル設定については <<default-settings-for-english,英語シンボル設定>>
