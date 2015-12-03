@@ -12,9 +12,9 @@ install:
   - export PATH=$PATH:$PWD/redpen-distribution-1.4.1/bin
 
 script:
-  - sudo gem install asciidoctor
-  - sudo gem install coderay
-  - sudo gem install --pre asciidoctor-pdf
+  - gem install asciidoctor
+  - gem install coderay
+  - gem install --pre asciidoctor-pdf
   - sudo apt-get update && sudo apt-get install oracle-java8-installer
   - asciidoctor --version
   - asciidoctor-pdf --version
