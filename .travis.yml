@@ -1,4 +1,7 @@
-language: text
+language: ruby
+
+rvm:
+  - 2.0.0-p598
 
 jdk:
     - oraclejdk8
