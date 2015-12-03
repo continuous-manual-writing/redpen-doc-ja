@@ -265,7 +265,7 @@ SectionLength は節で利用できる単語の数を指定します。
 [options="header"]
 |====
 |プロパティ      |デフォルト     |解説
-|``max_num``     |1000           |一つ節で利用する単語の最大数
+|``max_num``     |1000           |節内で利用する単語の最大数
 |====
 
 [[supported-languages]]
