@@ -12,4 +12,6 @@ install:
   - export PATH=$PATH:$PWD/redpen-distribution-1.4.1/bin
 
 script:
+  - sudo apt-get update && sudo apt-get install oracle-java8-installer
+  - java -version
   - make check
