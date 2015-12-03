@@ -98,7 +98,7 @@ $ redpen-server [start|stop]
 [[configuration]]
 === 設定
 
-redpen-server はredpen-serverコマンドファイル自身を編集することで設定できます。 
+redpen-serverの設定は、redpen-serverコマンドファイル自身に記載されています。変更するにはコマンドファイル自身を編集します。
 以下が設定できる項目となります。
 
 [options="header",]

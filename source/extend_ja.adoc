@@ -70,19 +70,19 @@ include::init-java-implementation.txt[]
 RedPen に作成した Validator を追加する方法は二通りあります。
 
 一つは、機能拡張（Validator）用ファイルを、RedPenのソースに追加してビルドする方法です。
-この方法は簡単です。しかし機能拡張用ソースファイルをRedPenのソースファイル群と同梱して扱う必要があります。
+この方法は簡単です。しかし機能拡張のソースファイルをRedPenソースファイル群と同梱して扱う必要があります。
 
 もう一つの方法はプラグインを作る方法です。
-プラグインの場合には、機能拡張用ファイルをRedPen から独立して扱えます。
+プラグインの場合には、機能拡張ソースファイルをRedPen から独立して扱えます。
 
-Note: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator**で終わる必要があります。クラス名がValidatorというサフィックスを持たない場合、RedPen は実装された機能ロードできません。
+Note: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator**で終わる必要があります。クラス名がValidatorで終わらない場合、RedPen は実装された機能をロードできません。
 以下、Validatorを追加する方法とプラグインの作り方について解説します。
 
 [[add-a-validator-in-redpen-source]]
 ==== Validator を RedPen のソースに追加
 
 ではさっそく、簡単なValidator（PlainSentenceLengthValidator）を実装してみましょう。
-PlainSentenceLengthValidatorは文書内に存在する文が百文字以上の場合、エラーを出力します。
+PlainSentenceLengthValidatorは文書内に存在する文が百文字もしくはそれ以上続く場合、エラーを出力します。
 実装したのち、PlainSentenceLengthValidator を RedPen のソースに追加します。
 
 [[sentencelengthvalidator]]
