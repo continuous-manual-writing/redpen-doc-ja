@@ -1,4 +1,4 @@
-= RedPen ドキュメント
+= RedPen 1.4 ドキュメント
 :stylesheet: redpen.css
 :pdf-style: redpen.yml
 :toc: right
