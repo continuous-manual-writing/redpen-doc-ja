@@ -1,4 +1,7 @@
-language: text
+language: ruby
+
+rvm:
+  - 2.0.0-p598
 
 jdk:
     - oraclejdk8
@@ -12,6 +15,11 @@ install:
   - export PATH=$PATH:$PWD/redpen-distribution-1.4.1/bin
 
 script:
+  - gem install asciidoctor
+  - gem install coderay
+  - gem install --pre asciidoctor-pdf
   - sudo apt-get update && sudo apt-get install oracle-java8-installer
+  - asciidoctor --version
+  - asciidoctor-pdf --version
   - java -version
-  - make check
+  - make check html pdf
