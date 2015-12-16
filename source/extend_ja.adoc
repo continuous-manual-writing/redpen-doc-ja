@@ -3,7 +3,7 @@
 ユーザは自身でRedPenを拡張（機能追加）できます。
 本節では機能追加の方法とRedPen が内部に保持する文書モデルについて解説します。
 
-機能拡張の作成には抽象クラス（Validato）を実装が必要です。
+機能拡張の作成には抽象クラス（Validator）を実装する必要があります。バージョン1.3以降ではJavaScriptでも拡張可能になっています。
 
 [[extending-validators]]
 === Validator クラスの拡張
@@ -143,6 +143,54 @@ $ mvn install
 無事mvnコマンドによるビルドが成功しました。これで**target**ディレクトリにプラグイン用jarファイルが生成されます。
 プラグイン用jarファイルをRedPenのクラスパスが含まれるディレクトリ（$REDPEN_HOME/libなど）にコピーします。
 作成したプラグインが設定ファイルに追加されると、RedPenは実装したvaildateメソッドを実行します。
+
+[[extending-with-javascript]]
+=== JavaScriptによる機能拡張の作成
+
+バージョン1.3からJavaScriptによる機能拡張（**機能拡張スクリプト**）をサポートしています。機能拡張スクリプトの作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽にRedPenを拡張できます。
+
+機能拡張スクリプトはいくつかのメソッドを定義します。以下定義できるメソッド群を解説します。
+
+==== validate系メソッド
+
+機能拡張スクリプトには、かならず**validate**系メソッドの定義がひとつ以上必要です。
+RedPenは文書内の文（もしくは節）のすべてを引数にして、対応するvalidate系メソッドを呼び出します。エラーの追加はaddErrorメソッドを利用します。
+
+定義できるvalidate系メソッドは二種類（validateSentence・validateSection）存在します。どちらも入力文（あるいは節）内を検査してエラーを追加します。
+
+===== validateSentence メソッド
+
+validateSentenceは引数に文（Sentence）を持ちます。
+
+===== validateSection メソッド
+
+validateSectionは引数に節（Section）をとります。文より大きな規模のチェックを行いたいときに使用します。
+
+たとえば著しく類似した節を検知する機能 **DuplicatedSection** があります。
+
+DuplicatedSectionは節単位の検査を行なってエラーを出力します。節の検査にvalidateSectionメソッドを利用します。
+
+==== preValidate系メソッド
+
+機能拡張スクリプトで**preValidate**系メソッドを定義すると検査前処理を行なえます。
+preValidate系メソッドは引数によって二種類（preValidateSentence・preValidateSection）存在します。それぞれ対応するvalidate系メソッド（validateSentence・validateSection）実行前に呼び出されます。
+
+===== preValidateSentenceメソッド
+
+preValidateSentenceは引数に文（Sentence）を持ちます。
+
+===== preValidateSectionメソッド
+
+preValidateSectionは引数に節（Section）を持ちます。
+
+=== 作成した機能拡張スクリプトの利用
+
+機能拡張スクリプトを利用するには、**JavaScript**機能を有効にします。JavaScript機能は指定されたディレクトリを走査しスクリプトを実行する機能です。デフォルトでは、JavaScript機能はRedPenホームディレクトリ直下のjsディレクトリを走査します。
+
+[source, xml]
+----
+include::redpen-js-conf.xml[]
+----
 
 [[model-structure]]
 === 文書モデル

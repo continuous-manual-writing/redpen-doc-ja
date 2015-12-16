@@ -32,6 +32,7 @@ RedPen は以下の機能を提供します。
 * NumberFormat
 * ParenthesizedSentence
 * WeakExpression
+* JavaScript
 
 [[sentencelength]]
 === SentenceLength
@@ -545,3 +546,23 @@ ParenthesizedSentence は括弧に関する規約を検査します。
 ==== Supported languages
 
 英語のみ対応しています。
+
+[[javascript]]
+=== JavaScript
+
+JavaScript は<<extending-with-javascript, 機能拡張スクリプト>>を実行します。
+
+
+[[properties-13]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ         |デフォルト  |解説
+|``script-path``  |``$REDPEN_HOME/js``  |機能拡張スクリプトを走査するパス。
+|====
+
+[[supported-languages-20]]
+==== 対象言語
+
+どの言語でも動作します。
