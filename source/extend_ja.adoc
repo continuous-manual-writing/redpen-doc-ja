@@ -29,7 +29,7 @@ Note: 実装されたクラスは特定のパッケージに属す必要があ�
 ==== prevalidate メソッド
 
 preValidate は validate が呼び出される前に実行されます。preValidate メソッドを validate メソッドの前処理として利用すると便利です。
-現在、二種類の prevalidte メソッドが提供されています。
+現在、二種類の prevalidate メソッドが提供されています。
 
 [source,java]
 ----
@@ -99,7 +99,7 @@ include::plainsentencelengthvalidator.java[]
 ----
 
 PlainSentenceLengthValidator は validate （引数＝ Sentence オブジェクト）メソッドを実装しています。
-PlainSentenceLengthValidator が設定ファイルに追加されると、RedPen は実装した vaildate メソッドを実行します。
+PlainSentenceLengthValidator が設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 Sentence が引数なので、RedPen は入力文書の文すべてを引数としてくりかえし実行します。
 
 [[include-a-new-validator]]
@@ -142,7 +142,7 @@ $ mvn install
 
 無事 mvn コマンドによるビルドが成功しました。これで **target** ディレクトリにプラグイン用 jar ファイルが生成されます。
 プラグイン用 jar ファイルを RedPen のクラスパスが含まれるディレクトリ（$REDPEN_HOME/lib など）にコピーします。
-作成したプラグインが設定ファイルに追加されると、RedPen は実装した vaildate メソッドを実行します。
+作成したプラグインが設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 
 [[model-structure]]
 === 文書モデル

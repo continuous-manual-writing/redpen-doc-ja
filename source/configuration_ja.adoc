@@ -55,7 +55,7 @@ validator 要素の "name" で機能を指定します。
 lang 属性で記述言語を指定すると、シンボルの基本（デフォルト）設定がロードされます。
 RedPen は二言語（英語 "en" と日本語 "ja"）の基本設定をサポートしています。
 各言語のシンボル設定については <<default-settings-for-english,英語シンボル設定>>
-と <<default-settings-for-japanese,日本語シンボル設定>>を参照してください。
+と<<default-settings-for-japanese,日本語シンボル設定>>を参照してください。
 
 デフォルトシンボル設定は、**symbols** ブロックを設定ファイルに追加すると上書きできます。
 symbols ブロックには **symbol** ブロックを追加します。
@@ -81,7 +81,7 @@ symbol ブロックにはシンボル属性をいくつか記述します。シ�
 二つ目は FULL_STOP です。FULL_STOP は文末文字（ピリオド、句点）を指定します。
 文末文字として半角ピリオドを使用する設定がなされてます。さらにピリオドの後ろには半角スペースを必要とするという指定がなされています。
 最後の要素は、コンマに関する設定です。二つのシンボルを利用不可な文字として登録しています。
-invalid-char に登録された文字は InvalidSymbol 機能で利用されます。
+invalid-chars に登録された文字は InvalidSymbol 機能で利用されます。
 invalid-chars に登録された文字が文中であらわれると、InvalidSymbol はエラーを出力します。
 
 [source,xml]
@@ -146,7 +146,7 @@ include::symbols-setting.xml[]
 SymbolWithSpace は前スペースもしくは後ろスペースの設定と異なる用法が存在した場合にエラーを出力します。
 デフォルト設定から変更したい場合は設定ファイルに **symbols** ブロックを追加します。
 追加した symbols ブロック内に変更したい文字の設定を記述します。
-くわしくは <<setting-symbols>> 節を参照してください。
+くわしくは<<setting-symbols,シンボル（文字）設定>>節を参照してください。
 
 [[default-settings-for-japanese]]
 ====  デフォルトのシンボル設定（日本語）
