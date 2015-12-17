@@ -152,7 +152,7 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 
 ==== 文書検査（JSON）
 
-*/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果をかえします。設定はJSONフォーマットでおこないます。
+*/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果を返します。設定はJSONフォーマットでおこないます。
 
 ===== Request フォーマット
 
@@ -217,16 +217,16 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
   ** WIKI
   ** ASCIIDOC
   ** LATEX
-* _format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります
+* _format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります。
   ** json（デフォルト）
   ** json2
   ** plain
   ** plain2
   ** xml
 * _config_ にはRedPenの設定をJSONフォーマットで指定します。 _config_ にはいくつかの要素が含まれます。
-  ** _validators_ には**validator**要素を追加し機能名リストを追加します。機能名ブロックには *properties* を追加し設定をおこなえます。
+  ** _validators_ には**validator**要素を追加し機能名リストを追加します。機能名ブロックには *properties* を追加し設定を行えます。
   ** _lang_ は入力文書の言語を指定します。
-  ** _symbols_ ではシンボル設定の変更を行います。書く要素はシンボル名からなるブロックです。シンボル名ブロックには以下の要素が追加されます
+  ** _symbols_ ではシンボル設定の変更を行います。各要素はシンボル名からなるブロックです。シンボル名ブロックには以下の要素が追加されます。
   *** _value_ specifies the Symbol's value
   *** _invalid_chars_ is a string of invalid alternatives for this Symbol
   *** _before_space_ and _after_space_ specify if a space is required before or after the Symbol.

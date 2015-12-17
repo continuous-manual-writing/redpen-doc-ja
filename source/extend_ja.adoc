@@ -47,7 +47,7 @@ include::init-java-interfaces.txt[]
 ----
 
 たとえば **SentencelengthValidator** は **max_len** というプロパティ（設定項目）を提供します。
-max_len は入力文書でゆるされる一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
+max_len は入力文書で許される一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
 
 [source,xml]
 ----

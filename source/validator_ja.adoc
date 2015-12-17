@@ -56,7 +56,7 @@ SentenceLengthは入力文書に存在する各文（センテンス）の長さ
 [[invalidexpression]]
 === InvalidExpression
 
-入力に不正な表現（単語や句）が含まれる発見すると、エラーを出力します。
+入力に不正な表現（単語や句）が存在するか検査します。不正な表現が存在すると InvalidExpression はエラーを出力します。
 
 [[properties-1]]
 ==== プロパティ
@@ -65,7 +65,7 @@ SentenceLengthは入力文書に存在する各文（センテンス）の長さ
 |====
 |プロパティ      |デフォルト     |解説
 |``dict``        |None           |ユーザ辞書ファイル
-|``list``        |None           |不正表現のリスト（コンマ区切り）。
+|``list``        |None           |不正表現のリスト（コンマ区切り）
 |====
 
 InvalidExpression で指定される辞書は改行区切りです。以下辞書の例となります。
@@ -93,7 +93,7 @@ InvalidWord は入力文に不正な単語が存在するかを検査します�
 |====
 |Property        |デフォルト     |解説
 |``dict``        |None           |ユーザ辞書ファイル
-|``list``        |None           |不正単語のリスト（コンマ区切り）。
+|``list``        |None           |不正単語のリスト（コンマ区切り）
 |====
 
 InvalidWord で指定される辞書は改行区切りです。以下辞書の例となります。
@@ -197,7 +197,7 @@ asap    as soon as possible
 InvalidSymbolは入力文で不正なシンボルが利用されているとエラーを出力します。
 
 使用するシンボルに関する設定は設定ファイルの **symbols** ブロックで指定します。
-詳しくは節 <<setting-symbols,シンボル設定>> を参照して下さい。
+詳しくは <<setting-symbols,シンボル設定>> 節を参照して下さい。
 
 [[supported-languages-2]]
 ==== 対応言語
@@ -428,7 +428,7 @@ DoubleNegative は入力文書に二重否定が使用されているとエラ�
 [options="header"]
 |====
 |プロパティ                  |デフォルト     |解説
-|``leading_word_limit``      |3              |考慮する銭湯からの単語数
+|``leading_word_limit``      |3              |考慮する先頭からの単語数
 |``percentage_threshold``    |25             |同一の文頭表現が利用された最大パーセント
 |``min_sentence_count``      |5              |エラーが起こる最小の文数。文書内の文が指定値よりも少ないとエラーは出力されません。
 |====
@@ -472,8 +472,8 @@ WordFrequency は文中で使用されている単語が一般的な単語の頻
 [options="header"]
 |====
 |プロパティ             |デフォルト    |解説
-|``deviation_factor``   |      3       | Permitted factor of deviation from the norm. So if a word is normally used 3% of the time, your document can use it up to 9% of the time.
-|``min_word_count``     |      200     | Minimum number of words in a document before this validator starts to validate
+|``deviation_factor``   |      3       | 単語使用頻度の偏差許容因子。例えば通常3%の出現頻度の単語であれば文書全体で9%まで使用できます。
+|``min_word_count``     |      200     | 検査前における文書内の最低単語数
 |====
 
 [[supported-languages-17]]
@@ -503,7 +503,7 @@ NumberFormatは文中の数値表現が一般的な記法に従っているか�
 |====
 |プロパティ                      |デフォルト       |解説
 |``decimal_delimiter_is_comma``  |  false          |数値のデリミタを . から , に変更する（ヨーロッパ方式）
-|``ignore_years``                |  false          |四桁の数値を虫する（2015, 1998など）
+|``ignore_years``                |  false          |四桁の数値を無視する（2015, 1998など）
 |====
 
 [[supported-languages-19]]
@@ -526,8 +526,8 @@ ParenthesizedSentence は括弧に関する規約を検査します。
 [options="header"]
 |====
 |プロパティ             |デフォルト  |解説
-|``max_nesting_level``  |2  |一文に存在してよい括弧のネスト数。
-|``max_count``          |1  |一文内に存在してよい括弧の上限数。
+|``max_nesting_level``  |2  |一文に存在してよい括弧のネスト数
+|``max_count``          |1  |一文内に存在してよい括弧の上限数
 |``max_length``         |4  |括弧内に存在してもよい単語数の上限
 |====
 

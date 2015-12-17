@@ -5,7 +5,7 @@ RedPen はいくつかの出力フォーマットをサポートしています�
 [[plain-text]]
 === 平文
 
-平文を指定すると RedPen がかえすエラーは、以下のフォーマットで出力されます。
+平文を指定すると RedPen が返すエラーは、以下のフォーマットで出力されます。
 
 ----
 FILE_NAME:LINE_NUM: ValidationError[ERROR_TYPE], ERROR_MESSAGE at line: SENTENCE
