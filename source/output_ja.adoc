@@ -17,7 +17,7 @@ plain2 を指定した場合には、各文ごとのエラーがまとまって�
 === XML
 
 XML 出力フォーマットの最上位ブロックは *validation-result* です。
-**validation-result**は複数の**error**ブロックを持ちます。**error**ブロック
+**validation-result** は複数の **error** ブロックを持ちます。**error** ブロック
 は以下の子要素を含んでいます。
 
 [option="header"]

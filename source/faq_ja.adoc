@@ -1,6 +1,6 @@
 == RedPen FAQ
 
-* RedPenはLaTeXに対応していますか。
+* RedPen は LaTeX に対応していますか。
 +
 --
 はい、バージョン1.4から対応を開始しました。

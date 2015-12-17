@@ -1,16 +1,16 @@
 == RedPen コマンド
 
-RedPenは二つのコマンドを提供します。RedPen はコマンドラインツールとサーバコマンドを提供します。
+RedPen は二つのコマンドを提供します。RedPen はコマンドラインツールとサーバコマンドを提供します。
 
 [[command-line-tool]]
 === コマンドラインツール
 
-RedPenが提供するコマンドラインツールは **redpen** という名前です。
+RedPen が提供するコマンドラインツールは **redpen** という名前です。
 
 [[usage-redpen]]
-==== 使い方：redpen
+==== 使い方: redpen
 
-redpenコマンドは以下のように利用します。
+redpen コマンドは以下のように利用します。
 
 [source,bash]
 ------------------------------------------------
@@ -22,7 +22,7 @@ $ redpen [オプション] 入力ファイル（複数可）
 [[options]]
 ==== オプション
 
-redpenコマンドは以下のオプションをサポートしています。
+redpen コマンドは以下のオプションをサポートしています。
 
 ===== RedPen の設定ファイルを指定
 
@@ -49,7 +49,7 @@ redpenコマンドは以下のオプションをサポートしています。
 |====
 
 [NOTE]
-残念ながらWikiフォーマットの一部要素に対応していません。またRedPenはWikiフォーマット文書のオフセット情報を出力できません。
+残念ながら Wiki フォーマットの一部要素に対応していません。また RedPen は Wiki フォーマット文書のオフセット情報を出力できません。
 
 ===== 出力フォーマット [**デフォルト**: plain]
 
@@ -83,12 +83,12 @@ redpen は以下の出力フォーマットをサポートします。
 [[sample-server]]
 === RedPen サーバ
 
-RedPen はサーバ機能も提供します。
+RedPen はサーバ機能を持ちます。
 
 [[usage-redpen-server]]
-==== 使い方：redpen-server
+==== 使い方: redpen-server
 
-RedPen サーバは redpen-server コマンドで起動（終了）できます。
+RedPen サーバは **redpen-server** コマンドで起動（終了）できます。
 
 [source,bash]
 ----------------------------
@@ -98,7 +98,7 @@ $ redpen-server [start|stop]
 [[configuration]]
 === 設定
 
-redpen-serverの設定は、redpen-serverコマンドファイル自身に記載されています。変更するにはコマンドファイル自身を編集します。
+redpen-server の設定は、 redpen-server コマンドファイル自身に記載されています。変更するにはコマンドファイル自身を編集します。
 以下が設定できる項目となります。
 
 [options="header",]

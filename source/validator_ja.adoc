@@ -36,7 +36,7 @@ RedPen は以下の機能を提供します。
 [[sentencelength]]
 === SentenceLength
 
-SentenceLengthは入力文書に存在する各文（センテンス）の長さに関する規約が守られているかを検査します。
+SentenceLength は入力文書に存在する各文（センテンス）の長さに関する規約が守られているかを検査します。
 具体的には文書内の各文が指定された最大文長より長い場合、エラーを出力します。
 
 [[properties]]
@@ -124,7 +124,7 @@ SpaceBeginningOfSentenceValidator はどの言語にも対応しています。
 [[commanumber]]
 === CommaNumber
 
-CommaNumberは一文（センテンス）で利用されるコンマの数が指定された最大数よりも多いときにエラーを出力します。
+CommaNumber は一文（センテンス）で利用されるコンマの数が指定された最大数よりも多いときにエラーを出力します。
 
 [[properties-3]]
 ==== プロパティ
@@ -162,7 +162,7 @@ WordNumber は一文内の単語数を検査します。文内の単語数が指
 [[suggestexpression]]
 === SuggestExpression
 
-SuggestExpression はInvalidExpression と同様に動作します。
+SuggestExpression は InvalidExpression と同様に動作します。
 入力文で不正な表現が使用されているとエラーを出力します。出力されるエラーには利用すべき正しい表現が含まれます。
 
 [[properties-5]]
@@ -193,8 +193,8 @@ asap    as soon as possible
 === InvalidSymbol
 
 シンボルによっては代替のシンボルが存在します。
-たとえばクエスチョンマーク **?（0x003F）** は代替のシンボル **？（0xFF1F）** がユニコードに登録されています。
-InvalidSymbolは入力文で不正なシンボルが利用されているとエラーを出力します。
+たとえばクエスチョンマーク **?（0x003F）** は代替のシンボル **？（0xFF1F）** が Unicode に登録されています。
+InvalidSymbol は入力文で不正なシンボルが利用されているとエラーを出力します。
 
 使用するシンボルに関する設定は設定ファイルの **symbols** ブロックで指定します。
 詳しくは <<setting-symbols,シンボル設定>> 節を参照して下さい。
@@ -209,7 +209,7 @@ InvalidSymbol はどの言語でも動作します。
 
 シンボルによっては前もしくは後にスペースが必要です。
 たとえば、左括弧 "（" の前には、かならず半角スペースを置くという規約がありえます。
-スペースに関する設定は設定ファイルの**symbols**ブロックで指定します。
+スペースに関する設定は設定ファイルの **symbols** ブロックで指定します。
 
 [[supported-languages-3]]
 ==== 対応言語
@@ -219,7 +219,7 @@ InvalidSymbol はどの言語でも動作します。
 [[katakanaendhyphen]]
 === KatakanaEndHyphen
 
-カタカナ単語の語尾が規約（JIS Z8301、G.6.2.2 b、G.3.）に従っているかを検査します。
+カタカナ単語の語尾が規約（JIS Z8301 、G.6.2.2 b 、G.3.）に従っているかを検査します。
 具体的には以下のルールが適用されます。
 
 * a: 単語が三文字もしくはそれ以上の場合には、ハイフンで単語は終わらない。
@@ -235,7 +235,7 @@ InvalidSymbol はどの言語でも動作します。
 [[katakanaspellcheck]]
 === KatakanaSpellCheck
 
-KatakanaSpellCheckはカタカナ単語のスペリングを検査します。
+KatakanaSpellCheck はカタカナ単語のスペリングを検査します。
 対象となるカタカナ単語に類似する単語が存在した場合、エラーを出力します。
 たとえば、"インデックス"と"インデクス"が同一文書で利用されているときにエラーを出力します。
 
@@ -276,7 +276,7 @@ SectionLength はどの言語でも動作します。
 [[paragraphnumber]]
 === ParagraphNumber
 
-ParagraphNumberは節（セクション）内に存在してよいパラグラフの最大数を指定します。
+ParagraphNumber は節（セクション）内に存在してよいパラグラフの最大数を指定します。
 
 [[properties]]
 ==== プロパティ
@@ -373,7 +373,7 @@ DoubledWord は一文内で二回以上、同一の単語が使用されたと�
 [[successiveword]]
 === SuccessiveWord
 
-SuccessiveWordは同一の単語が連続して使用されたときにエラーを出力します。
+SuccessiveWord は同一の単語が連続して使用されたときにエラーを出力します。
 
 たとえば入力文書に以下の文が含まれていると、エラーを出力します。
 以下の文は、**言語**という単語を連続（書き誤り）で使用しています。
@@ -441,11 +441,11 @@ DoubleNegative は入力文書に二重否定が使用されているとエラ�
 [[unexpandedacronym]]
 === UnexpandedAcronym
 
-UnexpandedAcronymは省略形で書かれている単語の正式表記が文中に存在するかを検査します。
+UnexpandedAcronym は省略形で書かれている単語の正式表記が文中に存在するかを検査します。
 
-たとえばもし**ABC**という省略形で書かれた単語が存在した場合を考えます。
-このとき、UnexpandedAcronymは文書中にABCの正式表記が含まれているかを検査します。
-正式表記はAxxx Bxx Cxxxという単語列です。
+たとえばもし **ABC** という省略形で書かれた単語が存在した場合を考えます。
+このとき、UnexpandedAcronym は文書中に ABC の正式表記が含まれているかを検査します。
+正式表記は Axxx Bxx Cxxx という単語列です。
 
 [[properties-9]]
 ==== プロパティ
@@ -459,7 +459,7 @@ UnexpandedAcronymは省略形で書かれている単語の正式表記が文中
 [[supported-languages-16]]
 ==== 対応言語
 
-UnexpandedAcronymは英語のみ動作します。
+UnexpandedAcronym は英語のみ動作します。
 
 [[wordfrequency]]
 === WordFrequency
@@ -494,7 +494,7 @@ Hyphenation ハイフンで連結された単語列が一般的な利用方法�
 [[numberformat]]
 === NumberFormat
 
-NumberFormatは文中の数値表現が一般的な記法に従っているかを検査します。
+NumberFormat は文中の数値表現が一般的な記法に従っているかを検査します。
 
 [[properties-11]]
 ==== プロパティ
@@ -539,7 +539,7 @@ ParenthesizedSentence は括弧に関する規約を検査します。
 [[weakexpression]]
 === WeakExpression
 
-文書内で https://github.com/redpen-cc/redpen/blob/master/redpen-core/src/main/resources/default-resources/weak-expressions/weak-expressions-en.dat[**Weak Expression**]と呼ばれる表現が使用された場合、エラーを出力します。
+文書内で https://github.com/redpen-cc/redpen/blob/master/redpen-core/src/main/resources/default-resources/weak-expressions/weak-expressions-en.dat[**Weak Expression**] と呼ばれる表現が使用された場合、エラーを出力します。
 
 [[supported-languages-21]]
 ==== Supported languages
