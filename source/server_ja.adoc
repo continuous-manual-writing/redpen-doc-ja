@@ -1,12 +1,12 @@
 [[redpen-server]]
 == RedPen サーバ
 
-RedPen サーバはRedPenが提供する機能のほとんどをHTTP REST APIとしてサポートしてます。
+RedPen サーバは RedPen が提供する機能のほとんどを HTTP REST API としてサポートしてます。
 
 [[starting-the-redpen-server]]
 === RedPen サーバの起動・終了方法
 
-RedPenコマンド節を参照してください。
+RedPen コマンド節を参照してください。
 
 [[redpen-server-api]]
 === RedPen サーバ API
@@ -14,14 +14,14 @@ RedPenコマンド節を参照してください。
 [[configuration]]
 ==== 設定を表示
 
-*/rest/config/redpens* はあらかじめ定義されたredpensメソッドで利用できる設定を返します。
+*/rest/config/redpens* はあらかじめ定義された redpens メソッドで利用できる設定を返します。
 
 ===== GET パラメタ
 
-* _lang=xx_ を設定すると、指定された言語の設定（JSONフォーマット）だけが返されます。
-langを指定しない場合には、すべての言語の設定が返されます。
+* _lang=xx_ を設定すると、指定された言語の設定（JSON フォーマット）だけが返されます。
+lang を指定しない場合には、すべての言語の設定が返されます。
 
-以下は返されたJSONの例となります。
+以下は返された JSON の例となります。
 
 [source,json]
 ----
@@ -73,11 +73,11 @@ langを指定しない場合には、すべての言語の設定が返されま�
 }
 ----
 
-* _version_ はRedPenのバージョンをあらわします。
+* _version_ は RedPen のバージョンをあらわします。
 * _documentParsers_ 配列はサポートされる文書パーサ（文書フォーマット）をあらわします。
-* _redpens_ はあらかじめ言語ごとに定義されたRedPenがどのように設定されているかをあらわします。
+* _redpens_ はあらかじめ言語ごとに定義された RedPen がどのように設定されているかをあらわします。
 ** _lang_ は対象となる言語をしめします。
-** _tokenizer_ はredpenによって利用されるTokenizerをあらわします。
+** _tokenizer_ は redpen によって利用される Tokenizer をあらわします。
 ** _validators_ は文書に適用される機能集合です。各オブジェクトは以下の要素をもちます。
 *** _languages_ は機能がサポートする言語からなる配列です。配列が空の場合には、任意の言語対応していることをあらわします。
 *** _properties_ は機能で指定された設定値をしめします。
@@ -85,25 +85,25 @@ langを指定しない場合には、すべての言語の設定が返されま�
 [[document-validation]]
 ==== 文書検査（XML）
 
-*/document/validate* はPOSTリクエストで文書を検査します。検査が終了した後、発見されたエラーを返します。
+*/document/validate* は POST リクエストで文書を検査します。検査が終了した後、発見されたエラーを返します。
 
 ===== POST パラメタ
 
-* _document_ にはRedPenに検査させたい文書（テキスト）を追加します。
+* _document_ には RedPen に検査させたい文書（テキスト）を追加します。
 * _documentParser_ にはパーサを指定します。現在対応しているパーサは以下のものがあります。
   ** PLAIN
   ** MARKDOWN
   ** WIKI
   ** ASCIIDOC
   ** LATEX
-* _lang_ には入力文書の言語を指定します。現在、**ja**（日本語）と**en**（英語）がサポートされています。
+* _lang_ には入力文書の言語を指定します。現在、**ja** （日本語）と **en** （英語）がサポートされています。
 * （オプション）_format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります
-  ** json（デフォルト）
+  ** json （デフォルト）
   ** json2
   ** plain
   ** plain2
   ** xml
-* _config_ にはRedPenの設定内容（XML）を追加します。
+* _config_ には RedPen の設定内容（XML）を追加します。
 
 ====== curl コマンドを利用して document/validate をつかってみる
 
@@ -152,7 +152,7 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 
 ==== 文書検査（JSON）
 
-*/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果をかえします。設定はJSONフォーマットでおこないます。
+*/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果を返します。設定は JSON フォーマットでおこないます。
 
 ===== Request フォーマット
 
@@ -210,23 +210,23 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 ----
 
 * _document_ には入力文書の内容を追加します。
-* _document_ にはRedPenに検査させたい文書（テキスト）を追加します。
+* _document_ には RedPen に検査させたい文書（テキスト）を追加します。
 * _documentParser_ にはパーサを指定します。現在対応しているパーサは以下のものがあります。
   ** PLAIN
   ** MARKDOWN
   ** WIKI
   ** ASCIIDOC
   ** LATEX
-* _format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります
-  ** json（デフォルト）
+* _format_ には出力フォーマットを指定します。指定できるフォーマットに以下のものがあります。
+  ** json （デフォルト）
   ** json2
   ** plain
   ** plain2
   ** xml
-* _config_ にはRedPenの設定をJSONフォーマットで指定します。 _config_ にはいくつかの要素が含まれます。
-  ** _validators_ には**validator**要素を追加し機能名リストを追加します。機能名ブロックには *properties* を追加し設定をおこなえます。
+* _config_ には RedPen の設定を JSON フォーマットで指定します。 _config_ にはいくつかの要素が含まれます。
+  ** _validators_ には **validator** 要素を追加し機能名リストを追加します。機能名ブロックには *properties* を追加し設定を行えます。
   ** _lang_ は入力文書の言語を指定します。
-  ** _symbols_ ではシンボル設定の変更を行います。書く要素はシンボル名からなるブロックです。シンボル名ブロックには以下の要素が追加されます
+  ** _symbols_ ではシンボル設定の変更を行います。各要素はシンボル名からなるブロックです。シンボル名ブロックには以下の要素が追加されます。
   *** _value_ specifies the Symbol's value
   *** _invalid_chars_ is a string of invalid alternatives for this Symbol
   *** _before_space_ and _after_space_ specify if a space is required before or after the Symbol.
@@ -328,7 +328,7 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 }
 ----
 
-====== curl コマンドを利用してdocument/validate/jsonをつかってみる
+====== curl コマンドを利用して document/validate/json をつかってみる
 
 [source,bash]
 ----

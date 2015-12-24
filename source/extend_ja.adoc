@@ -1,20 +1,20 @@
 == RedPen を拡張する
 
-ユーザは自身でRedPenを拡張（機能追加）できます。
-本節では機能追加の方法とRedPen が内部に保持する文書モデルについて解説します。
+ユーザは自身で RedPen を拡張（機能追加）できます。
+本節では機能追加の方法と RedPen が内部に保持する文書モデルについて解説します。
 
-機能拡張の作成には抽象クラス（Validator）を実装する必要があります。バージョン1.3以降、JavaScriptでも拡張可能になっています。
+機能拡張の作成には抽象クラス（Validator）を実装する必要があります。バージョン1.3以降、JavaScript でも拡張可能になっています。
 
 [[extending-validators]]
 === Validator クラスの拡張
 
-Validatorクラスには実装できるメソッドがいくつか（validate、prevalidate、init）提供されています。
+Validator クラスには実装できるメソッドがいくつか（validate ・ prevalidate ・ init）提供されています。
 以下各メソッドについて解説します。
 
 [[validate-methods]]
 ==== validate メソッド
 
-機能を作成するには、かならず**validate**メソッドの実装が必要です。
+機能を作成するには、かならず **validate** メソッドの実装が必要です。
 validate メソッドには引数によっていくつかのバリエーションがあります。
 現状では三種類の validate メソッドが提供されています。
 
@@ -23,13 +23,13 @@ validate メソッドには引数によっていくつかのバリエーショ�
 include::validate-java-interfaces.txt[]
 ----
 
-Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは**cc.redpen.validator**、**cc.redpen.validator.sentence**、**cc.redpen.validator.section**です。
+Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは **cc.redpen.validator** ・ **cc.redpen.validator.sentence** ・ **cc.redpen.validator.section** です。
 
 [[prevalidate-method]]
 ==== prevalidate メソッド
 
-preValidateはvalidateが呼び出される前に実行されます。preValidateメソッドをvalidateメソッドの前処理として利用すると便利です。
-現在、二種類のprevalidteメソッドが提供されています。
+preValidate は validate が呼び出される前に実行されます。preValidate メソッドを validate メソッドの前処理として利用すると便利です。
+現在、二種類の prevalidate メソッドが提供されています。
 
 [source,java]
 ----
@@ -47,66 +47,66 @@ include::init-java-interfaces.txt[]
 ----
 
 たとえば **SentencelengthValidator** は **max_len** というプロパティ（設定項目）を提供します。
-max_len は入力文書でゆるされる一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
+max_len は入力文書で許される一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
 
 [source,xml]
 ----
 include::load-property-config.xml[]
 ----
 
-SentenceLengthValidatorはmax_lenの値をinitメソッドで読み込みます。
-実際のinit処理は、以下で定義されます。
+SentenceLengthValidator は max_len の値を init メソッドで読み込みます。
+実際の init 処理は、以下で定義されます。
 
 [source,java]
 ----
 include::init-java-implementation.txt[]
 ----
 
-上記のコードで、getConfigAttributeAsIntはmax_lenに指定した値をint型としてロードしています。
+上記のコードで、 getConfigAttributeAsInt は max_len に指定した値を int 型としてロードしています。
 
 [[adding-validators]]
 === 作成した Validator の追加
 
 RedPen に作成した Validator を追加する方法は二通りあります。
 
-一つは、機能拡張（Validator）用ファイルを、RedPenのソースに追加してビルドする方法です。
-この方法は簡単です。しかし機能拡張のソースファイルをRedPenソースファイル群と同梱して扱う必要があります。
+一つは、機能拡張（Validator）用ファイルを、RedPen のソースに追加してビルドする方法です。
+この方法は簡単です。しかし機能拡張のソースファイルを RedPen ソースファイル群と同梱して扱う必要があります。
 
 もう一つの方法はプラグインを作る方法です。
-プラグインの場合には、機能拡張ソースファイルをRedPen から独立して扱えます。
+プラグインの場合には、機能拡張ソースファイルを RedPen から独立して扱えます。
 
-Note: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator**で終わる必要があります。クラス名がValidatorで終わらない場合、RedPen は実装された機能をロードできません。
-以下、Validatorを追加する方法とプラグインの作り方について解説します。
+Note: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator** で終わる必要があります。クラス名が Validator で終わらない場合、RedPen は実装された機能をロードできません。
+以下、Validator を追加する方法とプラグインの作り方について解説します。
 
 [[add-a-validator-in-redpen-source]]
 ==== Validator を RedPen のソースに追加
 
-ではさっそく、簡単なValidator（PlainSentenceLengthValidator）を実装してみましょう。
-PlainSentenceLengthValidatorは文書内に存在する文が百文字もしくはそれ以上続く場合、エラーを出力します。
+ではさっそく、簡単な Validator （PlainSentenceLengthValidator）を実装してみましょう。
+PlainSentenceLengthValidator は文書内に存在する文が百文字もしくはそれ以上続く場合、エラーを出力します。
 実装したのち、PlainSentenceLengthValidator を RedPen のソースに追加します。
 
 [[sentencelengthvalidator]]
 ===== PlainSentenceLengthValidator
 
-PlainSentenceLengthValidatorクラスをパッケージ'cc.redpen.validator.sentence'に作成します。
+PlainSentenceLengthValidator クラスをパッケージ'cc.redpen.validator.sentence'に作成します。
 このときクラスは 'redpen/redpen-core/src/main/java/cc/redpen/validator/sentence/' ディレクトリに保存します。
 
-以下はPlainSentenceLengthValidatorクラスの実装となります。
+以下は PlainSentenceLengthValidator クラスの実装となります。
 
 [source,java]
 ----
 include::plainsentencelengthvalidator.java[]
 ----
 
-PlainSentenceLengthValidatorはvalidate（引数＝Sentenceオブジェクト）メソッドを実装しています。
-PlainSentenceLengthValidatorが設定ファイルに追加されると、RedPenは実装したvaildateメソッドを実行します。
-Sentenceが引数なので、RedPenは入力文書の文すべてを引数としてくりかえし実行します。
+PlainSentenceLengthValidator は validate （引数＝ Sentence オブジェクト）メソッドを実装しています。
+PlainSentenceLengthValidator が設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
+Sentence が引数なので、RedPen は入力文書の文すべてを引数としてくりかえし実行します。
 
 [[include-a-new-validator]]
 ===== 実装した Validator を適用する
 
-では設定ファイルに作成した機能を追加しましょう。設定ファイルにはクラス名からサフィックスValidatorをのぞいて追加します。
-以下、PlainSentenceLengthValidatorを設定に追加しています。
+では設定ファイルに作成した機能を追加しましょう。設定ファイルにはクラス名からサフィックス Validator をのぞいて追加します。
+以下、PlainSentenceLengthValidator を設定に追加しています。
 
 [source,xml]
 ----
@@ -116,8 +116,8 @@ include::extension-config.xml[]
 [[create-a-validator-plugin]]
 ==== プラグインの作成
 
-プラグイン作成でもっとも重要なファイルはpom.xmlです。
-pom.xmlはビルドツール、Maven の設定ファイルです。以下は pom.xml の例です。
+プラグイン作成でもっとも重要なファイルは pom.xml です。
+pom.xml はビルドツール、Maven の設定ファイルです。以下は pom.xml の例です。
 
 [source,java]
 ----
@@ -125,10 +125,10 @@ include::redpen-plugin-pom.xml[]
 ----
 
 プラグインを作るときには上の pom.xml ファイルが**ほぼ**そのまま利用できます。
-変更する点は**artifactId**、**name**要素です。あなたの機能名になるよう名前を変更しましょう。
+変更する点は **artifactId** 、**name** 要素です。あなたの機能名になるよう名前を変更しましょう。
 
-これでpom.xmlが編集できました。編集した機能用のファイルを"main/java/cc/redpen/validator/sentence（sentence）"にコピーします。
-上記で解説しましたように、機能用のクラスはValidatorクラスを継承する必要があります。
+これで pom.xml が編集できました。編集した機能用のファイルを"main/java/cc/redpen/validator/sentence" （sentence）にコピーします。
+上記で解説しましたように、機能用のクラスは Validator クラスを継承する必要があります。
 
 Validator の実装ファイルをコピーすると、ビルドができます。以下のコマンドでプラグインを作成しましょう。
 
@@ -140,51 +140,51 @@ $ mvn install
 [[including-a-user-defined-validator-plugin]]
 ===== 作成したプラグインを利用する
 
-無事mvnコマンドによるビルドが成功しました。これで**target**ディレクトリにプラグイン用jarファイルが生成されます。
-プラグイン用jarファイルをRedPenのクラスパスが含まれるディレクトリ（$REDPEN_HOME/libなど）にコピーします。
-作成したプラグインが設定ファイルに追加されると、RedPenは実装したvaildateメソッドを実行します。
+無事 mvn コマンドによるビルドが成功しました。これで **target** ディレクトリにプラグイン用 jar ファイルが生成されます。
+プラグイン用 jar ファイルを RedPen のクラスパスが含まれるディレクトリ（$REDPEN_HOME/lib など）にコピーします。
+作成したプラグインが設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 
 [[extending-with-javascript]]
-=== JavaScriptによる機能拡張の作成
+=== JavaScript による機能拡張の作成
 
-バージョン1.3からJavaScriptによる機能拡張（**機能拡張スクリプト**）をサポートしています。機能拡張スクリプトの作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽にRedPenを拡張できます。
+バージョン1.3から JavaScript による機能拡張（**機能拡張スクリプト**）をサポートしています。機能拡張スクリプトの作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen を拡張できます。
 
 機能拡張スクリプトはいくつかのメソッドを定義します。以下定義できるメソッド群を解説します。
 
-==== validate系メソッド
+==== validate 系メソッド
 
-機能拡張スクリプトには、かならず**validate**系メソッドの定義が一つ以上必要です。
+機能拡張スクリプトには、かならず **validate** 系メソッドの定義が一つ以上必要です。
 
-定義できるvalidate系メソッドは二種類（validateSentence・validateSection）存在します。
+定義できる validate 系メソッドは二種類（validateSentence ・ validateSection）存在します。
 
 ===== validateSentence メソッド
 
-validateSentenceは引数に文（Sentence）を持ちます。
+validateSentence は引数に文（Sentence）を持ちます。
 
 ===== validateSection メソッド
 
-validateSectionは引数に節（Section）をとります。文より大きな規模のチェックを行いたいときに使用します。
+validateSection は引数に節（Section）をとります。文より大きな規模のチェックを行いたいときに使用します。
 
 たとえば著しく類似した節を検知する機能 **DuplicatedSection** があります。
 
-DuplicatedSectionは節単位の検査を行ないます。節の検査にvalidateSectionメソッドを利用します。
+DuplicatedSection は節単位の検査を行ないます。節の検査に validateSection メソッドを利用します。
 
-==== preValidate系メソッド
+==== preValidate 系メソッド
 
-機能拡張スクリプトで**preValidate**系メソッドを定義すると、検査に先立って前処理ができます。
-preValidate系メソッドは引数によって二種類（preValidateSentence・preValidateSection）存在します。それぞれ対応するvalidate系メソッド（validateSentence・validateSection）実行前に呼び出されます。
+機能拡張スクリプトで **preValidate** 系メソッドを定義すると、検査に先立って前処理ができます。
+preValidate 系メソッドは引数によって二種類（preValidateSentence ・ preValidateSection）存在します。それぞれ対応する validate 系メソッド（validateSentence ・ validateSection）実行前に呼び出されます。
 
-===== preValidateSentenceメソッド
+===== preValidateSentence メソッド
 
-preValidateSentenceは引数に文（Sentence）を持ちます。
+preValidateSentence は引数に文（Sentence）を持ちます。
 
-===== preValidateSectionメソッド
+===== preValidateSection メソッド
 
-preValidateSectionは引数に節（Section）を持ちます。
+preValidateSection は引数に節（Section）を持ちます。
 
 === 作成した機能拡張スクリプトの利用
 
-**JavaScript**機能を有効にすると、機能拡張スクリプトが利用できます。JavaScript機能はデフォルトでRedPenホームディレクトリ直下のjsディレクトリを走査します。走査するディレクトリは<<properties-13, プロパティ>>で変更できます。
+**JavaScript** 機能を有効にすると、機能拡張スクリプトが利用できます。JavaScript 機能はデフォルトで RedPen ホームディレクトリ直下の js ディレクトリを走査します。走査するディレクトリは<<properties-13, プロパティ>>で変更できます。
 
 [source, xml]
 ----
@@ -196,7 +196,7 @@ include::redpen-js-conf.xml[]
 
 本節では RedPen が内部に保持する文書モデルについて解説します。
 RedPen は多様なテキストフォーマットをサポートします。
-各種の入力文書はRedPen内部で**文書モデル**というブロック（クラス）群に変換されます。
+各種の入力文書は RedPen 内部で**文書モデル**というブロック（クラス）群に変換されます。
 
 生成された内部文書モデルは以下のブロックからなります。
 

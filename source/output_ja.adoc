@@ -5,7 +5,7 @@ RedPen はいくつかの出力フォーマットをサポートしています�
 [[plain-text]]
 === 平文
 
-平文を指定すると RedPen がかえすエラーは、以下のフォーマットで出力されます。
+平文を指定すると RedPen が返すエラーは、以下のフォーマットで出力されます。
 
 ----
 FILE_NAME:LINE_NUM: ValidationError[ERROR_TYPE], ERROR_MESSAGE at line: SENTENCE
@@ -17,7 +17,7 @@ plain2 を指定した場合には、各文ごとのエラーがまとまって�
 === XML
 
 XML 出力フォーマットの最上位ブロックは *validation-result* です。
-**validation-result**は複数の**error**ブロックを持ちます。**error**ブロック
+**validation-result** は複数の **error** ブロックを持ちます。**error** ブロック
 は以下の子要素を含んでいます。
 
 [option="header"]

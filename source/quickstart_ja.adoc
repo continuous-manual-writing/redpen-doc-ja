@@ -1,6 +1,6 @@
 == RedPen クィックスタート
 
-本節ではRedPenをダウンロードしてから利用するところまで解説します。
+本節では RedPen をダウンロードしてから利用するところまで解説します。
 
 [[requirements]]
 === 準備
@@ -66,4 +66,4 @@ sampledoc-en.txt:1: ValidationError[DoubledWord], Found repeated word "such". at
 ...
 ----
 
-上記のコマンドにおいて、 -c で指定されているのは設定ファイルとなります。
+上記のコマンドにおいて、 -c で指定されている値は設定ファイルパスです。

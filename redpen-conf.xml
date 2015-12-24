@@ -17,6 +17,7 @@
         <validator name="SuccessiveWord" />
 	<validator name="JapaneseStyle" />
 	<validator name="InvalidExpression" />
+	<validator name="SpaceBetweenAlphabeticalWord" />
         <validator name="JavaScript">
 	    <property name="script-path" value="js"/>
 	</validator>
