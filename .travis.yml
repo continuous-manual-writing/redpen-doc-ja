@@ -19,7 +19,6 @@ script:
   - gem install coderay
   - gem install --pre asciidoctor-pdf
   - sudo apt-get update && sudo apt-get install oracle-java8-installer
-  - java -version
   - make check     # RedPenを適用する
   - make html      # 出力ドキュメント（HTML）の生成
   - make pdf       # 出力ドキュメント（PDF）の生成
