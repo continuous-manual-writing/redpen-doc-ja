@@ -133,7 +133,7 @@ CommaNumber は一文（センテンス）で利用されるコンマの数が�
 [options="header"]
 |====
 |プロパティ      |デフォルト     |解説
-|``max_num``     |4              |一文に存在する最大のコンマ数
+|``max_num``     |3              |一文に存在する最大のコンマ数
 |====
 
 [[supported-languages-1]]
