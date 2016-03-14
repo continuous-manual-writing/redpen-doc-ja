@@ -24,7 +24,7 @@ html:
 
 pdf:
 	mkdir -p $(BUILDDIR)/pdf
-	$(ASCIIDOCTOR_PDF) -a pdf-stylesdir=source/pdf -a pdf-fontsdir=source/pdf/fonts -a source-highlighter=coderay -a target-version=1.4 -d book source/index_ja.adoc -D$(BUILDDIR)/pdf
+	$(ASCIIDOCTOR_PDF) -a pdf-stylesdir=source/pdf -a pdf-fontsdir=source/pdf/fonts -a source-highlighter=coderay -a target-version=1.5 -d book source/index_ja.adoc -D$(BUILDDIR)/pdf
 	@echo "Build finished. The PDF file is in $(BUILDDIR)/pdf"
 
 check:
