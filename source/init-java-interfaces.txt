@@ -1,7 +1,4 @@
 /**
- * Validation initialization, called after the configuration and symbol tables have been assigned
- *
- * @throws RedPenException
+ * @param keyValues String key and Object value pairs for supported config properties.
  */
- protected void init() throws RedPenException
-
+public Validator(Object...keyValues)
