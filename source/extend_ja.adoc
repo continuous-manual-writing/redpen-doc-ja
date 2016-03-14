@@ -39,8 +39,8 @@ include::prevalidate-java-interfaces.txt[]
 [[conf-properties]]
 ==== 設定項目
 
-validatorの動作にあたって設定項目（プロパティ）を必要とする場合があります。その場合、validatorのコンストラクタで必要なプロパティを定義します。
-このようにすることで、RedPenは各validatorについてプロパティが必要かを判断できます。また開発環境へプラグインとしてRedPenを組み込む場合においても、プラグインは必要なプロパティ定義を参照しGUIへ表示できます。
+validator の動作にあたって設定項目（プロパティ）を必要とする場合があります。その場合、validator のコンストラクタで必要なプロパティを定義します。
+コンストラクタで定義すると、RedPen は各 validator についてプロパティが必要かを判断できます。また IDE にプラグインとして組み込む場合においても、プラグインは必要なプロパティ定義を参照し GUI へ表示できます。
 
 [source,java]
 ----
@@ -55,7 +55,7 @@ max_len は入力文書で許される一文の最大長を指定します。以
 include::load-property-config.xml[]
 ----
 
-SentenceLengthValidator の作成時に max_len の値が自動的に読み込まれます。
+SentenceLengthValidator の作成時に max_len 値が設定ファイルから読み込まれます。
 設定ファイルにおいて max_len が定義されていない場合は、デフォルト値が使用されます。
 
 [source,java]
@@ -63,9 +63,9 @@ SentenceLengthValidator の作成時に max_len の値が自動的に読み込�
 include::init-java-implementation.txt[]
 ----
 
-一旦上記のように設定されたプロパティの値は、`getInt("max_len")` のようにして参照できます。
+一旦設定されたプロパティは、+++getInt("プロパティ名")+++ のようにして参照できます。
 
-`validate()` メソッドの実行前にプロパティを前処理しておきたい場合は `init()` メソッドをオーバーライドしてください。
+validate メソッドの実行前にプロパティを前処理しておきたいことがあります。その場合は init メソッドをオーバーライドしてください。
 
 [[adding-validators]]
 === 作成した Validator の追加
@@ -148,12 +148,12 @@ $ mvn install
 作成したプラグインが設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 
 [[javascript]]
-==== JavaScriptでRedPenの機能を拡張する
-バージョン1.3から任意の JavaScript を Validator として実行する、**JavaScriptValidator**をサポートしました。JavaScript による Validator の作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen の Validator を作成できます。
+==== JavaScript で RedPen の機能を拡張する
+バージョン1.3から任意の JavaScript を Validator として実行する、**JavaScriptValidator** がサポートされました。JavaScript による Validator の作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen の Validator を作成できます。
 
 [[enable-javascript]]
-===== JavaScriptValidatorを有効にする
-JavaScriptValidatorを使うには、`<validator name="JavaScript"/>` を `redpen-conf.xml` へ追記します。以下は追記する例です。
+===== JavaScriptValidator を有効にする
+JavaScriptValidator を使うのは簡単です。使うには `<validator name="JavaScript"/>` を設定ファイルへ追記します。以下は追記する例です。
 
 [source, xml]
 ----
@@ -161,10 +161,10 @@ include::redpen-js-conf.xml[]
 ----
 
 [[javascript-validator]]
-===== JavaScript による Validatorの作成
-JavaScriptValidator は `$REDPEN_HOME/js` ディレクトリを走査し、中にある全ての JavaScript ファイル（`.js`）を実行します。JavaScriptValidator が走査するディレクトリは `script-path` プロパティで指定できます。
+===== JavaScript による Validator の作成
+JavaScriptValidator は `$REDPEN_HOME/js` ディレクトリから JavaScript ファイル（`.js`）を検索し、全て実行します。JavaScriptValidator が JavaScript ファイルを検索するディレクトリは `script-path` プロパティで指定できます。
 
-JavaScriptValidator は 各 JavaScript ファイルに定義された関数を順次呼び出すことで文書を検査します。文書の検査にあたり呼び出される関数は以下のシグニチャを持ちます。
+文書の検査にあたり、JavaScriptValidator は 各 JavaScript ファイルに定義された関数を順次呼び出します。呼び出される関数は以下のシグニチャを持ちます。
 [source,javascript]
 ----
 include::js-validator-proto.js[]
@@ -172,18 +172,18 @@ include::js-validator-proto.js[]
 
 [[javascript-example]]
 ===== JavaScript による Validator の作成例
-NumberOfCharacterValidator を JavaScript で作成した例を示します。
+以下は、NumberOfCharacterValidator を JavaScript で作成した例です。
 
 [source,javascript]
 ----
 include::js-validator-example.js[]
 ----
 
-上の例は Java 版と良く似ています。しかし型システムの違いによって、Java 版で`validate(Sentence sentence)`と呼ばれていた関数が、JavaScript 版では`validateSentence(sentence)`と呼ばれています。
+上の例は Java 版と良く似ています。しかし型システムの違いによって Java 版における +++validate(Sentence sentence)+++ 関数が、JavaScript 版では +++validateSentence(sentence)+++ と呼ばれています。
 
 [[javascript-run]]
 ===== 実行
-JavaScript で書かれた Validator を使って文書を検査するには、`redpen` コマンドを実行します。以下は例で作成した JavaScript ファイルを Validator として実行する、コマンドラインの例です。上の例で作成した JavaScript ファイルを `$REDPEN_HOME/js` ディレクトリ以下に置いてください。
+`redpen` コマンドを実行すると JavaScript による Validator の実行ができます。以下は例で作成した JavaScript ファイルを Validator として実行する、コマンドラインの例です。上の例で作成した JavaScript ファイルを `$REDPEN_HOME/js` ディレクトリ以下に置いてください。
 
 [source,bash]
 ----
