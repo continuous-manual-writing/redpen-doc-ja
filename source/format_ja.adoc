@@ -1,11 +1,18 @@
 == 入力フォーマット
 
-RedPen は数種類のマークアップテキストフォーマットに対応しています。
+RedPen は数種類のテキストフォーマットに対応しています。以下は対応するテキストフォーマットの一覧です。
 
-[[plain-text]]
-=== 平文
+- 平文（プレーンテキスト）
+- Markdown
+- AsciiDoc
+- Wiki
+- LaTeX
+- Java プロパティ
 
-平文（plain テキスト）はパラグラフをサポートしています。
+[[plain-text-in]]
+=== プレーンテキスト
+
+プレーンテキストはパラグラフをサポートしています。
 パラグラフは連続する二つの改行によって区切られます。たとえば以下は二つのパラグラフを含んでいます。
 
 ----
@@ -102,3 +109,11 @@ include::wiki-comment.txt[]
 === Markdown
 
 https://daringfireball.net/projects/markdown/syntax[Markdown リファレンスを参照]
+
+[[java-properties]]
+=== Java プロパティ
+
+Java プロパティファイルやリソースバンドルは Java プロジェクトを国際化するために使われます。
+RedPen は各プロパティを、複数の文からなる節として取り扱います。コメントと設定値が検査の対象です。キーは検査されません。
+
+Java プロパティファイルのフォーマットについて、詳しくは https://docs.oracle.com/javase/7/docs/api/java/util/Properties.html#load(java.io.Reader)[Java プロパティに関する Javadoc] をご参照ください。

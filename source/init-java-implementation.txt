@@ -1,4 +1,3 @@
-protected void init() throws RedPenException {
-        this.maxLength = getConfigAttributeAsInt("max_len", DEFAULT_MAX_LENGTH);
+public SentenceLengthValidator() {
+  super("max_len", 30); // Default maximum length of sentences.
 }
-

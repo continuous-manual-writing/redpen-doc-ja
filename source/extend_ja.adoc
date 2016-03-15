@@ -36,17 +36,18 @@ preValidate は validate が呼び出される前に実行されます。preVali
 include::prevalidate-java-interfaces.txt[]
 ----
 
-[[init-method]]
-==== init メソッド
+[[conf-properties]]
+==== 設定項目
 
-init メソッドは機能（Validator）用の設定項目（プロパティ）を読み込むのに使用します。
+validator の動作にあたって設定項目（プロパティ）を必要とする場合があります。その場合、validator のコンストラクタで必要なプロパティを定義します。
+コンストラクタで定義すると、RedPen は各 validator についてプロパティが必要かを判断できます。また IDE にプラグインとして組み込む場合においても、プラグインは必要なプロパティ定義を参照し GUI へ表示できます。
 
 [source,java]
 ----
 include::init-java-interfaces.txt[]
 ----
 
-たとえば **SentencelengthValidator** は **max_len** というプロパティ（設定項目）を提供します。
+たとえば **SentencelengthValidator** は **max_len** というプロパティを提供します。
 max_len は入力文書で許される一文の最大長を指定します。以下は文の最大長を二百に指定した設定例となります。
 
 [source,xml]
@@ -54,15 +55,17 @@ max_len は入力文書で許される一文の最大長を指定します。以
 include::load-property-config.xml[]
 ----
 
-SentenceLengthValidator は max_len の値を init メソッドで読み込みます。
-実際の init 処理は、以下で定義されます。
+SentenceLengthValidator の作成時に max_len 値が設定ファイルから読み込まれます。
+設定ファイルにおいて max_len が定義されていない場合は、デフォルト値が使用されます。
 
 [source,java]
 ----
 include::init-java-implementation.txt[]
 ----
 
-上記のコードで、 getConfigAttributeAsInt は max_len に指定した値を int 型としてロードしています。
+一旦設定されたプロパティは、+++getInt("プロパティ名")+++ のようにして参照できます。
+
+validate メソッドの実行前にプロパティを前処理しておきたいことがあります。その場合は init メソッドをオーバーライドしてください。
 
 [[adding-validators]]
 === 作成した Validator の追加
@@ -144,51 +147,48 @@ $ mvn install
 プラグイン用 jar ファイルを RedPen のクラスパスが含まれるディレクトリ（$REDPEN_HOME/lib など）にコピーします。
 作成したプラグインが設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 
-[[extending-with-javascript]]
-=== JavaScript による機能拡張の作成
+[[javascript]]
+==== JavaScript で RedPen の機能を拡張する
+バージョン1.3から任意の JavaScript を Validator として実行する、**JavaScriptValidator** がサポートされました。JavaScript による Validator の作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen の Validator を作成できます。
 
-バージョン1.3から JavaScript による機能拡張（**機能拡張スクリプト**）をサポートしています。機能拡張スクリプトの作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen を拡張できます。
-
-機能拡張スクリプトはいくつかのメソッドを定義します。以下定義できるメソッド群を解説します。
-
-==== validate 系メソッド
-
-機能拡張スクリプトには、かならず **validate** 系メソッドの定義が一つ以上必要です。
-
-定義できる validate 系メソッドは二種類（validateSentence ・ validateSection）存在します。
-
-===== validateSentence メソッド
-
-validateSentence は引数に文（Sentence）を持ちます。
-
-===== validateSection メソッド
-
-validateSection は引数に節（Section）をとります。文より大きな規模のチェックを行いたいときに使用します。
-
-たとえば著しく類似した節を検知する機能 **DuplicatedSection** があります。
-
-DuplicatedSection は節単位の検査を行ないます。節の検査に validateSection メソッドを利用します。
-
-==== preValidate 系メソッド
-
-機能拡張スクリプトで **preValidate** 系メソッドを定義すると、検査に先立って前処理ができます。
-preValidate 系メソッドは引数によって二種類（preValidateSentence ・ preValidateSection）存在します。それぞれ対応する validate 系メソッド（validateSentence ・ validateSection）実行前に呼び出されます。
-
-===== preValidateSentence メソッド
-
-preValidateSentence は引数に文（Sentence）を持ちます。
-
-===== preValidateSection メソッド
-
-preValidateSection は引数に節（Section）を持ちます。
-
-=== 作成した機能拡張スクリプトの利用
-
-**JavaScript** 機能を有効にすると、機能拡張スクリプトが利用できます。JavaScript 機能はデフォルトで RedPen ホームディレクトリ直下の js ディレクトリを走査します。走査するディレクトリは<<properties-13, プロパティ>>で変更できます。
+[[enable-javascript]]
+===== JavaScriptValidator を有効にする
+JavaScriptValidator を使うのは簡単です。使うには `<validator name="JavaScript"/>` を設定ファイルへ追記します。以下は追記する例です。
 
 [source, xml]
 ----
 include::redpen-js-conf.xml[]
+----
+
+[[javascript-validator]]
+===== JavaScript による Validator の作成
+JavaScriptValidator は `$REDPEN_HOME/js` ディレクトリから JavaScript ファイル（`.js`）を検索し、全て実行します。JavaScriptValidator が JavaScript ファイルを検索するディレクトリは `script-path` プロパティで指定できます。
+
+文書の検査にあたり、JavaScriptValidator は 各 JavaScript ファイルに定義された関数を順次呼び出します。呼び出される関数は以下のシグニチャを持ちます。
+[source,javascript]
+----
+include::js-validator-proto.js[]
+----
+
+[[javascript-example]]
+===== JavaScript による Validator の作成例
+以下は、NumberOfCharacterValidator を JavaScript で作成した例です。
+
+[source,javascript]
+----
+include::js-validator-example.js[]
+----
+
+上の例は Java 版と良く似ています。しかし型システムの違いによって Java 版における +++validate(Sentence sentence)+++ 関数が、JavaScript 版では +++validateSentence(sentence)+++ と呼ばれています。
+
+[[javascript-run]]
+===== 実行
+`redpen` コマンドを実行すると JavaScript による Validator の実行ができます。以下は例で作成した JavaScript ファイルを Validator として実行する、コマンドラインの例です。上の例で作成した JavaScript ファイルを `$REDPEN_HOME/js` ディレクトリ以下に置いてください。
+
+[source,bash]
+----
+$ ./bin/redpen -c myredpen-conf.xml 2be-validated.txt
+2be-validated.txt:1: ValidationError[JavaScript], [NumberOfCharacter.js] Sentence is shorter than 100 characters long. at line: very short sentence.
 ----
 
 [[model-structure]]
