@@ -46,10 +46,8 @@ redpen コマンドは以下のオプションをサポートしています。
 |markdown |Markdown フォーマット
 |asciidoc |AsciiDoc フォーマット
 |latex    |LaTeX フォーマット
+|properties |Java プロパティファイルフォーマット
 |====
-
-[NOTE]
-残念ながら Wiki フォーマットの一部要素に対応していません。また RedPen は Wiki フォーマット文書のオフセット情報を出力できません。
 
 ===== 出力フォーマット [**デフォルト**: plain]
 
