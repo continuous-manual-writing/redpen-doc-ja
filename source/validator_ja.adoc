@@ -340,6 +340,16 @@ Contraction は入力文書で省略表現が利用されたときにエラー�
 
 Spelling は文書内でスペルミスが起こった時にエラーを出力します。
 
+[[properties-spelling]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``dict``        |None           |ユーザの辞書
+|``list``        |None           |ユーザ辞書（コンマ区切り）
+|====
+
 [[supported-languages-9]]
 ==== 対応言語
 
