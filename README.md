@@ -5,7 +5,7 @@ redpen-doc
 
 必要なツール
 -------------
-- AsciiDoctor
+- Asciidoctor
 - rubygem-coderay
 
 Download and Build
