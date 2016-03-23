@@ -10,7 +10,7 @@ RedPen が提供するコマンドラインツールは **redpen** という名�
 [[usage-redpen]]
 ==== 使い方: redpen
 
-redpen コマンドは以下のように利用します。
+以下は、redpen コマンドが提供するオプションです。
 
 [source,bash]
 ------------------------------------------------
@@ -46,10 +46,8 @@ redpen コマンドは以下のオプションをサポートしています。
 |markdown |Markdown フォーマット
 |asciidoc |AsciiDoc フォーマット
 |latex    |LaTeX フォーマット
+|properties |Java プロパティファイルフォーマット
 |====
-
-[NOTE]
-残念ながら Wiki フォーマットの一部要素に対応していません。また RedPen は Wiki フォーマット文書のオフセット情報を出力できません。
 
 ===== 出力フォーマット [**デフォルト**: plain]
 
@@ -83,7 +81,7 @@ redpen は以下の出力フォーマットをサポートします。
 [[sample-server]]
 === RedPen サーバ
 
-RedPen はサーバ機能を持ちます。
+RedPen はサーバ機能を提供します。
 
 [[usage-redpen-server]]
 ==== 使い方: redpen-server
@@ -108,4 +106,4 @@ redpen-server の設定は、 redpen-server コマンドファイル自身に記
 |STOP_KEY      |redpen.stop   |RedPen サーバはストップキーを登録すると http 経由で終了できます。http 経由で終了させたくない場合にはコメントアウトしてください。
 |=======================================================================
 
-RedPen サーバが提供する機能については <<redpen-server>> 節を参照してください。
+サーバが提供する機能については <<redpen-server>> 節を参照してください。
