@@ -11,7 +11,7 @@ RedPen コマンド節を参照してください。
 [[heroku-button]]
 === Heroku ボタンによるサーバ起動
 
-Heroku を利用すろとローカル環境でのサーバ管理が必要ないので便利です。RedPen サーバは Heroku ボタンを利用すると数クリックで立ち上がります。https://github.com/redpen-cc/redpen[RedPen プロジェクト README] の一番下にある、Heroku ボタンをクリックします。
+Heroku を利用するとローカル環境でのサーバ管理が必要ないので便利です。RedPen サーバは Heroku ボタンを利用すると数クリックで立ち上がります。https://github.com/redpen-cc/redpen[RedPen プロジェクト README] の一番下にある、Heroku ボタンをクリックします。
 
 image:heroku-button.png[image]
 
