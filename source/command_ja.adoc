@@ -8,7 +8,7 @@ RedPen は二つのコマンドを提供します。RedPen はコマンドライ
 RedPen が提供するコマンドラインツールは **redpen** という名前です。
 
 [[usage-redpen]]
-==== 使い方: redpen
+==== redpen の使い方
 
 以下は、redpen コマンドが提供するオプションです。
 
@@ -89,10 +89,13 @@ option:: -l <LIMIT NUMBER>, --limit  <LIMIT NUMBER>
 [[sample-server]]
 === RedPen サーバ
 
-RedPen はサーバ機能を提供します。
+RedPen はサーバ機能を提供します。RedPen はサーバ機能を提供します。RedPen サーバは UI のほかに、REST API も提供します（<<redpen-server>> 節参照）。
+以下 RedPen サーバ の UI です。
+
+image::redpen-ui.png[width="500", height="300"]
 
 [[usage-redpen-server]]
-==== 使い方: redpen-server
+==== redpen-server の使い方
 
 RedPen サーバは **redpen-server** コマンドで起動（終了）できます。
 
@@ -101,8 +104,8 @@ RedPen サーバは **redpen-server** コマンドで起動（終了）できま
 $ redpen-server [start|stop]
 ----------------------------
 
-[[configuration]]
-=== 設定
+[[server-configuration]]
+==== 設定
 
 redpen-server の設定は、 redpen-server コマンドファイル自身に記載されています。変更するにはコマンドファイル自身を編集します。
 以下が設定できる項目となります。
