@@ -111,16 +111,16 @@ wow
 
 単語の境界が曖昧な言語（日本語、中国語）では動作しません。
 
-[[spacebeginningofsentencevalidator]]
-=== SpaceBeginningOfSentenceValidator
+[[spacebeginningofsentence]]
+=== SpaceBeginningOfSentence
 
-SpaceBeginningOfSentenceValidator は文（センテンス）間に半角スペースが存在するかを検査します。
+SpaceBeginningOfSentence は文（センテンス）間に半角スペースが存在するかを検査します。
 
 
 [[supported-languages-2]]
 ==== 対応言語
 
-SpaceBeginningOfSentenceValidator はどの言語にも対応しています。
+SpaceBeginningOfSentence はどの言語にも対応しています。
 
 [[commanumber]]
 === CommaNumber
