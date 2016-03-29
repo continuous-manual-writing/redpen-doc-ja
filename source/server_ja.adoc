@@ -8,6 +8,15 @@ RedPen サーバは RedPen が提供する機能のほとんどを HTTP REST API
 
 RedPen コマンド節を参照してください。
 
+[[heroku-button]]
+=== Heroku ボタンによるサーバ起動
+
+Heroku を利用するとローカル環境でのサーバ管理が必要ないので便利です。RedPen サーバは Heroku ボタンを利用すると数クリックで立ち上がります。https://github.com/redpen-cc/redpen[RedPen プロジェクト README] の一番下にある、Heroku ボタンをクリックします。
+
+image:heroku-button.png[image]
+
+Heroku ボタンをクリックすると、RedPen サーバが Heroku 環境（http://*.herokuapp.com）に立ち上がり、利用できる状態になります。実は RedPen のホームページにある http://redpen.herokuapp.com/[RedPen サンプルサーバ] も Heroku 環境で動作しています。
+
 [[redpen-server-api]]
 === RedPen サーバ API
 
