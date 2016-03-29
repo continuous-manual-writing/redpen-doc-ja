@@ -8,7 +8,7 @@ RedPen は二つのコマンドを提供します。RedPen はコマンドライ
 RedPen が提供するコマンドラインツールは **redpen** という名前です。
 
 [[usage-redpen]]
-==== 使い方: redpen
+==== redpen の使い方
 
 以下は、redpen コマンドが提供するオプションです。
 
@@ -87,7 +87,7 @@ RedPen はサーバ機能を提供します。RedPen はサーバ機能を提供
 image::redpen-ui.png[width="500", height="300"]
 
 [[usage-redpen-server]]
-==== 使い方の redpen-server
+==== redpen-server の使い方
 
 RedPen サーバは **redpen-server** コマンドで起動（終了）できます。
 
