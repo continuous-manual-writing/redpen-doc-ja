@@ -42,7 +42,7 @@ include::validator-conf-sample.xml[]
 各機能は validator 要素で表現されます。
 validator 要素の "name" で機能を指定します。
 各機能は入力文書がもつ特定の面を検査します。たとえば SentenceLength は
-文書内にふくまれる文の長さが指定した上限よりも短いを検査します。
+文書内にふくまれる文の長さが指定した上限よりも短いかを検査します。
 
 提供される機能の中には **property** 要素で設定できるものがあります。
 たとえば、SentenceLength で検査する文長の最大値は **max_num** で指定できます。
