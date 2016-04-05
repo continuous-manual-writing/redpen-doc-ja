@@ -549,7 +549,7 @@ JavaScript は<<extending-with-javascript, 機能拡張スクリプト>>を実�
 [[doubledjoshi]]
 === DoubledJoshi
 
-DoubledJoshi は同一の助詞が一文で二回以上利用されているとエラーを出力します。
+DoubledJoshi は同一の助詞が一文で二回以上、利用されているとエラーを出力します。
 
 [[properties-doubled-joshi]]
 ==== プロパティ
@@ -579,7 +579,7 @@ DoubledJoshi は同一の助詞が一文で二回以上利用されていると�
 [[okurigana]]
 === Okurigana
 
-文書中の送りがなの使い方が正しくない場合にエラーを出力します。
+送りがなの使い方が正しくない場合にエラーを出力します。
 
 [[supported-languages-okurigana]]
 ==== 対象言語
