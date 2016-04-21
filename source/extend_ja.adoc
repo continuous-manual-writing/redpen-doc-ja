@@ -23,7 +23,7 @@ validate メソッドには引数によっていくつかのバリエーショ�
 include::validate-java-interfaces.txt[]
 ----
 
-Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは **cc.redpen.validator** ・ **cc.redpen.validator.sentence** ・ **cc.redpen.validator.section** です。
+NOTE: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは **cc.redpen.validator** 、 **cc.redpen.validator.sentence** 、 **cc.redpen.validator.section** の三つです。
 
 [[prevalidate-method]]
 ==== prevalidate メソッド
