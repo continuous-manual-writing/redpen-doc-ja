@@ -604,4 +604,4 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 [[supported-languages-start-with-capital]]
 ==== 対象言語
 
-英語およびラテン言系の言語で動作します。
+英語およびラテン系の言語で動作します。
