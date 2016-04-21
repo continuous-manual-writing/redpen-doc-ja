@@ -3,37 +3,6 @@
 
 RedPen は以下の機能を提供します。
 
-* SentenceLength
-* InvalidExpression
-* InvalidWord
-* SpaceBeginningOfSentence
-* CommaNumber
-* WordNumber
-* SuggestExpression
-* InvalidSymbol
-* SymbolWithSpace
-* KatakanaEndHyphen
-* KatakanaSpellCheck
-* SectionLength
-* SpaceBetweenAlphabeticalWord
-* ParagraphNumber
-* ParagraphStartWith
-* Contraction
-* Spelling
-* DoubledWord
-* SuccessiveWord
-* DuplicatedSection
-* JapaneseStyle
-* DoubleNegative
-* FrequentSentenceStart
-* UnexpandedAcronym
-* WordFrequency
-* Hyphenation
-* NumberFormat
-* ParenthesizedSentence
-* WeakExpression
-* JavaScript
-
 [[sentencelength]]
 === SentenceLength
 
@@ -545,7 +514,7 @@ ParenthesizedSentence は括弧に関する規約を検査します。
 [[supported-languages-20]]
 ==== 対象言語
 
-ヨーロッパ系の言語のみに対応しています。
+どの言語でも動作します。
 
 [[weakexpression]]
 === WeakExpression
@@ -576,3 +545,63 @@ JavaScript は<<extending-with-javascript, 機能拡張スクリプト>>を実�
 ==== 対象言語
 
 どの言語でも動作します。
+
+[[doubledjoshi]]
+=== DoubledJoshi
+
+DoubledJoshi は同一の助詞が一文で二回以上、利用されているとエラーを出力します。
+
+[[properties-doubled-joshi]]
+==== プロパティ
+
+[options="header"]
+|====
+|Property        |デフォルト     |解説
+|``dict``        |None           |ユーザ辞書ファイル
+|``list``        |None           |助詞のスキップリスト（コンマ区切り）
+|====
+
+[[supported-languages-doubled-joshi]]
+==== 対象言語
+
+日本語のみサポートしています。
+
+[[HankakuKana]]
+=== HankakuKana
+
+文書中に半角カナ文字が利用されているとエラーを出力します。
+
+[[supported-languages-hankaku-kana]]
+==== 対象言語
+
+日本語のみ動作します。
+
+[[okurigana]]
+=== Okurigana
+
+送りがなの使い方が正しくない場合にエラーを出力します。
+
+[[supported-languages-okurigana]]
+==== 対象言語
+
+日本語のみ動作します。
+
+[[startwithcapitalcharacter]]
+=== StartWithCapitalLetterValidator
+
+文が小文字から始まっている場合にエラーを出力します。
+
+[[properties-start-with-captital]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``dict``        |None           |ユーザの辞書（スキップリスト）
+|``list``        |None           |ユーザ辞書（コンマ区切り）
+|====
+
+[[supported-languages-start-with-capital]]
+==== 対象言語
+
+英語およびラテン系の言語で動作します。
