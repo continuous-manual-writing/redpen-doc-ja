@@ -2,11 +2,14 @@
 
 ユーザは自身で RedPen を拡張（機能追加）できます。
 本節では機能追加の方法と RedPen が内部に保持する文書モデルについて解説します。
+RedPen では Java と JavaScript を利用して機能を拡張できます。
 
-機能拡張の作成には抽象クラス（Validator）を実装する必要があります。バージョン1.3以降、JavaScript でも拡張可能になっています。
+=== Java による拡張の作成
+
+Java で機能拡張を作成するには抽象クラス（Validator）を実装します。
 
 [[extending-validators]]
-=== Validator クラスの拡張
+==== Validator クラスの拡張
 
 Validator クラスには実装できるメソッドがいくつか（validate ・ prevalidate ・ init）提供されています。
 以下各メソッドについて解説します。
@@ -14,7 +17,7 @@ Validator クラスには実装できるメソッドがいくつか（validate �
 [[validate-methods]]
 ==== validate メソッド
 
-機能を作成するには、かならず **validate** メソッドの実装が必要です。
+機能を作成するには、**validate** メソッドの実装が必要です。
 validate メソッドには引数によっていくつかのバリエーションがあります。
 現状では三種類の validate メソッドが提供されています。
 
@@ -23,7 +26,7 @@ validate メソッドには引数によっていくつかのバリエーショ�
 include::validate-java-interfaces.txt[]
 ----
 
-Note: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは **cc.redpen.validator** ・ **cc.redpen.validator.sentence** ・ **cc.redpen.validator.section** です。
+NOTE: 実装されたクラスは特定のパッケージに属す必要があります。利用できるパッケージは **cc.redpen.validator** ・ **cc.redpen.validator.sentence** ・ **cc.redpen.validator.section** です。
 
 [[prevalidate-method]]
 ==== prevalidate メソッド
@@ -40,7 +43,7 @@ include::prevalidate-java-interfaces.txt[]
 ==== 設定項目
 
 validator の動作にあたって設定項目（プロパティ）を必要とする場合があります。その場合、validator のコンストラクタで必要なプロパティを定義します。
-コンストラクタで定義すると、RedPen は各 validator についてプロパティが必要かを判断できます。また IDE にプラグインとして組み込む場合においても、プラグインは必要なプロパティ定義を参照し GUI へ表示できます。
+コンストラクタで定義すると、RedPen は各 validator についてプロパティが必要かを判断できます。
 
 [source,java]
 ----
@@ -63,22 +66,21 @@ SentenceLengthValidator の作成時に max_len 値が設定ファイルから�
 include::init-java-implementation.txt[]
 ----
 
-一旦設定されたプロパティは、+++getInt("プロパティ名")+++ のようにして参照できます。
+一旦設定されたプロパティは、+++getInt("プロパティ名")+++ のように参照できます。
 
 validate メソッドの実行前にプロパティを前処理しておきたいことがあります。その場合は init メソッドをオーバーライドしてください。
 
 [[adding-validators]]
-=== 作成した Validator の追加
+==== 作成した Validator の追加
 
 RedPen に作成した Validator を追加する方法は二通りあります。
 
 一つは、機能拡張（Validator）用ファイルを、RedPen のソースに追加してビルドする方法です。
 この方法は簡単です。しかし機能拡張のソースファイルを RedPen ソースファイル群と同梱して扱う必要があります。
 
-もう一つの方法はプラグインを作る方法です。
-プラグインの場合には、機能拡張ソースファイルを RedPen から独立して扱えます。
+もう一つの方法はプラグインを作る方法です。プラグインの場合には、機能拡張ソースファイルを RedPen から独立して扱えます。
 
-Note: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator** で終わる必要があります。クラス名が Validator で終わらない場合、RedPen は実装された機能をロードできません。
+NOTE: どちらの方法でもファイル名に制約があります。ファイル名は語尾（サフィックス）、**Validator** で終わる必要があります。クラス名が Validator で終わらない場合、RedPen は実装された機能をロードできません。
 以下、Validator を追加する方法とプラグインの作り方について解説します。
 
 [[add-a-validator-in-redpen-source]]
@@ -119,7 +121,7 @@ include::extension-config.xml[]
 [[create-a-validator-plugin]]
 ==== プラグインの作成
 
-プラグイン作成でもっとも重要なファイルは pom.xml です。
+プラグイン作成で重要なファイルは pom.xml です。
 pom.xml はビルドツール、Maven の設定ファイルです。以下は pom.xml の例です。
 
 [source,java]
@@ -127,7 +129,7 @@ pom.xml はビルドツール、Maven の設定ファイルです。以下は po
 include::redpen-plugin-pom.xml[]
 ----
 
-プラグインを作るときには上の pom.xml ファイルが**ほぼ**そのまま利用できます。
+プラグインを作るには上の pom.xml ファイルが**ほぼ**そのまま利用できます。
 変更する点は **artifactId** 、**name** 要素です。あなたの機能名になるよう名前を変更しましょう。
 
 これで pom.xml が編集できました。編集した機能用のファイルを"main/java/cc/redpen/validator/sentence" （sentence）にコピーします。
@@ -148,11 +150,11 @@ $ mvn install
 作成したプラグインが設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 
 [[javascript]]
-==== JavaScript で RedPen の機能を拡張する
+=== JavaScript による拡張の作成
 バージョン1.3から任意の JavaScript を Validator として実行する、**JavaScriptValidator** がサポートされました。JavaScript による Validator の作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen の Validator を作成できます。
 
 [[enable-javascript]]
-===== JavaScriptValidator を有効にする
+==== JavaScriptValidator を有効にする
 JavaScriptValidator を使うのは簡単です。使うには `<validator name="JavaScript"/>` を設定ファイルへ追記します。以下は追記する例です。
 
 [source, xml]
@@ -161,7 +163,7 @@ include::redpen-js-conf.xml[]
 ----
 
 [[javascript-validator]]
-===== JavaScript による Validator の作成
+==== Java による拡張の作成
 JavaScriptValidator は `$REDPEN_HOME/js` ディレクトリから JavaScript ファイル（`.js`）を検索し、全て実行します。JavaScriptValidator が JavaScript ファイルを検索するディレクトリは `script-path` プロパティで指定できます。
 
 文書の検査にあたり、JavaScriptValidator は 各 JavaScript ファイルに定義された関数を順次呼び出します。呼び出される関数は以下のシグニチャを持ちます。
@@ -171,7 +173,7 @@ include::js-validator-proto.js[]
 ----
 
 [[javascript-example]]
-===== JavaScript による Validator の作成例
+==== JavaScript による Validator の作成例
 以下は、NumberOfCharacterValidator を JavaScript で作成した例です。
 
 [source,javascript]
@@ -182,7 +184,7 @@ include::js-validator-example.js[]
 上の例は Java 版と良く似ています。しかし型システムの違いによって Java 版における +++validate(Sentence sentence)+++ 関数が、JavaScript 版では +++validateSentence(sentence)+++ と呼ばれています。
 
 [[javascript-run]]
-===== 実行
+==== 実行
 `redpen` コマンドを実行すると JavaScript による Validator の実行ができます。以下は例で作成した JavaScript ファイルを Validator として実行する、コマンドラインの例です。上の例で作成した JavaScript ファイルを `$REDPEN_HOME/js` ディレクトリ以下に置いてください。
 
 [source,bash]
