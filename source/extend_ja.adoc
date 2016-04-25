@@ -149,7 +149,7 @@ $ mvn install
 プラグイン用 jar ファイルを RedPen のクラスパスが含まれるディレクトリ（$REDPEN_HOME/lib など）にコピーします。
 作成したプラグインが設定ファイルに追加されると、RedPen は実装した validate メソッドを実行します。
 
-[[javascript]]
+[[create-javascript-validator]]
 === JavaScript による拡張の作成
 バージョン1.3から任意の JavaScript を Validator として実行する、**JavaScriptValidator** がサポートされました。JavaScript による Validator の作成にあたってはビルド作業が必要ありません。そのためユーザはより気軽に RedPen の Validator を作成できます。
 
@@ -162,8 +162,8 @@ JavaScriptValidator を使うのは簡単です。使うには `<validator name=
 include::redpen-js-conf.xml[]
 ----
 
-[[javascript-validator]]
-==== Java による拡張の作成
+[[implement-javascript-validator]]
+==== 機能の実装
 JavaScriptValidator は `$REDPEN_HOME/js` ディレクトリから JavaScript ファイル（`.js`）を検索し、全て実行します。JavaScriptValidator が JavaScript ファイルを検索するディレクトリは `script-path` プロパティで指定できます。
 
 文書の検査にあたり、JavaScriptValidator は 各 JavaScript ファイルに定義された関数を順次呼び出します。呼び出される関数は以下のシグニチャを持ちます。
@@ -172,8 +172,8 @@ JavaScriptValidator は `$REDPEN_HOME/js` ディレクトリから JavaScript �
 include::js-validator-proto.js[]
 ----
 
-[[javascript-example]]
-==== JavaScript による Validator の作成例
+[[javascript-validator-example]]
+==== Validator の作成例
 以下は、NumberOfCharacterValidator を JavaScript で作成した例です。
 
 [source,javascript]
