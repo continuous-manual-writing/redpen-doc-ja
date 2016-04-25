@@ -167,7 +167,7 @@ asap    as soon as possible
 InvalidSymbol は入力文で不正なシンボルが利用されているとエラーを出力します。
 
 使用するシンボルに関する設定は設定ファイルの **symbols** ブロックで指定します。
-詳しくは <<setting-symbols,シンボル設定>> 節を参照して下さい。
+詳しくは <<setting-symbols,シンボル設定>> 節を参照してください。
 
 [[supported-languages-2]]
 ==== 対応言語

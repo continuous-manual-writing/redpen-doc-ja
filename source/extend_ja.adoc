@@ -181,7 +181,7 @@ include::js-validator-proto.js[]
 include::js-validator-example.js[]
 ----
 
-上の例は Java 版と良く似ています。しかし型システムの違いによって Java 版における +++validate(Sentence sentence)+++ 関数が、JavaScript 版では +++validateSentence(sentence)+++ と呼ばれています。
+上の例は Java 版と似ています。しかし型システムの違いによって Java 版における +++validate(Sentence sentence)+++ 関数が、JavaScript 版では +++validateSentence(sentence)+++ と呼ばれています。
 
 [[javascript-run]]
 ==== 実行
