@@ -30,6 +30,8 @@ redpen コマンドは以下のオプションをサポートしています。
 -c <CONFIG_FILE>, --configuration <CONFIG_FILE>
 ----
 
+redpen コマンドに -c オプションで設定を渡さないと、RedPen は候補を走査します。はじめに RedPen はカレントディレクトリにある redpen-conf.xml というファイルがあるかチェックします。存在する場合には設定ファイルとしてロードします。もし無い場合にはカレントディレクトリにある redpen-conf-**{lang}**.xml をロードします。ここで {lang} は ISO 639-1 で表されれる言語コードです。言語コードはご利用環境の LOCALE 設定に依存します。redpen-conf-**{lang}**.xml も存在しない場合には、$REDPEN_HOME/conf にある設定ファイルがロードされます。
+
 ===== 入力フォーマット [**デフォルト**: plain]
 
 ----
