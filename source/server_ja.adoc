@@ -94,7 +94,7 @@ lang を指定しない場合には、すべての言語の設定が返されま
 [[document-validation]]
 ==== 文書検査（XML）
 
-*/document/validate* は POST リクエストで文書を検査します。検査が終了した後、発見されたエラーを返します。
+*/rest/document/validate* は POST リクエストで文書を検査します。検査が終了した後、発見されたエラーを返します。
 
 ===== POST パラメタ
 
@@ -161,7 +161,7 @@ $ curl -s --data document="古池や,蛙飛び込む水の音" \
 
 ==== 文書検査（JSON）
 
-*/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果を返します。設定は JSON フォーマットでおこないます。
+*/rest/document/validate/json* は POST リクエストを受け取ります。検査が終了すると結果を返します。設定は JSON フォーマットでおこないます。
 
 ===== Request フォーマット
 
