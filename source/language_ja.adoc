@@ -1,0 +1,40 @@
+[[language]]
+== RedPen言語設定
+
+RedPenが文書を処理するにあたり言語（ドイツ語・フランス語・日本語など）は問いません。デフォルトでは英語を代表とするラテン系言語を処理することを念頭に置いた設定がなされます。そのため、その他の言語で書かれた文書を処理するにはRedPen設定ファイルで言語を指定する必要があります。
+
+[[override-language]]
+=== 言語設定のオーバライド
+
+言語設定には、現在2つの値が指定できます。指定できる値は "en" と "ja" です。"en" は英語やドイツ語など、ラテン系の言語で書かれた文書を意味する値です。"ja" は日本語で書かれた文書を意味する値です。
+
+言語設定をオーバライドするには、設定ファイルのsymbolsセクションにあるlangプロパティを変更します。以下は文書の言語設定に日本語 ("ja") を指定する例です。
+
+[source,xml]
+----
+<symbols lang="ja">
+    <symbol name="EXCLAMATION_MARK" value="!" invalid-chars="！" after-space="true" />
+    <symbol name="LEFT_QUOTATION_MARK" value="\'"  invalid-chars="“" before-space="true" />
+    <symbol name="RIGHT_QUOTATION_MARK" value="\'"  invalid-chars="”" after-space="true" />
+    <symbol name="NUMBER_SIGN" value="#" invalid-chars="＃" after-space="true" />
+    <symbol name="FULL_STOP" value="。" invalid-chars="．." after-space="true" />
+    <symbol name="COMMA" value="、" invalid-chars="," after-space="true" />
+</symbols>
+----
+
+[[override-symbol-settings]]
+=== シンボル設定のオーバライド
+
+文書の内容や著者の好みによって、文書中で使用される文字や記号（シンボル）は異なります。例えば左一重引用符として、ある著者が "'" を使用するところで、また別の著者は "‘" を使用したいかもしれません。
+
+この問題に対処するために、RedPenは文書中で使用するシンボルの設定（デフォルト設定は<<setting-symbols,シンボル設定>>セクションを参照）をオーバライドする方法を提供しています。また、加えて文書中に現われてはならないシンボルを指定できます。
+
+以下は、一重引用符（左右問わず）に "'" の使用を強制する例です。
+
+[source,xml]
+----
+<symbols>
+  <symbol name="LEFT_SINGLE_QUOTATION_MARK" value="'"  invalid-chars="‘" />
+  <symbol name="RIGHT_SINGLE_QUOTATION_MARK" value="'" invalid-chars="’"/>
+</symbols>
+----

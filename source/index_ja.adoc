@@ -20,7 +20,7 @@ include::format_ja.adoc[]
 
 include::extend_ja.adoc[]
 
-//include::language.adoc[]
+include::language_ja.adoc[]
 
 include::server_ja.adoc[]
 
