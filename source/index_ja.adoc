@@ -24,8 +24,8 @@ include::extend_ja.adoc[]
 
 include::server_ja.adoc[]
 
-include::faq_ja.adoc[]
+include::developers_ja.adoc[]
 
-// include::developers.adoc[]
+include::faq_ja.adoc[]
 
 include::links_ja.adoc[]
