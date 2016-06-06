@@ -18,6 +18,8 @@ include::configuration_ja.adoc[]
 
 include::format_ja.adoc[]
 
+include::suppress_ja.adoc[]
+
 include::extend_ja.adoc[]
 
 include::language_ja.adoc[]
