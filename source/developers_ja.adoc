@@ -1,31 +1,31 @@
-== RedPenの開発について
+== RedPen の開発について
 
-GitHubを通してフィーチャリクエストを送っていただけることは大歓迎です。開発に参加したい方はこのセクションの情報を参考にしてください。
-RedPenの開発環境を構築するために有用な情報を記載しています。パッチはプルリクエストの形でいただけるとmasterブランチにマージしやすくなります。
+GitHub を通したフィーチャリクエストは大歓迎です。開発に参加したい方はこのセクションの情報を参考にしてください。
+RedPen の開発環境を構築するために有用な情報を記載しています。パッチはプルリクエストの形でいただけると master ブランチにマージしやすくなります。
 
 === 準備
 
-RedPenをビルドするには、次に挙げるツールをインストールする必要があります。
+RedPen をビルドするには、次に挙げるツールをインストールする必要があります。
 
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[JDK]
-* https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Gitクライアント]
-* http://www.dowdandassociates.com/blog/content/howto-install-maven/[Maven (v3以降)]
+* https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git クライアント]
+* http://www.dowdandassociates.com/blog/content/howto-install-maven/[Maven （v3 以降）]
 * http://phantomjs.org/download.html[PhantomJS]
 
-=== 開発ポリシー
+=== 開発ポリシ
 
-RedPenの開発は、「ゆっくりと着実に」というポリシーのもとに行なわれています。そのため、大きな変更が予想される提案は、その実現によって得られるメリットがある場合においても、受け入れできない場合があります。このポリシーは、チームメンバがRedPenを開発するにあたりストレスを抱えないようにするための工夫です。
+RedPen の開発は、「ゆっくりと着実に」というポリシのもとに行なわれています。そのため大きな変更が予想される提案は、その実現によって得られるメリットがある場合においても、受け入れできない場合があります。このポリシは、チームメンバが RedPen を開発するにあたりストレスを抱えないようにするための工夫です。
 
-=== RedPenのビルド
+=== RedPen のビルド
 
-RedPenパッケージ全体をビルドするのは簡単です。パッケージ全体をビルドするには以下のコマンドを実行します。
+RedPen パッケージ全体をビルドするのは簡単です。パッケージ全体をビルドするには以下のコマンドを実行します。
 
 ....
 $ mvn install
 ....
 
-ビルドされたRedPenパッケージは `redpen/redpen-distribution/target/redpen-distribution-*.*.*-SNAPSHOT-assembled.tar.gz` に出力されます。
-出力されたRedPenパッケージを使用するには展開する必要があります。以下はパッケージを展開する例です。
+ビルドされるとパッケージが出力されます。出力される場所は `redpen/redpen-distribution/target/redpen-distribution-*.*.*-SNAPSHOT-assembled.tar.gz` です。
+出力されたパッケージを使用するには展開する必要があります。以下はパッケージを展開する例です。
 
 ....
 $ cd redpen/redpen-distribution/target
@@ -38,7 +38,7 @@ x redpen-distribution-*.*.*-SNAPSHOT/lib/
 ...
 ....
 
-これでパッケージを使用する準備が整いました。以下はパッケージに含まれるredpenコマンドを使用する例です。
+これでパッケージを使用する準備が整いました。以下はパッケージに含まれる `redpen` コマンドを使用する例です。
 
 ....
 $cd redpen-distribution-*.*.*-SNAPSHOT
@@ -54,9 +54,9 @@ usage: redpen-cli [Options] [<INPUT FILE>]
   -v,--version                         Displays version information and exits
 ....
 
-=== RedPenのテスト
+=== RedPen のテスト
 
-RedPenのソースコードを変更する場合、必ず対応するテストケースを付けてください。テストケースを付けることで、期待される挙動をレビュアーが把握しやすくなります。加えて、プルリクエストを作成するにあたり（変更した箇所だけでなく）全テストケースが正常に実行されることを確認してください。RedPenの全テストケースを実行するコマンドを次に示します。
+RedPen のソースコードを変更する場合、必ず対応するテストケースを付けてください。テストケースを付けることで、期待される挙動をレビュアが把握しやすくなります。加えて、プルリクエストを作成するにあたり（変更した箇所だけでなく）全テストケースが正常に実行されることを確認してください。RedPen の全テストケースを実行するコマンドを次に示します。
 
 ....
 $mvn test
@@ -64,15 +64,15 @@ $mvn test
 
 === その他の情報
 
-* Twitterアカウント
+* Twitter アカウント
 
 
 https://twitter.com/redpen_news/
 
-* ソースコードリポジトリ (git)
+* ソースコードリポジトリ（git）
 
 https://github.com/redpen-cc/redpen
 
-* Issueトラッカ
+* Issue トラッカ
 
 https://github.com/redpen-cc/redpen/issues
