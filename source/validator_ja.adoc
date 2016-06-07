@@ -57,11 +57,11 @@ InvalidExpression で指定される辞書は改行区切りです。以下辞�
 InvalidWord は入力文に不正な単語が存在するかを検査します。
 
 [[properties-2]]
-==== Properties
+==== プロパティ
 
 [options="header"]
 |====
-|Property        |デフォルト     |解説
+|プロパティ        |デフォルト     |解説
 |``dict``        |None           |ユーザ辞書ファイル
 |``list``        |None           |不正単語のリスト（コンマ区切り）
 |====
@@ -136,7 +136,7 @@ SuggestExpression は InvalidExpression と同様に動作します。
 入力文で不正な表現が使用されているとエラーを出力します。出力されるエラーには利用すべき正しい表現が含まれます。
 
 [[properties-5]]
-==== Properties
+==== プロパティ
 
 [options="header"]
 |====
@@ -268,7 +268,7 @@ ParagraphNumber は節（セクション）内に存在してよいパラグラ�
 ParagraphStartWith はパラグラフの開始部分が指定された規約に従っているかを検査します。
 
 [[properties-7]]
-==== Properties
+==== プロパティ
 
 [options="header"]
 |====
@@ -566,7 +566,7 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 [options="header"]
 |====
-|Property        |デフォルト     |解説
+|プロパティ        |デフォルト     |解説
 |``dict``        |None           |ユーザ辞書ファイル
 |``list``        |None           |助詞のスキップリスト（コンマ区切り）
 |====
