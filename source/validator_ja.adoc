@@ -264,7 +264,7 @@ ParagraphNumber は節の中に存在してよいパラグラフの最大数を�
 [options="header"]
 |====
 |プロパティ      |デフォルト  |解説
-|``max_num``     |5           |一つの節に存在するパラグラフの最大数
+|``max_num``     |5           |1つの節に存在するパラグラフの最大数
 |====
 
 [[supported-languages-1]]
@@ -344,6 +344,7 @@ Spelling は文書内でスペルミスが起こった時にエラーを出力�
 英語のみです。
 
 [[doubledword]]
+[suppress=JapaneseNumberExpression]
 === DoubledWord
 
 DoubledWord は一文内で二回以上、同一の単語が使用されたときにエラーを出力します。
@@ -370,6 +371,7 @@ DoubledWord は一文内で二回以上、同一の単語が使用されたと�
 日本語は動作します。
 
 [[successiveword]]
+[suppress=JapaneseNumberExpression]
 === SuccessiveWord
 
 SuccessiveWord は同一の単語が連続して使用されたときにエラーを出力します。
@@ -514,7 +516,7 @@ NumberFormat は文中の数値表現が一般的な記法に従っているか�
 === ParenthesizedSentence
 
 ParenthesizedSentence は括弧に関する規約を検査します。
-検査するポイントは以下の三つです。
+検査するポイントは以下の3つです。
 
 * 一文内で使用される括弧の使用頻度
 * ネストされた括弧が存在するか
@@ -567,6 +569,7 @@ JavaScript は<<extending-with-javascript, 機能拡張スクリプト>>を実�
 どの言語でも動作します。
 
 [[doubledjoshi]]
+[suppress=JapaneseNumberExpression]
 === DoubledJoshi
 
 DoubledJoshi は同一の助詞が一文で二回以上、利用されているとエラーを出力します。
@@ -629,7 +632,7 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 [[voidsection]]
 === VoidSection
 
-節に段落や文が一つも含まれていない場合にエラーを出力します。
+節に段落や文が1つも含まれていない場合にエラーを出力します。
 
 [[supported-languages-voidsection]]
 ==== 対象言語
