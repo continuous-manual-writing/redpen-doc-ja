@@ -1,31 +1,32 @@
 == RedPen の開発について
 
-GitHub を通したフィーチャリクエストは大歓迎です。開発に参加したい方はこのセクションの情報を参考にしてください。
-RedPen の開発環境を構築するために有用な情報を記載しています。パッチはプルリクエストの形でいただけると master ブランチにマージしやすくなります。
+GitHub を通したフィーチャリクエストを歓迎しています。開発に参加したい方は以下の情報を参考にしてください。
+RedPen の開発環境を構築するために必要な情報を記載しています。修正はプルリクエストの形でいただけると master ブランチにマージしやすくなります。
 
 === 準備
 
-RedPen をビルドするには、次に挙げるツールをインストールする必要があります。
+RedPen をビルドするには、次のツールをインストールします。
 
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[JDK]
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git クライアント]
 * http://www.dowdandassociates.com/blog/content/howto-install-maven/[Maven （v3 以降）]
 * http://phantomjs.org/download.html[PhantomJS]
 
-=== 開発ポリシ
+=== 開発ポリシー
 
-RedPen の開発は、「ゆっくりと着実に」というポリシのもとに行なわれています。そのため大きな変更が予想される提案は、その実現によって得られるメリットがある場合においても、受け入れできない場合があります。このポリシは、チームメンバが RedPen を開発するにあたりストレスを抱えないようにするための工夫です。
+RedPen の開発ポリシーは、「ゆっくりと着実に」です。そのため大きな変更が予想される提案は、受け入れできない場合があります。
+このポリシーは、チームメンバが RedPen を開発するにあたりストレスを抱えないようにするための工夫です。
 
 === RedPen のビルド
 
-RedPen パッケージ全体をビルドするのは簡単です。パッケージ全体をビルドするには以下のコマンドを実行します。
+RedPen パッケージのビルドでは Maven を使用します。パッケージ全体をビルドするには以下のコマンドを実行します。
 
 ....
 $ mvn install
 ....
 
 ビルドされるとパッケージが出力されます。出力される場所は `redpen/redpen-distribution/target/redpen-distribution-*.*.*-SNAPSHOT-assembled.tar.gz` です。
-出力されたパッケージを使用するには展開する必要があります。以下はパッケージを展開する例です。
+出力されたパッケージを使用するまえに、パッケージを展開します。以下はパッケージを展開する例です。
 
 ....
 $ cd redpen/redpen-distribution/target
@@ -56,7 +57,7 @@ usage: redpen-cli [Options] [<INPUT FILE>]
 
 === RedPen のテスト
 
-RedPen のソースコードを変更する場合、必ず対応するテストケースを付けてください。テストケースを付けることで、期待される挙動をレビュアが把握しやすくなります。加えて、プルリクエストを作成するにあたり（変更した箇所だけでなく）全テストケースが正常に実行されることを確認してください。RedPen の全テストケースを実行するコマンドを次に示します。
+RedPen のソースコードを変更する場合、必ず対応するテストケースを追加してください。レビューアが期待される挙動をテストから推測できます。加えて、プルリクエストを作成するにあたり（変更した箇所だけでなく）全テストケースが正常に実行されることを確認してください。RedPen の全テストケースを実行するコマンドを次に示します。
 
 ....
 $mvn test
@@ -66,13 +67,12 @@ $mvn test
 
 * Twitter アカウント
 
-
 https://twitter.com/redpen_news/
 
 * ソースコードリポジトリ（git）
 
 https://github.com/redpen-cc/redpen
 
-* Issue トラッカ
+* Issue トラッカー
 
 https://github.com/redpen-cc/redpen/issues
