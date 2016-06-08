@@ -6,6 +6,7 @@ RedPen は数種類のテキストフォーマットに対応しています。�
 - Markdown
 - AsciiDoc
 - Wiki
+- Re:VIEW
 - LaTeX
 - Java プロパティ
 
@@ -109,6 +110,12 @@ include::wiki-comment.txt[]
 === Markdown
 
 https://daringfireball.net/projects/markdown/syntax[Markdown リファレンスを参照]
+
+[[review-format]]
++=== Re:VIEW format
+
+https://github.com/kmuto/review/blob/master/doc/format.md[Re:VIEW リファレンスを参照]
+
 
 [[java-properties]]
 === Java プロパティ

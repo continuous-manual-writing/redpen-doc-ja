@@ -47,9 +47,25 @@ redpen コマンドに -c オプションで設定を渡さないと、RedPen �
 |wiki     |Wiki (Textile) フォーマット
 |markdown |Markdown フォーマット
 |asciidoc |AsciiDoc フォーマット
+|review   |Re:VIEW フォーマット
 |latex    |LaTeX フォーマット
 |properties |Java プロパティファイルフォーマット
 |====
+
+NOTE: 入力フォーマットの指定がない場合、RedPen はファイル拡張子からフォーマットを推測します。以下は RedPen が理解するファイルフォーマットと拡張子の一覧です。
+
+[options="header",]
+|====
+|値      |拡張子
+|plain      |txt
+|wiki       |wiki
+|markdown   |md, markdown
+|asciidoc   |adoc, asciidoc
+|review     |re, review
+|latex      |tex, latex
+|properties |properties
+|====
+
 
 ===== 出力フォーマット [**デフォルト**: plain]
 

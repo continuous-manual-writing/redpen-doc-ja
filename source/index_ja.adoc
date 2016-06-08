@@ -18,14 +18,16 @@ include::configuration_ja.adoc[]
 
 include::format_ja.adoc[]
 
+include::suppress_ja.adoc[]
+
 include::extend_ja.adoc[]
 
-//include::language.adoc[]
+include::language_ja.adoc[]
 
 include::server_ja.adoc[]
 
-include::faq_ja.adoc[]
+include::developers_ja.adoc[]
 
-// include::developers.adoc[]
+include::faq_ja.adoc[]
 
 include::links_ja.adoc[]

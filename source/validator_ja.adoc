@@ -57,11 +57,11 @@ InvalidExpression で指定される辞書は改行区切りです。以下辞�
 InvalidWord は入力文に不正な単語が存在するかを検査します。
 
 [[properties-2]]
-==== Properties
+==== プロパティ
 
 [options="header"]
 |====
-|Property        |デフォルト     |解説
+|プロパティ        |デフォルト     |解説
 |``dict``        |None           |ユーザ辞書ファイル
 |``list``        |None           |不正単語のリスト（コンマ区切り）
 |====
@@ -136,7 +136,7 @@ SuggestExpression は InvalidExpression と同様に動作します。
 入力文で不正な表現が使用されているとエラーを出力します。出力されるエラーには利用すべき正しい表現が含まれます。
 
 [[properties-5]]
-==== Properties
+==== プロパティ
 
 [options="header"]
 |====
@@ -197,6 +197,16 @@ InvalidSymbol はどの言語でも動作します。
 * c: 単語が複合語の場合には各々の部分単語について条件が適用される。
 * d: *a* から *c* のルールにおいて、拗音をのぞきハイフンは一文字としてカウントされます。
 
+[[properties-katakanaendhyhen]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``list``        |None           |無視したい単語用の辞書（コンマ区切り）
+|====
+
+
 [[supported-languages-4]]
 ==== 対応言語
 
@@ -246,7 +256,7 @@ SectionLength はどの言語でも動作します。
 [[paragraphnumber]]
 === ParagraphNumber
 
-ParagraphNumber は節（セクション）内に存在してよいパラグラフの最大数を指定します。
+ParagraphNumber は節の中に存在してよいパラグラフの最大数を指定します。
 
 [[properties]]
 ==== プロパティ
@@ -268,7 +278,7 @@ ParagraphNumber は節（セクション）内に存在してよいパラグラ�
 ParagraphStartWith はパラグラフの開始部分が指定された規約に従っているかを検査します。
 
 [[properties-7]]
-==== Properties
+==== プロパティ
 
 [options="header"]
 |====
@@ -288,7 +298,16 @@ ParagraphStartWith はパラグラフの開始部分が指定された規約に�
 単語が空白によって区切られない言語（日本語、中国語など）で執筆するときに使用します。
 SpaceBetweenAlphabeticalWord はアルファベット単語の前後に空白が存在しないとエラーを出力します。
 
-[[supported-languages-7]]
+[[properties-spacebetweenalphabeticalword]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ        |デフォルト  |解説
+|``forbidden``  | false          | 空白が存在すべき（false）か存在すべきでない（true）か
+|====
+
+[[supported-languages-spacebetweenalphabeticalword]]
 ==== 対応言語
 
 日本語や中国語など単語がスペースで区切られていない言語に適用できます。
@@ -495,10 +514,11 @@ NumberFormat は文中の数値表現が一般的な記法に従っているか�
 === ParenthesizedSentence
 
 ParenthesizedSentence は括弧に関する規約を検査します。
-検査するポイントは以下の二つです。
+検査するポイントは以下の三つです。
 
-* 一文内での括弧の使用頻度
-* ネストされた括弧が存在する
+* 一文内で使用される括弧の使用頻度
+* ネストされた括弧が存在するか
+* 括弧の開始位置から終了位置までの長さ
 
 [[properties-12]]
 ==== プロパティ
@@ -556,7 +576,7 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 [options="header"]
 |====
-|Property        |デフォルト     |解説
+|プロパティ        |デフォルト     |解説
 |``dict``        |None           |ユーザ辞書ファイル
 |``list``        |None           |助詞のスキップリスト（コンマ区切り）
 |====
@@ -606,13 +626,24 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 英語およびラテン系の言語で動作します。
 
+[[voidsection]]
+=== VoidSection
+
+節に段落や文が一つも含まれていない場合にエラーを出力します。
+
+[[supported-languages-voidsection]]
+==== 対象言語
+
+どの言語でも動作します。
+
+
 [[gappedsection]]
 === GappedSection
 
 GappedSection は節（章）の大きさにギャップがあるとエラーを出力します。
 たとえば、以下のテキストでは 1 節の直下に 1.1.1 節があります。
 つまり 1 節と 1.1.1 節の間にギャップが存在します。
-この場合、ギャップを埋めるため 1.1.1 節の前に 1.1 節が存在するべきです。
+ギャップを埋めるためには、1.1.1 節の前に 1.1 節が存在するべきです。
 
 ----
 # 1 節
@@ -626,3 +657,87 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 ==== 対象言語
 
 どの言語でも動作します。
+
+[[long-kanji-chain]]
+=== LongKanjiChain
+
+長すぎる熟語（漢字の連続）を検出し、エラーを出力します。
+
+[[properties-long-kanji-chain]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ        |デフォルト  |解説
+|``max_len``  |2  |熟語の最大長
+|====
+
+[[supported-language-long-kanji-chain]]
+==== 対象言語
+
+日本語のみサポートしています。
+
+[[section-level]]
+=== SectionLevel
+
+深すぎる節を検出しエラーを出力します。
+
+[[properties-section-level]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ        |デフォルト  |解説
+|``max_num``     |5              |節の最大深度
+|====
+
+[[supported-language-section-level]]
+==== 対象言語
+
+どの言語でも動作します。
+
+[[japanese-ambiguous-noun-conjunction]]
+=== JapaneseAmbiguousNounConjunction
+
+日本語文に含まれる、曖昧な名詞接続のパターンを検出しエラーを出力します。
+ここで、曖昧な名詞接続のパターンとは、格助詞の "の" + 名詞連続 + 各助詞の "の" です。
+たとえば以下の文は、曖昧な名詞接続を含んでいます。
+
+----
+弊社の経営方針の説明を受けた。
+----
+
+[[supported-language-japanese-ambiguous-noun-conjunction]]
+==== Supported languages
+
+日本語のみサポートしています。
+
+[[japanese-number-expression]]
+=== JapaneseNumberExpression
+
+日本語文において、計数表現のスタイルが一貫していない箇所を検出しエラーを出力します。
+
+[[properties-section-level]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ        |デフォルト  |解説
+|``mode``        |numeric        |使用すべき計数表現のスタイル。四つの値 （"numeric" ・ "numeric-zenkaku" ・ "kansuji" ・ "hiragana"）から選択
+|====
+
+以下は、各値と期待される計数表現の対応をまとめた表です。
+
+[options="header"]
+|====
+|値                | 計数表現
+|``numeric``          | 1つ、2つ
+|``numeric-zenkaku``  | １つ、２つ
+|``kansuji``          | 一つ、二つ
+|``hiragana``         | ひとつ、ふたつ
+|====
+
+[[supported-language-japanese-number-expression]]
+==== 対象言語
+
+日本語のみサポートしています。
