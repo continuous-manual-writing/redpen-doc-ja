@@ -158,7 +158,7 @@ json2 も RedPen の結果を JSON フォーマットで返します。json2 で
 ]
 ----
 
-json2 の errors は三つの要素からなるブロックです。以下、各要素の解説です。
+json2 の errors は3つの要素からなるブロックです。以下、各要素の解説です。
 
 [option="header"]
 |====

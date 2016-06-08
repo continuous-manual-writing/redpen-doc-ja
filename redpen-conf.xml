@@ -18,6 +18,11 @@
     <validator name="InvalidExpression" />
     <validator name="DoubleNegative" />
     <validator name="FrequentSentenceStart" />
+    <validator name="Okurigana"/>
+    <validator name="JapaneseNumberExpression"/>
+    <validator name="JapaneseAnchorExpression"/>
+    <validator name="JapaneseAmbiguousNounConjunction" />
+    <validator name="LongKanjiChain" />
 
     <!-- Rules on human errors -->
     <validator name="SuccessiveWord" />
@@ -26,11 +31,17 @@
     <validator name="SectionLength">
       <property name="max_num" value="1500"/>
     </validator>
-    <validator name="ParagraphNumber"/>        
+    <validator name="ParagraphNumber"/>
+    <validator name="SectionLevel" />
 
     <!-- Rules on symbols -->
     <validator name="InvalidSymbol"/>
     <validator name="SpaceBetweenAlphabeticalWord" />
+    <validator name="ParenthesizedSentence">
+      <property name="max_count" value="2"/>
+      <property name="max_nesting_level" value="1"/>
+      <property name="max_length" value="10"/>
+    </validator>
 
     <!-- Load JavaScript based Validators --> 
     <validator name="JavaScript">
