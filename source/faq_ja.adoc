@@ -10,3 +10,14 @@
 $ redpen -c redpen-conf.xml -f latex content.tex
 ----
 --
+
+* RedPen の設定方法で参考となる文書プロジェクトはありますか。
++
+--
+以下の文書プロジェクトが参考になります。
+
+* https://github.com/continuous-manual-writing/redpen-doc-ja[本マニュアル（AsciiDoc で記述）]
+* https://github.com/takahi-i/fit-2016-paper[FIT 2016 で RedPen を紹介した記事（LaTeX で記述）]
+* https://github.com/continuous-manual-writing/book-source[書籍、「ドキュメント作成システム構築ガイド」のソースファイル]
+--
+
