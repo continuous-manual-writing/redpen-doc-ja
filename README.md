@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/continuous-manual-writing/redpen-doc-ja.svg?branch=master)](https://travis-ci.org/takahi-i/continuous-manual-writing/redpen-doc-ja)
+
 redpen-doc
 ==========
 
