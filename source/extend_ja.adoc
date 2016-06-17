@@ -1,3 +1,4 @@
+[[redpen-extension]]
 == RedPen を拡張する
 
 ユーザは自身で RedPen を拡張（機能追加）できます。
