@@ -21,3 +21,18 @@ $ redpen -c redpen-conf.xml -f latex content.tex
 * https://github.com/continuous-manual-writing/book-source[書籍、「ドキュメント作成システム構築ガイド」のソースファイル]
 * https://github.com/redpen-cc/redpen-doc[RedPen の英語マニュアル]
 --
+
+* RedPen の拡張を作りたいのですが、参考になる資料はありますか。
++
+--
+まずは "<<redpen-extension>>" をご一読ください。拡張を作る上で、以下の資料とプロジェクトが参考になります。
+
+* 参考になる記事
+** http://www.clear-code.com/blog/2015/8/29.html[RedPen の Validator を JavaScript で書くには（ククログ）]
+** http://atl.recruit-tech.co.jp/blog/3629/[RedPen に JavaScript で機能追加]
+* 参考になるプロジェクト
+** JavaScript
+*** https://github.com/kongou-ae/redpen-validator[redpen-validator（kongou-ae さん）]
+** Java
+*** https://github.com/k--kato/redpen-ms-style-jp-validator[redpen-ms-style-jp-validator（k--kato さん）]
+--
