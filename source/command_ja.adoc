@@ -107,7 +107,7 @@ option:: -l <LIMIT NUMBER>, --limit  <LIMIT NUMBER>
 [[sample-server]]
 === RedPen サーバ
 
-RedPen はサーバ機能を提供します。RedPen はサーバ機能を提供します。RedPen サーバは UI のほかに、REST API も提供します（<<redpen-server>> 節参照）。
+RedPen はサーバ機能を提供します。RedPen サーバは UI のほかに、REST API も提供します（<<redpen-server>> 節参照）。
 以下 RedPen サーバ の UI です。
 
 image::redpen-ui.png[width="500", height="300"]
