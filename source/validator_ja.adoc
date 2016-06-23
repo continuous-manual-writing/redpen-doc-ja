@@ -720,7 +720,7 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 
 日本語文において、計数表現のスタイルが一貫していない箇所を検出しエラーを出力します。
 
-[[properties-section-level]]
+[[properties-japanese-number-expression]]
 ==== プロパティ
 
 [options="header"]
@@ -741,6 +741,35 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 |====
 
 [[supported-language-japanese-number-expression]]
+==== 対象言語
+
+日本語のみサポートしています。
+
+[[japanese-anchor-expression]]
+=== JapaneseAnchorExpression
+
+日本語文において、章節の参照が一貫したスタイルになっているか検査します。
+
+[[properties-japanese-anchor-expression]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ        |デフォルト  |解説
+|``mode``        |numeric        |使用すべきスタイル。三つの値 （"numeric" ・ "numeric-zenkaku" ・ "kansuji" ）から選択
+|====
+
+以下は、値と期待される表現の対応をまとめた表です。
+
+[options="header"]
+|====
+|値                | 計数表現
+|``numeric``          | 1章、1.2節
+|``numeric-zenkaku``  | １章、２節
+|``kansuji``          | 一章、二節
+|====
+
+[[supported-language-japanese-anchor-expression]]
 ==== 対象言語
 
 日本語のみサポートしています。
