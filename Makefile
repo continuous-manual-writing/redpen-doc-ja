@@ -11,6 +11,7 @@ ASCIIDOCTOR_PDF       = asciidoctor-pdf
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
+	@echo "  check      to check soruce files with RedPen"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
