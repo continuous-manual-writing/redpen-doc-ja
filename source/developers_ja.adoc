@@ -72,6 +72,10 @@ https://twitter.com/redpen_news/
 
 https://github.com/redpen-cc/redpen
 
+* チャット（日本語）
+
+https://gitter.im/redpen-cc/redpen/redpen-ja
+
 * Issue トラッカー
 
 https://github.com/redpen-cc/redpen/issues
