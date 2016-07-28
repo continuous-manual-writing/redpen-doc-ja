@@ -773,3 +773,18 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 ==== 対象言語
 
 日本語のみサポートしています。
+
+[[doubled-conjunctive-particle-ga]]
+=== DoubledConjunctiveParticleGa
+
+一文に二回以上、接続助詞の **が** が出現するとエラーを出力します。たとえば、DoubledConjunctiveParticleGa は以下の文に対してエラーを出力します。
+
+----
+今日は早朝から出発したが、定刻通りではなかったが、無事会場に到着した。
+----
+
+[[supported-languages-doubled-conjunctive-particle-ga]]
+==== 対象言語
+
+日本語のみサポートしています。
+
