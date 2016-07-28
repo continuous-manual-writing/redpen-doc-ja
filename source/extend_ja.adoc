@@ -194,6 +194,44 @@ $ ./bin/redpen -c myredpen-conf.xml 2be-validated.txt
 2be-validated.txt:1: ValidationError[JavaScript], [NumberOfCharacter.js] Sentence is shorter than 100 characters long. at line: very short sentence.
 ----
 
+[[javascript-property]]
+==== JavaScriptValidator にパラメタ（プロパティ）を渡す
+
+バージョン 1.7 より JavaScript で記述された機能にプロパティを渡せるようになりました。プロパティを渡すことで、機能の挙動を修正できます。プロパティ JavaScript 機能の設定ブロックに記述します。以下の例ではプロパティ **max_char_num** を 5 に設定しています。
+
+----
+<validator name="JavaScript">
+  <property name="max_char_num" value="5" />
+</validator>
+----
+
+JavaScript ブロックに登録されたプロパティは JavaScript 拡張から抽出できます。以下の JavaScript 機能拡張はプロパティ、 **max_char_num** の値を getInt メソッドで取り出しています。
+
+----
+function validateSentence(sentence) {
+  var content = sentence.getContent().split(" ");
+  var limit= getInt("max_char_num");
+
+  for(var i = 0; i<content.length;i++){
+    if(content[i].length >= limit){
+      addError("word [" + content[i] +"] is too long. length: " + content[i].length, sentence);
+    }
+  }
+}
+----
+
+プロパティを取り出すメソッドは型ごとに存在します。以下、サポートしている get メソッドの一覧です。
+
+[options="header"]
+|====
+|メソッド名         |型
+|``getInt``         |Int
+|``getFloat``       |Float
+|``getString``      |String
+|``getBoolean``     |Boolean
+|``getSet``         |Set
+|====
+
 [[model-structure]]
 === 文書モデル
 

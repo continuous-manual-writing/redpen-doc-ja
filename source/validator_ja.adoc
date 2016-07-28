@@ -580,8 +580,9 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 [options="header"]
 |====
 |プロパティ        |デフォルト     |解説
-|``dict``        |None           |ユーザ辞書ファイル
-|``list``        |None           |助詞のスキップリスト（コンマ区切り）
+|``dict``          |None           |ユーザ辞書ファイル
+|``list``          |None           |助詞のスキップリスト（コンマ区切り）
+|``min_interval``  |1              |助詞の最低間隔値 。textlint-rule-no-doubled-joshiにならって導入しました。詳しくは https://github.com/azu/textlint-rule-no-doubled-joshi[こちら] を確認してください。
 |====
 
 [[supported-languages-doubled-joshi]]
@@ -792,3 +793,16 @@ SuccessiveSentence は同一の文が二回連続で使用されるとエラー�
 
 どの言語にも対応しています。
 
+[[doubled-conjunctive-particle-ga]]
+=== DoubledConjunctiveParticleGa
+
+一文に二回以上、接続助詞の **が** が出現するとエラーを出力します。たとえば、DoubledConjunctiveParticleGa は以下の文に対してエラーを出力します。
+
+----
+今日は早朝から出発したが、定刻通りではなかったが、無事会場に到着した。
+----
+
+[[supported-languages-doubled-conjunctive-particle-ga]]
+==== 対象言語
+
+日本語のみサポートしています。
