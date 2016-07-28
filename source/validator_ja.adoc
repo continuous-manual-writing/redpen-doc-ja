@@ -635,6 +635,15 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 節に段落や文が1つも含まれていない場合にエラーを出力します。
 
+[[properties-voidsection]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``limit``       |5              |指定したレベル以下の節に対して検査をスキップする。
+|====
+
 [[supported-languages-voidsection]]
 ==== 対象言語
 
@@ -710,6 +719,16 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 ----
 弊社の経営方針の説明を受けた。
 ----
+
+[[properties-japanese-ambiguous-noun-conjunction]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``dict``        |None           |ユーザ辞書ファイル（スキップリスト）
+|``list``        |None           |スキップリスト（コンマ区切り）
+|====
 
 [[supported-language-japanese-ambiguous-noun-conjunction]]
 ==== Supported languages
@@ -788,4 +807,3 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 ==== 対象言語
 
 日本語のみサポートしています。
-
