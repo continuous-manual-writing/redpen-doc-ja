@@ -794,7 +794,6 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 
 日本語のみサポートしています。
 
-=======
 [[doubled-conjunctive-particle-ga]]
 === DoubledConjunctiveParticleGa
 
