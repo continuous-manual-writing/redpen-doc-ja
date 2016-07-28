@@ -710,6 +710,16 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 弊社の経営方針の説明を受けた。
 ----
 
+[[properties-japanese-ambiguous-noun-conjunction]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``dict``        |None           |ユーザ辞書ファイル（スキップリスト）
+|``list``        |None           |スキップリスト（コンマ区切り）
+|====
+
 [[supported-language-japanese-ambiguous-noun-conjunction]]
 ==== Supported languages
 
@@ -773,3 +783,5 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 ==== 対象言語
 
 日本語のみサポートしています。
+
+
