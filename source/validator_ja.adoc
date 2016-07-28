@@ -794,6 +794,24 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 
 日本語のみサポートしています。
 
+[[successivesentence]]
+=== SuccessiveSentence
+
+SuccessiveSentence は同一の文が二回連続で使用されるとエラーを出力します。
+
+たとえば入力文書に以下のパラグラフが含まれていると、エラーを出力します。
+
+----
+いつも感じるのです。日本語はよい言語だ。日本語はよい言語だ。それでも別の言語もよい点が色々あります。
+----
+
+上記のパラグラフには同一の文 "日本語はよい言語だ。" が二回連続で出現しています。
+
+[[supported-languages-successivesentence]]
+==== 対応言語
+
+どの言語にも対応しています。
+
 [[doubled-conjunctive-particle-ga]]
 === DoubledConjunctiveParticleGa
 
