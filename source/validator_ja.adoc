@@ -634,6 +634,15 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 節に段落や文が1つも含まれていない場合にエラーを出力します。
 
+[[properties-voidsection]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``limit``       |5              |指定したレベル以下の節に対して検査をスキップする。
+|====
+
 [[supported-languages-voidsection]]
 ==== 対象言語
 
