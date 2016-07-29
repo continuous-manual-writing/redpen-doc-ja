@@ -20,12 +20,12 @@ html:
 	mkdir -p $(BUILDDIR)/html
 	cp source/*.jpg source/*.png source/*.txt source/*.xml source/*.java $(BUILDDIR)/html/
 	cp -a source/redpen $(BUILDDIR)/html/
-	$(ASCIIDOCTOR) -a source-highlighter=coderay -a target-version=1.6 -d book -b html5 source/index_ja.adoc -D$(BUILDDIR)/html
+	$(ASCIIDOCTOR) -a source-highlighter=coderay -a target-version=1.7 -d book -b html5 source/index_ja.adoc -D$(BUILDDIR)/html
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html"
 
 pdf:
 	mkdir -p $(BUILDDIR)/pdf
-	$(ASCIIDOCTOR_PDF) -a pdf-stylesdir=source/pdf -a pdf-fontsdir=source/pdf/fonts -a source-highlighter=coderay -a target-version=1.6 -d book source/index_ja.adoc -D$(BUILDDIR)/pdf
+	$(ASCIIDOCTOR_PDF) -a pdf-stylesdir=source/pdf -a pdf-fontsdir=source/pdf/fonts -a source-highlighter=coderay -a target-version=1.7 -d book source/index_ja.adoc -D$(BUILDDIR)/pdf
 	@echo "Build finished. The PDF file is in $(BUILDDIR)/pdf"
 
 check:
