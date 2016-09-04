@@ -34,5 +34,5 @@ $ redpen -c redpen-conf.xml -f latex content.tex
 ** JavaScript
 *** https://github.com/kongou-ae/redpen-validator[redpen-validator（kongou-ae さん）]
 ** Java
-*** https://github.com/k--kato/redpen-ms-style-jp-validator[redpen-ms-style-jp-validator（k--kato さん）]
+*** https://github.com/k\--kato/redpen-ms-style-jp-validator[redpen-ms-style-jp-validator（--kato さん）]
 --
