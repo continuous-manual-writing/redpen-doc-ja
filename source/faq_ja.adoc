@@ -1,3 +1,4 @@
+[suppress='LongKanjiChain']
 == RedPen FAQ
 
 * RedPen は LaTeX に対応していますか。
@@ -35,4 +36,18 @@ $ redpen -c redpen-conf.xml -f latex content.tex
 *** https://github.com/kongou-ae/redpen-validator[redpen-validator（kongou-ae さん）]
 ** Java
 *** https://github.com/k--kato/redpen-ms-style-jp-validator[redpen-ms-style-jp-validator（k--kato さん）]
+--
+
+* RedPen の利用方法で参考になる記事はありますか。
++
+--
+以下の記事が参考になります。
+
+* RedPen の利用方法
+** http://gihyo.jp/lifestyle/serial/01/redpen[RedPenを使って技術文書を手軽に校正しよう]
+** https://tech.trileg.net/2016/10/08/auto-check-thesis[論文自動添削 ＆ 自動コンパイルチェック環境の構築（with Wercker ＆ RedPen）]
+** http://mocobeta-backup.tumblr.com/post/151222169812/gitlabci-redpen[GitLab + GitLab CI + RedPen な継続的ドキュメント検査 ]
+* RedPen の設定方法
+** http://qiita.com/takahi-i/items/a8b994ef17fd66fe6237[文書執筆の指南書で解説されている問題点を RedPen で発見する]
+** http://qiita.com/takahi-i/items/f16fd93e2e5061851320[RedPen のおすすめ設定]
 --
