@@ -173,10 +173,10 @@ SymbolWithSpace は前スペースもしくは後ろスペースの設定と異�
 |`PLUS_SIGN`                   |'＋'         | false            |  false             |  '+'              |  Plus sign
 |`HYPHEN_SIGN`                 |'ー'         | false            |  false             |  '-'              |  Hyphenation
 |`SLASH`                       |'／'         | false            |  false             |  '/'              |  Slash
-|`COLON`                       |'：'         | false            |  false             |  ':'              |  Colon
-|`SEMICOLON`                   |'；'         | false            |  false             |  ';'              |  Semicolon
-|`LESS_THAN_SIGN`              |'＜'         | false            |  false             |  '<'              |  Less than sign
-|`GREATER_THAN_SIGN`           |'＞'         | false            |  false             |  '>'              |  Greater than sign
+|`COLON`                       |'：'         | false            |  false             |                   |  Colon
+|`SEMICOLON`                   |'；'         | false            |  false             |                   |  Semicolon
+|`LESS_THAN_SIGN`              |'＜'         | false            |  false             |                   |  Less than sign
+|`GREATER_THAN_SIGN`           |'＞'         | false            |  false             |                   |  Greater than sign
 |`EQUAL_SIGN`                  |'＝'         | false            |  false             |  '='              |  Equal sign
 |`AT_MARK`                     |'＠'         | false            |  false             |  '@'              |  At mark
 |`LEFT_SQUARE_BRACKET`         |'「'         | true             |  false             |                   |  Left square bracket
