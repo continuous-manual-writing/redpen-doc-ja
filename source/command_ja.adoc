@@ -93,6 +93,14 @@ redpen コマンドは入力文書に含まれるエラー数が指定された�
 option:: -l <LIMIT NUMBER>, --limit  <LIMIT NUMBER>
 ----
 
+===== 入力文を指定
+
+redpen コマンドは指定された文をパラメタとして渡せます。主にテスト目的で利用します。
+
+----
+option:: -s <INPUT SENTENCE>, --sentence  <INPUT SENTENCE>
+----
+
 ===== ヘルプの出力
 
 ----
