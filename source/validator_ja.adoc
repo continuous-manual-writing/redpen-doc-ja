@@ -85,6 +85,16 @@ wow
 
 SpaceBeginningOfSentence は文（センテンス）間に半角スペースが存在するかを検査します。
 
+[[properties-spacebetweenalphabeticalword]]
+==== Properties
+
+[options="header"]
+|====
+|プロパティ      |デフォルト      |解説
+|``forbidden``   | false          | false では空白が矯正される。true では禁止される。
+|``skip_before`` | ""             | 指定されたシンボル（複数指定できる）の前に半角スペースがなくても、エラーは起こらない。
+|``skip_after``  | ""             | 指定されたシンボル（複数指定できる）の後に半角スペースがなくても、エラーは起こらない。
+|====
 
 [[supported-languages-2]]
 ==== 対応言語
@@ -635,6 +645,8 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 節に段落や文が1つも含まれていない場合にエラーを出力します。
 
+WARNING: VoidSection は Deprecated です。将来的に削除されます。かわりに EmptySection をご利用ください。
+
 [[properties-voidsection]]
 ==== プロパティ
 
@@ -649,6 +661,24 @@ DoubledJoshi は同一の助詞が一文で二回以上、利用されている�
 
 どの言語でも動作します。
 
+[[emptysection]]
+=== EmptySection
+
+節に段落や文が1つも含まれていない場合にエラーを出力します。
+
+[[properties-emptysection]]
+==== プロパティ
+
+[options="header"]
+|====
+|プロパティ      |デフォルト     |解説
+|``limit``       |5              |指定したレベル以下の節に対して検査をスキップする。
+|====
+
+[[supported-languages-emptysection]]
+==== 対象言語
+
+どの言語でも動作します。
 
 [[gappedsection]]
 === GappedSection
