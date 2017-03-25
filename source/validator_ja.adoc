@@ -83,6 +83,8 @@ wow
 [[spacebeginningofsentence]]
 === SpaceBeginningOfSentence
 
+WARNING: VoidSection の実装に問題がみつかりました。現在 Deprecated が指定されています。くわしくは https://github.com/redpen-cc/redpen/issues/719[こちら]
+
 SpaceBeginningOfSentence は文（センテンス）間に半角スペースが存在するかを検査します。
 
 [[properties-spacebetweenalphabeticalword]]
