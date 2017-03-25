@@ -1,10 +1,10 @@
 language: ruby
 
 rvm:
-  - 2.0.0-p598
+  - 2.3.3
 
 jdk:
-    - oraclejdk8
+  - oraclejdk8
 
 env:
   - URL=https://github.com/redpen-cc/redpen/releases/download/redpen-1.6.1
@@ -18,7 +18,6 @@ script:
   - gem install asciidoctor
   - gem install coderay
   - gem install --pre asciidoctor-pdf
-  - sudo apt-get update && sudo apt-get install oracle-java8-installer
   - make check     # RedPenを適用する
   - make html      # 出力ドキュメント（HTML）の生成
   - make pdf       # 出力ドキュメント（PDF）の生成
