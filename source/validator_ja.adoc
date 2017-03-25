@@ -765,6 +765,22 @@ GappedSection は節（章）の大きさにギャップがあるとエラーを
 
 日本語のみサポートしています。
 
+[[japanese-joyo-kanji]]
+=== JapaneseJoyoKanji
+
+常用漢字以外の漢字を検出しエラーを出力します。
+
+たとえば以下の文は、常用漢字でない漢字（踵）を含んでいます。
+
+----
+踵を返して出て行った。
+----
+
+[[supported-language-japanese-joyo-kanji]]
+==== Supported languages
+
+日本語のみサポートしています。
+
 [[japanese-number-expression]]
 === JapaneseNumberExpression
 
