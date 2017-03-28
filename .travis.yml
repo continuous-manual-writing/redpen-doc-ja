@@ -20,4 +20,4 @@ script:
   - gem install --pre asciidoctor-pdf
   - make check     # RedPenを適用する
   - make html      # 出力ドキュメント（HTML）の生成
-  - make pdf       # 出力ドキュメント（PDF）の生成
+#  - make pdf       # 出力ドキュメント（PDF）の生成
