@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/continuous-manual-writing/redpen-doc-ja.svg?branch=master)](https://travis-ci.org/takahi-i/continuous-manual-writing/redpen-doc-ja)
 
+NOTE
+====
+
+本文書の更新は v1.8 で終了します。今後日本語の RedPen ドキュメントは [redpen-doc](https://github.com/redpen-cc/redpen-doc) に引き継がれます。
+
+
 redpen-doc
 ==========
 
