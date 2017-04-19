@@ -41,7 +41,7 @@ RedPen はまちがってエラーを出力してしまう箇所があります�
 ** JavaScript
 *** https://github.com/kongou-ae/redpen-validator[redpen-validator（kongou-ae さん）]
 ** Java
-*** https://github.com/k--kato/redpen-ms-style-jp-validator[redpen-ms-style-jp-validator（k--kato さん）]
+*** https://github.com/k\--kato/redpen-ms-style-jp-validator[redpen-ms-style-jp-validator（k\--kato さん）]
 --
 
 * RedPen の利用方法で参考になる記事はありますか。
